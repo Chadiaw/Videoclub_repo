@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.OngletAdherentsController">
+                           <children>
+                              <SplitPane dividerPositions="0.3" layoutX="16.0" layoutY="11.0" prefHeight="546.0" prefWidth="863.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false">
+                                       <children>
+                                          <VBox layoutY="14.0" spacing="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <GridPane prefHeight="152.0">
+                                                  <columnConstraints>
+                                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="251.0" minWidth="10.0" percentWidth="70.0" prefWidth="196.0" />
+                                                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" percentWidth="30.0" prefWidth="92.0" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
+                                                   <children>
+                                                      <Label text="Liste adhérents">
+                                                         <GridPane.margin>
+                                                            <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                         </GridPane.margin>
+                                                      </Label>
+                                                      <Button fx:id="boutonAjouterAdherent" mnemonicParsing="false" onAction="#ajouterAdherent" text="Add" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin></Button>
+                                                   </children>
+                                                </GridPane>
+                                                <ListView fx:id="listeAherents" layoutX="9.0" layoutY="21.0" prefHeight="634.0" prefWidth="381.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false">
+                                       <children>
+                                          <TabPane prefHeight="570.0" prefWidth="502.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <tabs>
+                                              <Tab text="Informations personnelles">
+                                                <content>
+                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <VBox layoutX="121.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+                                                               <children>
+                                                                  <VBox spacing="5.0">
+                                                                     <children>
+                                                                        <Label text="Nom">
+                                                                           <VBox.margin>
+                                                                              <Insets />
+                                                                           </VBox.margin>
+                                                                        </Label>
+                                                                        <TextField fx:id="nomAdherent" editable="false">
+                                                                           <VBox.margin>
+                                                                              <Insets />
+                                                                           </VBox.margin>
+                                                                        </TextField>
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox layoutX="10.0" layoutY="10.0" spacing="5.0">
+                                                                     <children>
+                                                                        <Label text="Numéro de téléphone">
+                                                                           <VBox.margin>
+                                                                              <Insets />
+                                                                           </VBox.margin>
+                                                                        </Label>
+                                                                        <TextField fx:id="telephoneAdherent" editable="false">
+                                                                           <VBox.margin>
+                                                                              <Insets />
+                                                                           </VBox.margin>
+                                                                        </TextField>
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox layoutX="10.0" layoutY="77.0" spacing="5.0">
+                                                                     <children>
+                                                                        <Label text="Adresse">
+                                                                           <VBox.margin>
+                                                                              <Insets />
+                                                                           </VBox.margin>
+                                                                        </Label>
+                                                                        <TextArea fx:id="adresseAdherent" editable="false" prefHeight="200.0" prefWidth="200.0" />
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="144.0" spacing="5.0">
+                                                                     <children>
+                                                                        <Label text="Solde">
+                                                                           <VBox.margin>
+                                                                              <Insets />
+                                                                           </VBox.margin>
+                                                                        </Label>
+                                                <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                                                   <children>
+                                                                              <Text fx:id="soldeAdherent" strokeType="OUTSIDE" strokeWidth="0.0" text="0.00" textAlignment="RIGHT" wrappingWidth="55.0" />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$" />
+                                                   </children>
+                                                </HBox>
+                                                                     </children>
+                                                                     <VBox.margin>
+                                                                        <Insets top="30.0" />
+                                                                     </VBox.margin>
+                                                                  </VBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                </content>
+                                              </Tab>
+                                              <Tab text="Prêts">
+                                                <content>
+                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <TableView fx:id="historiqueAdherent" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                              <columns>
+                                                                <TableColumn prefWidth="92.0" text="Statut" />
+                                                                <TableColumn prefWidth="132.0" text="Code article" />
+                                                                  <TableColumn prefWidth="146.0" text="Date de retour" />
+                                                                  <TableColumn prefWidth="254.0" text="Titre" />
+                                                              </columns>
+                                                            </TableView>
+                                                         </children>
+                                                      </AnchorPane>
+                                                </content>
+                                              </Tab>
+                                            </tabs>
+                                          </TabPane>
+                                       </children></AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children>
+                        </AnchorPane>

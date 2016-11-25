@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="278.0" prefWidth="491.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.NouvelAdherentController">
+   <children>
+      <VBox prefHeight="280.0" prefWidth="560.0" spacing="10.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <VBox spacing="5.0">
+               <children>
+                  <Label text="Nom">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="nomAdherent" prefHeight="31.0" prefWidth="511.0">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" spacing="5.0">
+               <children>
+                  <Label text="Numéro de téléphone">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="telephoneAdherent">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="77.0" spacing="5.0">
+               <children>
+                  <Label text="Adresse">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <TextArea fx:id="adresseAdherent" prefHeight="100.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER_RIGHT" layoutX="192.0" layoutY="283.0" prefHeight="45.0" prefWidth="388.0" spacing="20.0" AnchorPane.rightAnchor="20.0">
+         <children>
+            <Button fx:id="boutonEnregistrer" mnemonicParsing="false" onAction="#actionEnregistrer" text="Enregistrer" />
+            <Button fx:id="boutonAnnuler" cancelButton="true" mnemonicParsing="false" onAction="#actionAnnuler" text="Annuler" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

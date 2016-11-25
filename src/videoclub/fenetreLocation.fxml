@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="465.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.FenetreLocationController">
+   <children>
+      <VBox prefHeight="144.0" prefWidth="543.0">
+         <children>
+            <HBox>
+               <children>
+                  <Label fx:id="ajoutManuelLabel" text="Ajouter film manuellement">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <TextField fx:id="titreFilmField" prefHeight="31.0" prefWidth="483.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets left="25.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="31.0" spacing="135.0">
+               <children>
+                  <TextField fx:id="codeFilmField" prefHeight="31.0" prefWidth="239.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+                  <HBox spacing="10.0">
+                     <children>
+                        <Label text="Durée">
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="dureeLocationField" prefHeight="31.0" prefWidth="58.0">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="25.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="72.0" spacing="25.0">
+               <padding>
+                  <Insets left="25.0" top="10.0" />
+               </padding>
+               <children>
+                  <Button fx:id="boutonAjouter" mnemonicParsing="false" text="Ajouter" />
+                  <Label fx:id="messageErreur" text="Message d'erreur" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <TableView fx:id="tableLocation" layoutX="26.0" layoutY="156.0" prefHeight="223.0" prefWidth="618.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+        <columns>
+          <TableColumn prefWidth="98.0" text="Code" />
+            <TableColumn prefWidth="277.0" text="Titre" />
+          <TableColumn minWidth="0.0" prefWidth="78.0" text="Durée" />
+            <TableColumn minWidth="0.0" prefWidth="147.0" text="Coût" />
+        </columns>
+      </TableView>
+      <HBox alignment="BOTTOM_RIGHT" layoutX="321.0" layoutY="342.0" prefHeight="41.0" prefWidth="279.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button fx:id="boutonConfirmer" mnemonicParsing="false" text="Confirmer" />
+            <Button fx:id="boutonAnnuler" mnemonicParsing="false" onAction="#actionAnnuler" text="Annuler" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" right="25.0" />
+         </padding>
+      </HBox>
+      <HBox layoutX="594.0" layoutY="386.0" AnchorPane.rightAnchor="30.0">
+         <children>
+            <Label fx:id="totalLocation" layoutX="594.0" layoutY="386.0" text="Total location" />
+         </children>
+      </HBox>
+      <Button fx:id="boutonScan" layoutX="554.0" layoutY="33.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="87.0" text="Scan" />
+      <Separator layoutX="540.0" layoutY="4.0" orientation="VERTICAL" prefHeight="137.0" prefWidth="0.0" />
+      <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="424.0" spacing="5.0">
+         <children>
+            <Label text="Adhérent :" />
+            <ComboBox fx:id="adherentBox" layoutX="122.0" layoutY="420.0" prefHeight="31.0" prefWidth="181.0" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>

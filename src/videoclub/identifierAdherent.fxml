@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="187.0" prefWidth="332.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.IdentifierAdherentController">
+   <children>
+      <VBox layoutY="-3.0" prefHeight="141.0" prefWidth="353.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <VBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="300.0">
+               <children>
+                  <Label layoutX="23.0" layoutY="4.0" text="Numéro de téléphone" />
+                  <TextField fx:id="numeroAdherent" layoutX="58.0" layoutY="-1.0" />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" layoutY="74.0" prefHeight="76.0" prefWidth="187.0">
+               <children>
+                  <Label layoutX="23.0" layoutY="4.0" text="Code secret" />
+                  <TextField fx:id="codeSecretAdherent" layoutX="58.0" layoutY="-1.0" />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
+      <HBox alignment="BOTTOM_RIGHT" layoutX="173.0" layoutY="197.0" prefHeight="31.0" prefWidth="226.0" spacing="20.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0">
+         <children>
+            <Button fx:id="boutonIdentifier" mnemonicParsing="false" text="Identifier" />
+            <Button fx:id="boutonAnnuler" mnemonicParsing="false" onAction="#actionAnnuler" text="Annuler" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

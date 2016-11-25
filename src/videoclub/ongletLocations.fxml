@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="543.0" prefWidth="859.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.OngletLocationsController">
+                           <children>
+                              <VBox layoutX="182.0" layoutY="123.0" prefHeight="200.0" prefWidth="100.0" spacing="30.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                                 <children>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="545.0" minWidth="10.0" prefWidth="338.0" />
+                                          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="435.0" minWidth="10.0" prefWidth="318.0" />
+                                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="435.0" minWidth="10.0" prefWidth="335.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Liste des locations en cours" GridPane.rowIndex="1" />
+                                          <Button mnemonicParsing="false" text="Générer rapport de retards" GridPane.columnIndex="2" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date du jour: 01/01/17 " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                       </children>
+                                    </GridPane>
+                                    <TableView prefHeight="537.0" prefWidth="880.0">
+                                      <columns>
+                                        <TableColumn prefWidth="55.0" text="Id" />
+                                        <TableColumn prefWidth="134.0" text="Code article" />
+                                          <TableColumn prefWidth="138.0" text="Adhérent" />
+                                          <TableColumn prefWidth="168.0" text="Date de retour" />
+                                          <TableColumn prefWidth="384.0" text="Description" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children></AnchorPane>
