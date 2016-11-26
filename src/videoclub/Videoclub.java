@@ -34,6 +34,15 @@ public class Videoclub extends Application {
     private Employe employeConnecte;
     private ArrayList<Employe> listeEmployes;
     private ObservableList<Adherent> listeAdherents = FXCollections.observableArrayList();
+    private Adherent adherantLouant;
+
+    public void setAdherantLouant(Adherent adherantLouant) {
+        this.adherantLouant = adherantLouant;
+    }
+
+    public Adherent getAdherantLouant() {
+        return adherantLouant;
+    }
     
     // Instance unique de l'application (Videoclub)
     private static Videoclub instance;

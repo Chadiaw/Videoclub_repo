@@ -73,5 +73,23 @@ public class OngletAccueilController implements Initializable {
         }    
     }
     
+    public void actionInscrireAdherent(ActionEvent event) {
+        // Ouvrir l'interface de Nouvel adhérent
+        try {
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("nouvelAdherent.fxml"));
+            Parent root1 = (Parent) loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("Ajouter adhérent");
+            stage.setScene(new Scene(root1));  
+            stage.show();
+        }
+        catch (Exception ex) {
+            Logger.getLogger(OngletAccueilController.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
+    
     
 }

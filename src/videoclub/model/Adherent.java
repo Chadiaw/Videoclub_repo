@@ -16,13 +16,13 @@ public class Adherent {
     private String  nom;
     private String numeroTelephone;
     private String adresse;
-    private String codeSecret;
+    private int codeSecret;
 
-    public String getCodeSecret() {
+    public int getCodeSecret() {
         return codeSecret;
     }
 
-    public void setCodeSecret(String codeSecret) {
+    public void setCodeSecret(int codeSecret) {
         this.codeSecret = codeSecret;
     }
     
@@ -30,11 +30,12 @@ public class Adherent {
     
     private double solde; 
 
-    public Adherent(String nom, String numeroTelephone, String adresse, double solde) {
+    public Adherent(String nom, String numeroTelephone, String adresse, double solde, int codeSecret) {
         this.nom = nom;
         this.numeroTelephone = numeroTelephone;
         this.adresse = adresse;
         this.solde = solde;
+        this.codeSecret = codeSecret;
     }
 
     public String getNom() {

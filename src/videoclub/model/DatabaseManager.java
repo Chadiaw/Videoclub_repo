@@ -19,7 +19,7 @@ import videoclub.securite.LoginManager;
 public class DatabaseManager {
     
     // Chemin du fichier de base de donnees SQLite
-    final static String DATABASE_PATH = "videoDB.db"; 
+    final static String DATABASE_PATH = "data/videoDB.db"; 
     
     /**
      * Retourne la liste des employes stockés dans la base de donnees.
@@ -73,7 +73,8 @@ public class DatabaseManager {
           ResultSet rs = stmt.executeQuery( "SELECT * FROM ADHERENT;" );
           while ( rs.next() ) {
              Adherent adherent = new Adherent(rs.getString("name"), rs.getString("telephone"),
-                                              rs.getString("address"), rs.getDouble("solde"));
+                                              rs.getString("address"), rs.getDouble("solde"),
+                                              rs.getInt("code"));
              listeAdherents.add(adherent);
           }
           rs.close();

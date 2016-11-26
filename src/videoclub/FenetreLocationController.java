@@ -44,13 +44,13 @@ public class FenetreLocationController implements Initializable {
     @FXML
     private Label totalLocation;
     @FXML
-    private ComboBox adherentBox;
+    private Label labelAdherent;
     @FXML
     private Button boutonAnnuler;
     @FXML
     private Button boutonConfirmer;
     
-    
+    private Videoclub application;
     
     /**
      * Initializes the controller class.
@@ -58,10 +58,13 @@ public class FenetreLocationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        application = Videoclub.getInstance();
         titreFilmField.setPromptText("Titre film...");
         codeFilmField.setPromptText("Code film...");
         dureeLocationField.setPromptText("jours");
         messageErreur.setText("");
+        String labelMsg = String.format("Adhérent : %s", application.getAdherantLouant().getNom());
+        labelAdherent.setText(labelMsg);
     }    
     
     public void actionAnnuler(ActionEvent event) {
