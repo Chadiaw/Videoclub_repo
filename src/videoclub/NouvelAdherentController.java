@@ -57,6 +57,7 @@ public class NouvelAdherentController implements Initializable {
             alert.setContentText("Tous les champs obligatoires n'ont pas été remplis.");
             
             alert.showAndWait();
+            return;
         }
         Adherent nouveau = new Adherent(nomAdherent.getText(), telephoneAdherent.getText(), 
                 adresseAdherent.getText(), 0, Integer.parseInt(codeSecretAdherent.getText()));
