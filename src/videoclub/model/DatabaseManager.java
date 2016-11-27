@@ -19,7 +19,7 @@ import videoclub.securite.LoginManager;
 public class DatabaseManager {
     
     // Chemin du fichier de base de donnees SQLite
-    final static String DATABASE_PATH = "videoDB.db"; 
+    final static String DATABASE_PATH = "data/videoDB.db"; 
     
     /**
      * Retourne la liste des employes stockés dans la base de donnees.
