@@ -92,7 +92,7 @@
             <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                <children>
                   <Button fx:id="boutonPaiement" mnemonicParsing="false" text="Procéder au paiement" />
-                  <Button fx:id="boutonAnnuler" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#actionAnnulerTransaction" text="Annuler" />
+                  <Button fx:id="boutonAnnuler" cancelButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#actionAnnulerTransaction" text="Annuler" />
                </children>
                <padding>
                   <Insets bottom="5.0" right="10.0" />

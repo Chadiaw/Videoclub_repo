@@ -10,7 +10,9 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -33,6 +35,8 @@ public class NouvelAdherentController implements Initializable {
     private Button boutonEnregistrer;
     @FXML 
     private Button boutonAnnuler;
+    @FXML
+    private PasswordField codeSecretAdherent;
     
     private Videoclub application;
     
@@ -46,8 +50,17 @@ public class NouvelAdherentController implements Initializable {
     }    
     
     public void actionEnregistrer(ActionEvent event) {
+        if(codeSecretAdherent.getText().isEmpty() || nomAdherent.getText().isEmpty() 
+                || telephoneAdherent.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Tous les champs obligatoires n'ont pas été remplis.");
+            
+            alert.showAndWait();
+            return;
+        }
         Adherent nouveau = new Adherent(nomAdherent.getText(), telephoneAdherent.getText(), 
-                adresseAdherent.getText(), 0);
+                adresseAdherent.getText(), 0, Integer.parseInt(codeSecretAdherent.getText()));
         application.ajouterAdherent(nouveau);
         Stage stage = (Stage) boutonEnregistrer.getScene().getWindow();
         stage.close();

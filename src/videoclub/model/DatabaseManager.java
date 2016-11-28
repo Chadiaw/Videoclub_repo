@@ -73,7 +73,8 @@ public class DatabaseManager {
           ResultSet rs = stmt.executeQuery( "SELECT * FROM ADHERENT;" );
           while ( rs.next() ) {
              Adherent adherent = new Adherent(rs.getString("name"), rs.getString("telephone"),
-                                              rs.getString("address"), rs.getDouble("solde"));
+                                              rs.getString("address"), rs.getDouble("solde"),
+                                              rs.getInt("code"));
              listeAdherents.add(adherent);
           }
           rs.close();
