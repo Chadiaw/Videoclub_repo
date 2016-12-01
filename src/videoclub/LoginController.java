@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -22,13 +23,15 @@ import javafx.scene.control.TextField;
 public class LoginController implements Initializable {
     
     @FXML
+    Text textBienvenue;
+    @FXML
     TextField username;
     @FXML
     PasswordField password;
     @FXML
     Button boutonConnexion;
     @FXML
-    Label messageConnexion;
+    Text messageConnexion;
     
     private Videoclub application;
     

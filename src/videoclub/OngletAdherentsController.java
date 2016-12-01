@@ -23,6 +23,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -60,6 +61,7 @@ public class OngletAdherentsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.application = Videoclub.getInstance();
+        
         listeAherents.setItems(application.getListeAdherents());
         
         // Formatter ListView pour n'afficher que le nom de l'objet 'Adherent'
