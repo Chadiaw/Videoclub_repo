@@ -26,12 +26,12 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Label text="Liste des locations en cours" GridPane.rowIndex="1" />
-                                          <Button mnemonicParsing="false" text="Générer rapport de retards" GridPane.columnIndex="2" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date du jour: 01/01/17 " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                          <Label fx:id="listeLocationsLabel" text="Locations en cours" GridPane.rowIndex="1" />
+                                          <Button fx:id="boutonRapportRetards" mnemonicParsing="false" text="Générer rapport de retards" GridPane.columnIndex="2" />
+                                          <Text fx:id="dateDuJour" strokeType="OUTSIDE" strokeWidth="0.0" text="Date du jour: 01/01/17 " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                        </children>
                                     </GridPane>
-                                    <TableView prefHeight="537.0" prefWidth="880.0">
+                                    <TableView fx:id="listeLocations" prefHeight="537.0" prefWidth="880.0">
                                       <columns>
                                         <TableColumn prefWidth="55.0" text="Id" />
                                         <TableColumn prefWidth="134.0" text="Code article" />

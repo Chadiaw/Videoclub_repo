@@ -1,0 +1,109 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 30-Nov-2016, 12:05:21 PM
+    Author     : cheikh
+*/
+
+.root {
+     -fx-background-image: url("../images/mainBackground.jpg");
+     -fx-background-repeat: no-repeat;
+}
+
+#boutonDeconnexion {          
+    -fx-background-image: url("../images/logout-icon.png");
+    -fx-background-size: 18 18;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:left;   
+    -fx-text-fill: black;
+    -fx-background-color: #cc0808;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    
+}
+#boutonDeconnexion:hover {
+    -fx-background-color: #f00e0e;
+}
+
+#messageBienvenue {
+    -fx-font-family: "Ubuntu";
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+    
+.button {
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-color: #7a7a7a; 
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.button:hover{
+    -fx-background-color: #666666;
+}
+
+#boutonAjouterAdherent {
+    -fx-background-image: url("../images/add-icon.png");
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center;  
+    -fx-background-color: #c4c4c4;
+}
+
+#boutonAjouterAdherent:hover {
+    -fx-background-color: #666666;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane
+{
+    -fx-tab-min-width:120px;
+}
+.tab-pane .tab
+{
+    -fx-background-color: #8a8a8a;
+
+}
+
+.tab-pane .tab:selected
+{
+    -fx-background-color: #7a7a7a;
+}
+.tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #696569;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: black;
+}
+
+#historiqueLabel, #listeLocationsLabel  {
+   -fx-font-size: 24px;
+   -fx-font-family: "Arial Black";
+   -fx-fill: #7a7a7a;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+   -fx-underline: true;   
+}
+
+#dateDuJour {
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+}
+
+.split-pane {
+ -fx-background-image: url("../images/mainBackground.jpg");
+ }
+ 

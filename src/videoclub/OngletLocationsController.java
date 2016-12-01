@@ -7,12 +7,12 @@ package videoclub;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import videoclub.model.Employe;
+import javafx.scene.control.TableView;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -21,13 +21,16 @@ import videoclub.model.Employe;
  */
 public class OngletLocationsController implements Initializable {
 
-/*
-    @FXML
-	private Label messageBienvenue;
-    @FXML 
-    private Button boutonDeconnexion;
 
-  */  
+    @FXML
+    private Label listeLocationsLabel;
+    @FXML
+    private Text dateDuJour;
+    @FXML
+    private Button boutonRapportRetards;
+    @FXML
+    private TableView listeLocations;
+    
     private Videoclub application;
     
     

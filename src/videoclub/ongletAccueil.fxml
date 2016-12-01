@@ -13,28 +13,43 @@
 
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="580.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.OngletAccueilController">
                            <children>
-      <Label fx:id="historiqueLabel" layoutX="14.0" layoutY="14.0" text="Historique session" />
-                              <TableView fx:id="tableHistorique" layoutX="14.0" layoutY="46.0" prefHeight="467.0" prefWidth="870.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
-                                <columns>
-                                  <TableColumn prefWidth="49.0" text="Id" />
-                                  <TableColumn prefWidth="236.0" text="Type" />
-                                    <TableColumn prefWidth="220.0" text="Date" />
-                                    <TableColumn prefWidth="344.0" text="Détails" />
-                                </columns>
-                              </TableView>
-                              <VBox layoutX="14.0" layoutY="523.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
-                                 <children>
-                                    <HBox alignment="CENTER" layoutX="14.0" layoutY="523.0" spacing="60.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <VBox layoutX="14.0" layoutY="14.0" spacing="5.0">
+         <children>
+            <HBox layoutX="14.0" layoutY="14.0">
+               <children>
+                  <Label fx:id="historiqueLabel" layoutX="14.0" layoutY="14.0" text="Historique session">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+                                    <TableView fx:id="tableHistorique" layoutX="14.0" layoutY="46.0" prefHeight="467.0" prefWidth="870.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                                      <columns>
+                                        <TableColumn prefWidth="49.0" text="Id" />
+                                        <TableColumn prefWidth="236.0" text="Type" />
+                                          <TableColumn prefWidth="220.0" text="Date" />
+                                          <TableColumn prefWidth="344.0" text="Détails" />
+                                      </columns>
+                                    </TableView>
+                                    <VBox layoutX="14.0" layoutY="523.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
                                        <children>
-                                          <Button fx:id="boutonTransaction" mnemonicParsing="false" onAction="#actionTransaction" prefHeight="40.0" prefWidth="200.0" text="Nouvelle transaction" />
-                                          <Button fx:id="boutonRetournerFilm" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="Retourner film" />
-                                          <Button fx:id="boutonInscrireAdherent" layoutX="285.0" layoutY="10.0" mnemonicParsing="false" onAction="#actionInscrireAdherent" prefHeight="40.0" prefWidth="200.0" text="Inscrire adhérent" />
+                                          <HBox alignment="CENTER" layoutX="14.0" layoutY="523.0" spacing="60.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                                             <children>
+                                                <Button fx:id="boutonTransaction" mnemonicParsing="false" onAction="#actionTransaction" prefHeight="40.0" prefWidth="200.0" text="Nouvelle transaction" />
+                                                <Button fx:id="boutonRetournerFilm" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="Retourner film" />
+                                                <Button fx:id="boutonInscrireAdherent" layoutX="285.0" layoutY="10.0" mnemonicParsing="false" onAction="#actionInscrireAdherent" prefHeight="40.0" prefWidth="200.0" text="Inscrire adhérent" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
                                        </children>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </HBox>
-                                 </children>
-                              </VBox>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+                                    </VBox>
+         </children>
+      </VBox>
                            </children>
                         </AnchorPane>

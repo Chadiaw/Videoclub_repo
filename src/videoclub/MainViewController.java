@@ -33,8 +33,7 @@ public class MainViewController implements Initializable {
     public void setApp(Videoclub application){
         this.application = application;
         
-        String message = String.format("Bonjour, %s", application.getEmployeConnecte().getNom());
-        messageBienvenue.setText(message);
+        messageBienvenue.setText(application.getEmployeConnecte().getNom());
     }
     
     @Override
