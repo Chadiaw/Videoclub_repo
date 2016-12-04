@@ -18,7 +18,9 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import videoclub.model.Adherent;
 import videoclub.model.DatabaseManager;
 import videoclub.model.Employe;
@@ -123,7 +125,6 @@ public class Videoclub extends Application {
     private void gotoLogin() {
         try {
             LoginController login = (LoginController) changerScene("Login.fxml");
-            login.setApp(instance);
         } catch (Exception ex) {
             Logger.getLogger(Videoclub.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -135,7 +136,6 @@ public class Videoclub extends Application {
     private void goToMainView() {
         try {
             MainViewController mainView = (MainViewController) changerScene("MainView.fxml");
-            mainView.setApp(instance);
         } catch (Exception ex) {
             Logger.getLogger(Videoclub.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -177,6 +177,24 @@ public class Videoclub extends Application {
         return listeAdherents;
     }
 
+    public void goToNewAdherent() {
+        // Ouvrir l'interface de Nouvel adhérent
+        try {
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("nouvelAdherent.fxml"));
+            Parent root1 = (Parent) loader.load();
+            Stage popUpStage = new Stage();
+            popUpStage.initModality(Modality.APPLICATION_MODAL);
+            popUpStage.initStyle(StageStyle.UTILITY);
+            popUpStage.setTitle("Ajouter adhérent");
+            popUpStage.setScene(new Scene(root1));  
+            popUpStage.show();
+        }
+        catch (Exception ex) {
+            Logger.getLogger(Videoclub.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
+    
     void ajouterAdherent(Adherent nouveau) {
         listeAdherents.add(nouveau);
     }

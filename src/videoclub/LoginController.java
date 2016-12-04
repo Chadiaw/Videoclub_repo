@@ -35,13 +35,9 @@ public class LoginController implements Initializable {
     
     private Videoclub application;
     
-    
-    public void setApp(Videoclub application){
-        this.application = application;
-    }
-    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.application = Videoclub.getInstance();
         messageConnexion.setText("");        
     }
        

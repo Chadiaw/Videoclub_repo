@@ -54,7 +54,7 @@ public class NewTransactionController implements Initializable {
     @FXML
     private TableView tableVente;
     
-    
+    private Videoclub application;
     
     
     /**
@@ -63,8 +63,9 @@ public class NewTransactionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        sousTotalLocation.setText("");
-        sousTotalLocation.setText("");
+        this.application = Videoclub.getInstance();
+        sousTotalLocation.setText("Sous-total : 0.00 $");
+        sousTotalVente.setText("Sous-total: 0.00 $");
         adherentLabel.setText("");
         totalTransaction.setText("Total : 0.00$");
     }    

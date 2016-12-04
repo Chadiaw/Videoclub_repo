@@ -30,15 +30,10 @@ public class MainViewController implements Initializable {
     private Videoclub application;
     
     
-    public void setApp(Videoclub application){
-        this.application = application;
-        
-        messageBienvenue.setText(application.getEmployeConnecte().getNom());
-    }
-    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-               
+        this.application = Videoclub.getInstance();
+        messageBienvenue.setText(application.getEmployeConnecte().getNom());
     }
     
     public void actionDeconnexion(ActionEvent event) {

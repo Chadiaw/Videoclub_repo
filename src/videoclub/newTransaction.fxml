@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="473.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.NewTransactionController">
+<AnchorPane id="AnchorPane" prefHeight="473.0" prefWidth="737.0" stylesheets="@styles/newTransaction.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.NewTransactionController">
    <children>
       <GridPane layoutX="49.0" layoutY="121.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -21,19 +21,18 @@
           <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <SplitPane dividerPositions="0.4925170068027211" prefHeight="160.0" prefWidth="200.0" GridPane.columnSpan="2">
+            <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" GridPane.columnSpan="2">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <Button fx:id="boutonLocation" layoutX="139.0" layoutY="136.0" mnemonicParsing="false" onAction="#actionAjoutLocation" prefHeight="71.0" prefWidth="80.0" text="Ajouter Location" textAlignment="CENTER" wrapText="true" />
-                        <VBox layoutX="36.0" layoutY="65.0" prefHeight="342.0" prefWidth="364.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox layoutX="36.0" layoutY="65.0" prefHeight="342.0" prefWidth="364.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
                                     <Label fx:id="locationLabel" text="Location" />
                                  </children>
                               </HBox>
-                              <TableView fx:id="tableLocation" layoutX="36.0" layoutY="65.0">
+                              <TableView fx:id="tableLocation" layoutX="36.0" layoutY="65.0" visible="false">
                                 <columns>
                                   <TableColumn prefWidth="245.0" text="Film" />
                                   <TableColumn prefWidth="81.0" text="Durée (jours)" />
@@ -47,6 +46,7 @@
                               </TableView>
                            </children>
                         </VBox>
+                        <Button fx:id="boutonLocation" layoutX="139.0" layoutY="136.0" mnemonicParsing="false" onAction="#actionAjoutLocation" prefHeight="71.0" prefWidth="80.0" text="Ajouter Location" textAlignment="CENTER" wrapText="true" />
                      </children>
                      <padding>
                         <Insets left="5.0" right="5.0" />
@@ -54,15 +54,14 @@
                   </AnchorPane>
                 <AnchorPane>
                      <children>
-                        <Button fx:id="boutonVente" layoutX="145.0" layoutY="136.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="80.0" text="Ajouter Vente" textAlignment="CENTER" wrapText="true" />
-                        <VBox prefHeight="342.0" prefWidth="364.0" spacing="10.0" visible="false">
+                        <VBox prefHeight="342.0" prefWidth="364.0" spacing="10.0">
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
                                     <Label fx:id="venteLabel" text="Vente" />
                                  </children>
                               </HBox>
-                              <TableView fx:id="tableVente" layoutX="36.0" layoutY="65.0" prefHeight="417.0" prefWidth="364.0">
+                              <TableView fx:id="tableVente" layoutX="36.0" layoutY="65.0" prefHeight="417.0" prefWidth="364.0" visible="false">
                                  <columns>
                                     <TableColumn prefWidth="196.0" text="Article" />
                                     <TableColumn prefWidth="141.0" text="Quantité" />
@@ -76,6 +75,7 @@
                               </TableView>
                            </children>
                         </VBox>
+                        <Button fx:id="boutonVente" layoutX="145.0" layoutY="136.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="80.0" text="Ajouter Vente" textAlignment="CENTER" wrapText="true" />
                      </children>
                   </AnchorPane>
               </items>

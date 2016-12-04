@@ -44,16 +44,12 @@ public class OngletAccueilController implements Initializable {
     private Videoclub application;
     
     
-    public void setApp(Videoclub application){
-        this.application = application;
-    }
-    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        this.application = Videoclub.getInstance();
     }    
     
     public void actionTransaction(ActionEvent event) {
@@ -63,7 +59,7 @@ public class OngletAccueilController implements Initializable {
             Parent root1 = (Parent) loader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initStyle(StageStyle.UTILITY);
             stage.setTitle("Nouvelle transaction");
             stage.setScene(new Scene(root1));  
             stage.show();
@@ -74,21 +70,7 @@ public class OngletAccueilController implements Initializable {
     }
     
     public void actionInscrireAdherent(ActionEvent event) {
-        // Ouvrir l'interface de Nouvel adhérent
-        try {
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("nouvelAdherent.fxml"));
-            Parent root1 = (Parent) loader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("Ajouter adhérent");
-            stage.setScene(new Scene(root1));  
-            stage.show();
-        }
-        catch (Exception ex) {
-            Logger.getLogger(OngletAccueilController.class.getName()).log(Level.SEVERE, null, ex);
-        }  
+        application.goToNewAdherent();
     }
     
     
