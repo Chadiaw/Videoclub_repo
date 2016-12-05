@@ -5,10 +5,35 @@
  */
 package videoclub.model;
 
+import java.util.ArrayList;
+
 /**
  *
- * @author cheik
+ * @author Melanie
  */
-public class Location {
+
+
+class Location {
+    
+    private double totalLocation;
+    private ArrayList<LigneLocation> LigneLoc;
+    
+    public Location(){
+        this.totalLocation = 0;
+        this.LigneLoc = new ArrayList<>();
+    }
+    
+    public void creerLigneLocation(int numeroArticle, int numeroExemplaire, int duree){
+        LigneLocation ligne = new LigneLocation(numeroArticle, numeroExemplaire, duree);
+        LigneLoc.add(ligne);
+    }
+    
+    public double getTotalLocation(){
+        double total = 0;
+        for(int i = 0; i< LigneLoc.size()-1; i++){
+            total = total + LigneLoc.get(i).getSousTotal();
+        }
+        return total;
+    }
     
 }

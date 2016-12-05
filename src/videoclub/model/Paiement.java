@@ -9,14 +9,6 @@ package videoclub.model;
  *
  * @author Melanie
  */
-public class Video extends Article{
-    
-    String titre;
-    String genre;
-    boolean nouveaute;
-    String synopsis;
-    String type; /*Blue-Ra */
-    
-    
+public class Paiement {
     
 }

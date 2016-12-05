@@ -11,4 +11,17 @@ package videoclub.model;
  */
 public class Article {
     
+    private int numeroArticle;
+    private double prix;
+    private String descriptif;
+    private boolean achetable;
+    
+    public Article(int numeroArticle, double prix, String descriptif, boolean achetable){
+        this.numeroArticle = numeroArticle;
+        this.prix= prix;
+        this.descriptif=descriptif;
+        this.achetable= achetable;
+        
+    }
+    
 }

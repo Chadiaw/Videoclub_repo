@@ -87,6 +87,23 @@ public class NewTransactionController implements Initializable {
         }   
     }
     
+    public void actionAjoutVente(ActionEvent event){
+        //Ouvrir l'interface Nouvelle vente
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("fenetreVente.fxml"));
+            Parent root1 = (Parent) loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("Vente");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        }
+        catch(Exception ex){
+            Logger.getLogger(NewTransactionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void actionAnnulerTransaction(ActionEvent event) {
         // Recuperer la fenêtre (stage) parente
         Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
