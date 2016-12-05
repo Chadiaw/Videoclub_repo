@@ -7,6 +7,7 @@ package videoclub.model;
 
 import java.util.ArrayList;
 
+
 /**
  *
  * @author Melanie
@@ -15,8 +16,8 @@ public class CatalogueProduits {
     
     private ArrayList<Article> catalogue;
     
-    public CatalogueProduits(){
-        /*Aller chercher a partir de la base de donnees*/
+    private CatalogueProduits(){
+        
     }
     
     public void ajouterArticle(double prix, String descriptif, boolean achetable){
@@ -24,6 +25,13 @@ public class CatalogueProduits {
         Article nouvelArticle = new Article(numeroArt, prix, descriptif, achetable);
         catalogue.add(nouvelArticle);
     }
+    
+    private static CatalogueProduits instance;
+    
+    public static CatalogueProduits getInstance(){
+        return instance;
+    }
+    
     
     
 }

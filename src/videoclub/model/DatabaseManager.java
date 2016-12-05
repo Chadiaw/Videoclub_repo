@@ -87,5 +87,34 @@ public class DatabaseManager {
         return listeAdherents;
     }
     
+    public static ObservableList<Adherent> getAdherents() {
+        ObservableList<Adherent> listeAdherents = FXCollections.observableArrayList();
+        
+        Connection c = null;
+        Statement stmt = null;
+        try {
+          Class.forName("org.sqlite.JDBC");
+          String url = String.format("jdbc:sqlite:%s", DATABASE_PATH);
+          c = DriverManager.getConnection(url);
+          c.setAutoCommit(false);
+          
+          stmt = c.createStatement();
+          ResultSet rs = stmt.executeQuery( "SELECT * FROM ADHERENT;" );
+          while ( rs.next() ) {
+             Adherent adherent = new Adherent(rs.getString("name"), rs.getString("telephone"),
+                                              rs.getString("address"), rs.getDouble("solde"),
+                                              rs.getInt("code"));
+             listeAdherents.add(adherent);
+          }
+          rs.close();
+          stmt.close();
+          c.close();
+        } catch ( Exception e ) {
+          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+          System.exit(0);
+        }
+        return listeAdherents;
+    }
+    
     
 }
