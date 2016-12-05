@@ -16,6 +16,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import videoclub.securite.LoginManager;
 
+/**
+ * Fournit des méthodes d'accès à la base de données du vidéoclub.
+ * @author cheikh
+ */
 public class DatabaseManager {
     
     // Chemin du fichier de base de donnees SQLite
@@ -85,6 +89,37 @@ public class DatabaseManager {
           System.exit(0);
         }
         return listeAdherents;
+    }
+    
+    public static ObservableList<Article> getArticles() {
+        ObservableList<Article> listeArticles = FXCollections.observableArrayList();
+        
+        Connection c = null;
+        Statement stmt = null;
+        
+        try {
+          Class.forName("org.sqlite.JDBC");
+          String url = String.format("jdbc:sqlite:%s", DATABASE_PATH);
+          c = DriverManager.getConnection(url);
+          c.setAutoCommit(false);
+          
+          stmt = c.createStatement();
+          ResultSet rs = stmt.executeQuery( "SELECT * FROM ARTICLE;" );
+          while ( rs.next() ) {
+              
+             Article article = new Article(rs.getInt("numero"), rs.getDouble("prix"),
+                                              rs.getString("descriptif"), 
+                                              (rs.getInt("achetable") == 1));
+             listeArticles.add(article);
+          }
+          rs.close();
+          stmt.close();
+          c.close();
+        } catch ( Exception e ) {
+          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+          System.exit(0);
+        }
+        return listeArticles;
     }
     
     

@@ -12,6 +12,9 @@ package videoclub.model;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Employé du vidéoclub
+ */
 public class Employe {
 
     private Employe(String username) {

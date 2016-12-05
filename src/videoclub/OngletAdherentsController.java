@@ -101,6 +101,8 @@ public class OngletAdherentsController implements Initializable {
     
     public void ajouterAdherent(ActionEvent event) {
         application.goToNewAdherent();
+        
+        
     }
     
 }
