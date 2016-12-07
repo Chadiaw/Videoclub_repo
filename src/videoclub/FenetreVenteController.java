@@ -16,6 +16,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import videoclub.model.CatalogueProduits;
+import videoclub.model.Vente;
 
 /**
  * FXML Controller class
@@ -27,7 +29,7 @@ public class FenetreVenteController implements Initializable {
     @FXML
     private Label entreeManuelleLabel;
     @FXML
-    private TextField codeArticle;
+    private TextField numeroArticle;
     @FXML 
     private AnchorPane quantiteLabel;
     @FXML
@@ -47,6 +49,9 @@ public class FenetreVenteController implements Initializable {
     @FXML
     private Button boutonAnnuler;
     private Videoclub application;
+    
+    private CatalogueProduits catalogue;
+    private Vente vente;
 
     /**
      * Initializes the controller class.
@@ -54,9 +59,25 @@ public class FenetreVenteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         application = Videoclub.getInstance();
-        total.setText("0.00$");
-        // TODO
-    }   
+        Vente vente = new Vente();
+        total.setText(Double.toString(vente.getTotalVente()) + "$");
+        
+    }  
+    
+    @FXML
+    private void actionAjouter(ActionEvent event){
+        String code = numeroArticle.getText();
+        String quant = quantite.getText();
+        /*ajouter verification de type*/
+        int quantite = Integer.parseInt(quant);
+        vente.creerLigneArticle(code, quantite);
+        total.setText(Double.toString(vente.getTotalVente()) + "$");
+    }
+        
+        
+  
+        
+    
     
     
     

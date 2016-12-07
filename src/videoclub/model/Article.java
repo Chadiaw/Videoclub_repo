@@ -24,4 +24,16 @@ public class Article {
         
     }
     
+    public double getPrix(){
+        return this.prix;
+    }
+    
+    public String getDescriptif(){
+        return this.descriptif;
+    }
+    
+    public boolean getAchetable(){
+        return this.achetable;
+    }
+    
 }

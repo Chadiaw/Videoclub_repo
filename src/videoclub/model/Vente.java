@@ -24,13 +24,12 @@ public class Vente {
     public void creerLigneArticle(String numeroArticle, int quantite){
         LigneArticle ligne = new LigneArticle(numeroArticle, quantite);
         LigneArt.add(ligne);
+        totalVente += ligne.getSousTotal();
     }
     
     public double getTotalVente(){
-        double total = 0;
-        for(int i = 0; i< LigneArt.size()-1; i++){
-            total = total + LigneArt.get(i).getSousTotal();
-        }
-        return total;
+        return totalVente;
     }
+
+    
 }

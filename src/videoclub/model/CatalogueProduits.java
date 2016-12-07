@@ -33,6 +33,11 @@ public class CatalogueProduits {
         return instance;
     }
     
+    public Article getArticle(String numero){
+        //dummy - a changer
+        return new Article("1111", "dummy", 3.99, true);
+    }
+    
     
     
 }
