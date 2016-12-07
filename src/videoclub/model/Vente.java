@@ -21,7 +21,7 @@ public class Vente {
         this.LigneArt = new ArrayList<>();
     }
     
-    public void creerLigneArticle(int numeroArticle, int quantite){
+    public void creerLigneArticle(String numeroArticle, int quantite){
         LigneArticle ligne = new LigneArticle(numeroArticle, quantite);
         LigneArt.add(ligne);
     }

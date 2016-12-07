@@ -6,6 +6,7 @@
 package videoclub.model;
 
 import java.util.ArrayList;
+import javafx.collections.ObservableList;
 
 
 /**
@@ -14,15 +15,15 @@ import java.util.ArrayList;
  */
 public class CatalogueProduits {
     
-    private ArrayList<Article> catalogue;
+    private ObservableList<Article> catalogue;
     
     private CatalogueProduits(){
         
     }
     
-    public void ajouterArticle(double prix, String descriptif, boolean achetable){
-        int numeroArt = catalogue.size();
-        Article nouvelArticle = new Article(numeroArt, prix, descriptif, achetable);
+    public void ajouterArticle(String numero, String descriptif, double prix, boolean achetable){
+
+        Article nouvelArticle = new Article(numero, descriptif, prix, achetable);
         catalogue.add(nouvelArticle);
     }
     

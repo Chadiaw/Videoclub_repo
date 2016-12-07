@@ -23,7 +23,7 @@ class Location {
         this.LigneLoc = new ArrayList<>();
     }
     
-    public void creerLigneLocation(int numeroArticle, int numeroExemplaire, int duree){
+    public void creerLigneLocation(String numeroArticle, int numeroExemplaire, int duree){
         LigneLocation ligne = new LigneLocation(numeroArticle, numeroExemplaire, duree);
         LigneLoc.add(ligne);
     }

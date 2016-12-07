@@ -11,12 +11,12 @@ package videoclub.model;
  */
 public class LigneArticle {
     
-    private int numeroArticle;
+    private String numeroArticle;
     private int quantite;
     //private Description description; //non Description se trouve dans Article
     private double sousTotal;
     
-    public LigneArticle(int numeroArticle, int quantite){
+    public LigneArticle(String numeroArticle, int quantite){
         this.numeroArticle = numeroArticle;
         this.quantite = quantite;
         

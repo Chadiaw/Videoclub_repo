@@ -16,9 +16,9 @@ public class Film extends Article{
     String synopsis;
     String type; /*Blue-Ray/DVD */
     
-    public Film (int numeroArticle, double prix, String descriptif, boolean achetable, String titre, 
+    public Film (String numero, String descriptif, double prix, boolean achetable, String titre, 
                     String genre, boolean nouveaute, String synopsis, String type){
-        super(numeroArticle, prix, descriptif, achetable);
+        super(numero, descriptif, prix, achetable);
         this.titre = titre;
         this.genre = genre;
         this.nouveaute = nouveaute;

@@ -87,8 +87,8 @@ public class DatabaseManager {
         return listeAdherents;
     }
     
-    public static ObservableList<Adherent> getAdherents() {
-        ObservableList<Adherent> listeAdherents = FXCollections.observableArrayList();
+    public static ObservableList<Article> getArticles() {
+        ObservableList<Article> listeArticles = FXCollections.observableArrayList();
         
         Connection c = null;
         Statement stmt = null;
@@ -99,12 +99,11 @@ public class DatabaseManager {
           c.setAutoCommit(false);
           
           stmt = c.createStatement();
-          ResultSet rs = stmt.executeQuery( "SELECT * FROM ADHERENT;" );
+          ResultSet rs = stmt.executeQuery( "SELECT * FROM ARTICLE;" );
           while ( rs.next() ) {
-             Adherent adherent = new Adherent(rs.getString("name"), rs.getString("telephone"),
-                                              rs.getString("address"), rs.getDouble("solde"),
-                                              rs.getInt("code"));
-             listeAdherents.add(adherent);
+             Article article = new Article(rs.getString("numero"), rs.getString("descriptif"),
+                                              rs.getDouble("prix"), (rs.getInt("achetable")==1));
+             listeArticles.add(article);
           }
           rs.close();
           stmt.close();
@@ -113,7 +112,7 @@ public class DatabaseManager {
           System.err.println( e.getClass().getName() + ": " + e.getMessage() );
           System.exit(0);
         }
-        return listeAdherents;
+        return listeArticles;
     }
     
     

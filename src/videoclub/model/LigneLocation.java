@@ -18,11 +18,11 @@ public class LigneLocation {
     
     private int duree; /*le nombre de jours de la location */
     private int numExemplaire; /*le numero d'exemplaire de l'article */
-    private int numArticle;
+    private String numArticle;
     private double sousTotal;
     /*date de retour a ajouter*/
     
-    public LigneLocation(int numeroArticle, int numeroExemplaire, int duree){
+    public LigneLocation(String numeroArticle, int numeroExemplaire, int duree){
         this.duree = duree;
         this.numExemplaire = numeroExemplaire;
         /*Ajouter connexion a l'article avec le numero Article.. il faudra renvoyer
@@ -35,7 +35,7 @@ public class LigneLocation {
         return this.sousTotal;
     }
     
-    private double calculerSousTotal(int numeroArticle, int duree){
+    private double calculerSousTotal(String numeroArticle, int duree){
         double total =0 ; /*a changer le 0 une fois le reste decommente */
        /* boolean nouveaute = catalogue.getItem(numeroArticle).getDescription().getNouveaute();*/
       /*  if(nouveaute){
