@@ -22,6 +22,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import videoclub.model.Adherent;
+import videoclub.model.CatalogueProduits;
 import videoclub.model.DatabaseManager;
 import videoclub.model.Employe;
 import videoclub.securite.LoginManager;
@@ -170,7 +171,8 @@ public class Videoclub extends Application {
         
         // Charger articles dans onglet Inventaire
         
-        System.out.println("Adhérents chargés.");
+        // Charger catalogue
+        CatalogueProduits.getInstance().setListeProduits(DatabaseManager.getArticles());
     }
     
     public ObservableList<Adherent> getListeAdherents() {

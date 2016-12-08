@@ -5,8 +5,9 @@
  */
 package videoclub.model;
 
-import java.util.ArrayList;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 
 
 /**
@@ -15,29 +16,49 @@ import javafx.collections.ObservableList;
  */
 public class CatalogueProduits {
     
-    private ObservableList<Article> catalogue;
+    private ObservableList<Article> listeProduits;
+    
+    // Mappe les numéros (code article) à des objets Article
+    private ObservableMap<String, Article> mapCodeProduits = FXCollections.observableHashMap();
     
     private CatalogueProduits(){
         
     }
     
+    /*
     public void ajouterArticle(String numero, String descriptif, double prix, boolean achetable){
 
         Article nouvelArticle = new Article(numero, descriptif, prix, achetable);
-        catalogue.add(nouvelArticle);
+        listeProduits.add(nouvelArticle);
+        mapCodeProduits.put(numero, nouvelArticle);
+    }
+    */
+    // Rendre la méthode indépendante de l'implémentation de Article
+    public void ajouterArticle(Article article) {
+        listeProduits.add(article);
+        mapCodeProduits.put(article.getNumeroArticle(), article);
     }
     
-    private static CatalogueProduits instance;
+    // Si on ne veut pas ajouter les articles un par un..
+    public void setListeProduits(ObservableList<Article> listeProduits) {
+        this.listeProduits = listeProduits;
+        for (Article article:listeProduits)
+        {
+            mapCodeProduits.put(article.getNumeroArticle(), article);
+        }
+    }
+    
+    
+    
+    private static CatalogueProduits INSTANCE = new CatalogueProduits();
     
     public static CatalogueProduits getInstance(){
-        return instance;
+        return INSTANCE;
     }
     
-    public Article getArticle(String numero){
-        //dummy - a changer
-        return new Article("1111", "dummy", 3.99, true);
+    public Article getArticle(String numero){     
+        return mapCodeProduits.get(numero);
+        
     }
-    
-    
     
 }

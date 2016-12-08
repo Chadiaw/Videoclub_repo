@@ -11,19 +11,29 @@ package videoclub.model;
  */
 public class LigneArticle {
     
-    private String numeroArticle;/* cet attribut ne devrait pas apparaitre dans Ligne Article*/
     private int quantite;
-    //private Description description; //non Description se trouve dans Article
     private double sousTotal;
-    private CatalogueProduits catalogue;
+    private Article article;
     
     public LigneArticle(String numeroArticle, int quantite){
         /*this.numeroArticle = numeroArticle;*/
+        this.article = CatalogueProduits.getInstance().getArticle(numeroArticle);
         this.quantite = quantite;
-        this.catalogue = CatalogueProduits.getInstance();
-        this.sousTotal = quantite * catalogue.getArticle(numeroArticle).getPrix();
+        this.sousTotal = quantite * article.getPrix();
         
-   /*est-ce que la connexion au catalogue devrait se faire a partir de cette classe*/
+    }
+    
+    
+    /*
+        Cette implémentation marche, mais je pense qu'on devrait quand même 
+       avoir un attribut Article dans cette classe. 
+        Par exemple, dans le tableau de la fenetre vente, il sera alors facile d'appeler
+        ligne.article.code, ligne.article.descriptif etc pour remplir les colonnes.
+    */
+    public LigneArticle(Article article, int quantite) {
+        this.article = article;
+        this.quantite = quantite;
+        this.sousTotal = quantite * article.getPrix();
     }
     
     public int getQuantite(){
@@ -34,4 +44,7 @@ public class LigneArticle {
         return this.sousTotal;
     }
     
+    public Article getArticle() {
+        return article;
+    }
 }
