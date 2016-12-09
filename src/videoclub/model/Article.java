@@ -12,7 +12,7 @@ package videoclub.model;
  */
 public class Article {
     
-    private String numeroArticle;
+    private String codeArticle;
 
     
     private double prix;
@@ -20,8 +20,8 @@ public class Article {
     private boolean achetable;
     
 
-    public Article(String numeroArticle, String descriptif, double prix, boolean achetable){
-        this.numeroArticle = numeroArticle;
+    public Article(String codeArticle, String descriptif, double prix, boolean achetable){
+        this.codeArticle = codeArticle;
         this.prix= prix;
         this.descriptif=descriptif;
         this.achetable= achetable;    
@@ -35,8 +35,8 @@ public class Article {
         return this.descriptif;
     }
     
-    public String getNumeroArticle() {
-        return numeroArticle;
+    public String getCodeArticle() {
+        return codeArticle;
     }
     
     public boolean isAchetable(){

@@ -17,25 +17,19 @@ import javafx.collections.ObservableList;
 public class Vente {
     
     private double totalVente;
-    private ObservableList<LigneArticle> lignesArticles;
+    private ObservableList<LigneArticle> lignesArticle;
     
     public Vente(){
         this.totalVente = 0;
-        this.lignesArticles = FXCollections.observableArrayList();
+        this.lignesArticle = FXCollections.observableArrayList();
     }
     
-    public void ajouterLigneArticle(String numeroArticle, int quantite){
-        LigneArticle ligne = new LigneArticle(numeroArticle, quantite);
-        lignesArticles.add(ligne);
+    public void ajouterLigneArticle(String codeArticle, int quantite){
+        LigneArticle ligne = new LigneArticle(codeArticle, quantite);
+        lignesArticle.add(ligne);
         totalVente += ligne.getSousTotal();
     }
-    
-    public void ajouterLigneArticle(Article article, int quantite) {
-        LigneArticle ligne = new LigneArticle(article, quantite);
-        lignesArticles.add(ligne);
-        totalVente += ligne.getSousTotal();
-    }
-    
+   
     public double getTotalVente(){
         return totalVente;
     }
@@ -46,6 +40,6 @@ public class Vente {
     }
 
     public ObservableList<LigneArticle> getLignesArticles() {
-        return lignesArticles;
+        return lignesArticle;
     }
 }

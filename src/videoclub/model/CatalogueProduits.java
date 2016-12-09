@@ -16,39 +16,18 @@ import javafx.collections.ObservableMap;
  */
 public class CatalogueProduits {
     
-    private ObservableList<Article> listeProduits;
+    private ObservableList<Article> listeArticles;
+    private ObservableList<Film> listeFilms;
     
-    // Mappe les numéros (code article) à des objets Article
-    private ObservableMap<String, Article> mapCodeProduits = FXCollections.observableHashMap();
+    // Mappe les codes article à des objets Article
+    private ObservableMap<String, Article> mapCodeArticles = FXCollections.observableHashMap();
+    
+    // Mappe les codes article à des objets Film
+    private ObservableMap<String, Film> mapCodeFilms = FXCollections.observableHashMap();
     
     private CatalogueProduits(){
         
     }
-    
-    /*
-    public void ajouterArticle(String numero, String descriptif, double prix, boolean achetable){
-
-        Article nouvelArticle = new Article(numero, descriptif, prix, achetable);
-        listeProduits.add(nouvelArticle);
-        mapCodeProduits.put(numero, nouvelArticle);
-    }
-    */
-    // Rendre la méthode indépendante de l'implémentation de Article
-    public void ajouterArticle(Article article) {
-        listeProduits.add(article);
-        mapCodeProduits.put(article.getNumeroArticle(), article);
-    }
-    
-    // Si on ne veut pas ajouter les articles un par un..
-    public void setListeProduits(ObservableList<Article> listeProduits) {
-        this.listeProduits = listeProduits;
-        for (Article article:listeProduits)
-        {
-            mapCodeProduits.put(article.getNumeroArticle(), article);
-        }
-    }
-    
-    
     
     private static CatalogueProduits INSTANCE = new CatalogueProduits();
     
@@ -56,9 +35,40 @@ public class CatalogueProduits {
         return INSTANCE;
     }
     
-    public Article getArticle(String numero){     
-        return mapCodeProduits.get(numero);
-        
+    // Rendre la méthode indépendante de l'implémentation de Article
+    public void ajouterArticle(Article article) {
+        listeArticles.add(article);
+        mapCodeArticles.put(article.getCodeArticle(), article);
+    }
+    
+    public void ajouterFilm(Film film) {
+        listeFilms.add(film);
+        mapCodeFilms.put(film.getCodeArticle(), film);
+    }
+    
+    // Si on ne veut pas ajouter les articles un par un..
+    public void setListeArticles(ObservableList<Article> listeArticles) {
+        this.listeArticles = listeArticles;
+        for (Article article:listeArticles)
+        {
+            mapCodeArticles.put(article.getCodeArticle(), article);
+        }
+    }
+    
+    public void setListeFilms(ObservableList<Film> listeFilms) {
+        this.listeFilms = listeFilms;
+        for (Film film:listeFilms)
+        {
+            mapCodeFilms.put(film.getCodeArticle(), film);
+        }
+    }
+    
+    public Article getArticle(String codeArticle){     
+        return mapCodeArticles.get(codeArticle);
+    }
+    
+    public Film getFilm(String codeFilm) {
+        return mapCodeFilms.get(codeFilm);
     }
     
 }

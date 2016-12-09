@@ -12,28 +12,13 @@ package videoclub.model;
 public class LigneArticle {
     
     private int quantite;
-    private double sousTotal;
-    private Article article;
+    private String codeArticle;
     
-    public LigneArticle(String numeroArticle, int quantite){
-        /*this.numeroArticle = numeroArticle;*/
-        this.article = CatalogueProduits.getInstance().getArticle(numeroArticle);
+    public LigneArticle(String codeArticle, int quantite){
+        this.codeArticle = codeArticle;
         this.quantite = quantite;
-        this.sousTotal = quantite * article.getPrix();
         
-    }
-    
-    
-    /*
-        Cette implémentation marche, mais je pense qu'on devrait quand même 
-       avoir un attribut Article dans cette classe. 
-        Par exemple, dans le tableau de la fenetre vente, il sera alors facile d'appeler
-        ligne.article.code, ligne.article.descriptif etc pour remplir les colonnes.
-    */
-    public LigneArticle(Article article, int quantite) {
-        this.article = article;
-        this.quantite = quantite;
-        this.sousTotal = quantite * article.getPrix();
+        
     }
     
     public int getQuantite(){
@@ -41,10 +26,11 @@ public class LigneArticle {
     }
     
     public double getSousTotal(){
-        return this.sousTotal;
+        return quantite * CatalogueProduits.getInstance().getArticle(this.codeArticle).getPrix();
     }
     
-    public Article getArticle() {
-        return article;
+    public String getCodeArticle() {
+        return this.codeArticle;
     }
+    
 }

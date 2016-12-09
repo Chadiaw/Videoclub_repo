@@ -23,7 +23,7 @@
       <Separator layoutX="479.0" layoutY="2.0" orientation="VERTICAL" prefHeight="106.0" prefWidth="8.0" />
       <VBox layoutX="32.0" layoutY="35.0" prefHeight="41.0" prefWidth="294.0">
          <children>
-            <TextField fx:id="numeroArticle" prefHeight="37.0" prefWidth="324.0" promptText="Entrez le code produit..." />
+            <TextField fx:id="codeArticle" prefHeight="37.0" prefWidth="324.0" promptText="Entrez le code produit..." />
          </children>
       </VBox>
       <VBox layoutX="31.0" layoutY="79.0" prefHeight="41.0" prefWidth="334.0">
@@ -48,7 +48,7 @@
       <Label fx:id="totalLabel" alignment="CENTER_RIGHT" layoutX="408.0" layoutY="342.0" prefHeight="21.0" prefWidth="167.0" text="Total achats" />
       <HBox alignment="BOTTOM_RIGHT" layoutX="321.0" layoutY="375.0" prefHeight="41.0" prefWidth="279.0" spacing="20.0">
          <children>
-            <Button fx:id="boutonConfirmer" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Confirmer" />
+            <Button fx:id="boutonConfirmer" mnemonicParsing="false" onAction="#actionConfirmer" prefHeight="25.0" prefWidth="123.0" text="Confirmer" />
             <Button fx:id="boutonAnnuler" cancelButton="true" mnemonicParsing="false" onAction="#actionAnnulerVente" text="Annuler" />
          </children>
          <padding>

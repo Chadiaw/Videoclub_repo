@@ -5,61 +5,90 @@
  */
 package videoclub.model;
 
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 /**
  *
  * @author cheik
  */
 public class Transaction {
     
+    
     private int numeroTransaction;
-    private String date;
+    private LocalDateTime date;
     private Vente vente;
     private Location location;
+    private Adherent adherent;
     private double total;
-    private double TPS; /*champ relatif*/
-    private double TVQ; /*champ relatif*/
-    private double sousTotal;
-
    
-    public Transaction(int numeroTransaction){
-        this.numeroTransaction = numeroTransaction;
-        this.location = new Location();
+    public Transaction(){
+        this.numeroTransaction = HistoriqueTransactions.getTransactionsCount();
         this.total = 0;
+        this.adherent = null;
+        this.vente = null;
+        this.location = null;
+        this.date = LocalDateTime.now(); 
+        
     }
     
     public int getNumeroTransaction(){
         return numeroTransaction;
     }
     
-    public String getDate(){
+    public LocalDateTime getDate(){
         return date;
     }
     
-    public void setTotal(){
-        this.total = calculerTotal();
-    }
-    public double getTotal(){
+    public double getTotal() {
+            /*
+            additionner sousTotal Vente et Location
+            multiplier par taxes
+            retourner resultat
+            */
         return total;
     }
     
+    public Adherent getAdherent() {
+        return this.adherent;
+    }
+    
+    public void setAdherent(Adherent adherent) {
+        this.adherent = adherent;
+    }
+    
+    public Vente getVente() {
+        return this.vente;
+    }
+    
+    public void setVente(Vente vente) {
+        this.vente = vente;
+    }
+    
+    public Location getLocation() {
+        return this.location;
+    }
+    
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+/*
     public double calculerSousTotal(){
-        sousTotal = 0;
+        totalSansTax = 0;
         if(this.vente != null){
-            sousTotal = sousTotal + this.vente.getTotalVente();
+            totalSansTax = totalSansTax + this.vente.getTotalVente();
         }
         if(this.location != null){
-            sousTotal = sousTotal + this.location.getTotalLocation();
+            totalSansTax = totalSansTax + this.location.getTotalLocation();
         }
-        return sousTotal;
+        return totalSansTax;
     }
     
     public double calculerTPS(){
-        return (double)Math.round(this.sousTotal * 0.05 * 0.998*100)/100 ;
+        return (double)Math.round(this.totalSansTax * 0.05 * 0.998*100)/100 ;
     }
     
     public double calculerTVQ(){
-        return (double)Math.round(this.sousTotal * 0.998*100)/100 ;
+        return (double)Math.round(this.totalSansTax * 0.998*100)/100 ;
     }
     
     public double calculerTotal() {
@@ -83,4 +112,5 @@ public class Transaction {
     public void enregistrerTransaction(){
         
     }
+*/
 }

@@ -21,6 +21,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import videoclub.model.Transaction;
 
 /**
  * FXML Controller class
@@ -64,23 +65,51 @@ public class NewTransactionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         this.application = Videoclub.getInstance();
+        if (application.getTransactionEnCours() == null) {
+            application.setTransactionEnCours(new Transaction());
+        }
         sousTotalLocation.setText("Sous-total : 0.00 $");
         sousTotalVente.setText("Sous-total: 0.00 $");
-        adherentLabel.setText("");
+        
+        if(application.getTransactionEnCours().getLocation() == null) {
+            boutonLocation.setVisible(true);
+            tableLocation.setVisible(false);
+        }
+        else {
+            boutonLocation.setVisible(false);
+            tableLocation.setVisible(true);
+        }
+        
+        if(application.getTransactionEnCours().getVente() == null) {
+            boutonVente.setVisible(true);
+            tableVente.setVisible(false);
+        }
+        else {
+            boutonVente.setVisible(false);
+            tableVente.setVisible(true);
+        }
+        
+        if(application.getTransactionEnCours().getAdherent() == null) {
+            adherentLabel.setText("");
+        }
+        else {
+            adherentLabel.setText("Adhérent : " + application.getTransactionEnCours().getAdherent().getNom());
+        }
+        
         totalTransaction.setText("Total : 0.00$");
+        
     }    
     
     public void actionAjoutLocation(ActionEvent event) {
          // Ouvrir l'interface de Nouvelle location
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("identifierAdherent.fxml"));
-            Parent root1 = (Parent) loader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("Identifier adhérent");
-            stage.setScene(new Scene(root1));  
-            stage.show();
+            // Fermer vue actuelle
+            Stage stage = (Stage) boutonLocation.getScene().getWindow();
+            stage.close();
+            
+            // Ouvrir vue 'Identifier adhérent'
+            application.getViewManager().openView("identifierAdherent.fxml", "Identifier adhérent", StageStyle.UNDECORATED );
+         
         }
         catch (Exception ex) {
             Logger.getLogger(NewTransactionController.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,14 +119,13 @@ public class NewTransactionController implements Initializable {
     public void actionAjoutVente(ActionEvent event){
         //Ouvrir l'interface Nouvelle vente
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("fenetreVente.fxml"));
-            Parent root1 = (Parent) loader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("Vente");
-            stage.setScene(new Scene(root1));
-            stage.show();
+            // Fermer vue actuelle
+            Stage stage = (Stage) boutonVente.getScene().getWindow();
+            stage.close();
+            
+            // Ouvvrir vue 'Vente'
+            application.getViewManager().openView("fenetreVente.fxml", "Vente", StageStyle.UNDECORATED );
+    
         }
         catch(Exception ex){
             Logger.getLogger(NewTransactionController.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,10 +133,15 @@ public class NewTransactionController implements Initializable {
     }
     
     public void actionAnnulerTransaction(ActionEvent event) {
+        
+        application.setTransactionEnCours(null);
         // Recuperer la fenêtre (stage) parente
         Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
         // Fermer fenêtre
         stage.close();
+        
+        
     }
+
     
 }

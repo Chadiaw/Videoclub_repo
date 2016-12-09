@@ -10,20 +10,22 @@ package videoclub.model;
  */
 public class Film extends Article{
     
-    String titre;
-    String genre;
-    boolean nouveaute;
-    String synopsis;
-    String type; /*Blue-Ray/DVD */
+    private String titre;
+    private String genre;
+    private boolean nouveaute;
+    private String synopsis;
+    private String type; /*Blue-Ray/DVD */
+    private int annee;
     
-    public Film (String numero, String descriptif, double prix, boolean achetable, String titre, 
-                    String genre, boolean nouveaute, String synopsis, String type){
-        super(numero, descriptif, prix, achetable);
+    public Film (String codeArticle, String descriptif, double prix, boolean achetable, String titre, 
+                    String genre, boolean nouveaute, String synopsis, String type, int annee){
+        super(codeArticle, descriptif, prix, achetable);
         this.titre = titre;
         this.genre = genre;
         this.nouveaute = nouveaute;
         this.synopsis = synopsis;
         this.type = type;
+        this.annee = annee;
     }
     
     public String getTitre(){
@@ -34,15 +36,13 @@ public class Film extends Article{
         return this.genre;
     }
     
-    public boolean getNouveaute(){
+    public boolean isNouveaute(){
         return this.nouveaute;
     }
     
     public String getType(){
         return this.type;
     }
-    
-    
     
 }
     

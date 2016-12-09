@@ -5,12 +5,16 @@
  */
 package videoclub;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -21,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import videoclub.model.Article;
 import videoclub.model.CatalogueProduits;
 import videoclub.model.LigneArticle;
@@ -36,7 +41,7 @@ public class FenetreVenteController implements Initializable {
     @FXML
     private Label entreeManuelleLabel;
     @FXML
-    private TextField numeroArticle;
+    private TextField codeArticle;
     @FXML 
     private AnchorPane quantiteLabel;
     @FXML
@@ -89,7 +94,7 @@ public class FenetreVenteController implements Initializable {
     
     @FXML
     private void actionAjouter(ActionEvent event){
-        String codeSaisi = numeroArticle.getText();
+        String codeSaisi = codeArticle.getText();
         
         if(CatalogueProduits.getInstance().getArticle(codeSaisi) == null ) {
             Alert alert = new Alert(Alert.AlertType.ERROR);;
@@ -124,10 +129,43 @@ public class FenetreVenteController implements Initializable {
         Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
         // Fermer fenêtre
         stage.close();
+        
+        try {
+            application.getViewManager().openView("newTransaction.fxml", "Nouvelle transaction", StageStyle.UTILITY);
+        } catch (IOException ex) {
+            Logger.getLogger(FenetreVenteController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @FXML
+    private void actionConfirmer(ActionEvent event) {
+        // Mettre a jour la transaction courante
+        if(vente.getLignesArticles().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("La vente est vide !");
+            
+            alert.showAndWait();
+            return;
+            
+        }
+        application.getTransactionEnCours().setVente(vente);
+       
+        // Fermer fenetre
+        Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
+        stage.close();
+        
+        try {
+            application.getViewManager().openView("newTransaction.fxml", "Nouvelle transaction", StageStyle.UTILITY);
+        }
+        catch (Exception ex) {
+            Logger.getLogger(FenetreVenteController.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
     }
 
   
-    public class TableVenteItem {
+    protected class TableVenteItem {
         /**
          * Definit le format d'une ligne de la table vente. 
          */
@@ -137,7 +175,7 @@ public class FenetreVenteController implements Initializable {
         private double prix; 
         
         public TableVenteItem(Article article, int quantite) {
-            this.code = article.getNumeroArticle();
+            this.code = article.getCodeArticle();
             this.descriptif = article.getDescriptif();
             this.quantite = quantite;
             this.prix = article.getPrix();

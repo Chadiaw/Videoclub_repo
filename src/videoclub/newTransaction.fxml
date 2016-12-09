@@ -38,10 +38,10 @@
                                     <Label fx:id="locationLabel" text="Location" />
                                  </children>
                               </HBox>
-                              <TableView fx:id="tableLocation" layoutX="36.0" layoutY="65.0" visible="false">
+                              <TableView fx:id="tableLocation" layoutX="36.0" layoutY="65.0">
                                 <columns>
-                                  <TableColumn prefWidth="245.0" text="Film" />
-                                  <TableColumn prefWidth="81.0" text="Durée (jours)" />
+                                  <TableColumn prefWidth="242.0" text="Film" />
+                                  <TableColumn prefWidth="109.0" text="Durée (jours)" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -67,10 +67,10 @@
                                     <Label fx:id="venteLabel" text="Vente" />
                                  </children>
                               </HBox>
-                              <TableView fx:id="tableVente" layoutX="36.0" layoutY="65.0" prefHeight="417.0" prefWidth="364.0" visible="false">
+                              <TableView fx:id="tableVente" layoutX="36.0" layoutY="65.0" prefHeight="417.0" prefWidth="364.0">
                                  <columns>
-                                    <TableColumn prefWidth="196.0" text="Article" />
-                                    <TableColumn prefWidth="141.0" text="Quantité" />
+                                    <TableColumn prefWidth="260.0" text="Article" />
+                                    <TableColumn prefWidth="97.0" text="Quantité" />
                                  </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

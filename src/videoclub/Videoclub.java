@@ -25,6 +25,7 @@ import videoclub.model.Adherent;
 import videoclub.model.CatalogueProduits;
 import videoclub.model.DatabaseManager;
 import videoclub.model.Employe;
+import videoclub.model.Transaction;
 import videoclub.securite.LoginManager;
 
 /**
@@ -37,14 +38,20 @@ public class Videoclub extends Application {
     private Employe employeConnecte;
     private ArrayList<Employe> listeEmployes;
     private ObservableList<Adherent> listeAdherents = FXCollections.observableArrayList();
-    private Adherent adherantLouant;
+    private Transaction transactionEnCours = null;
+    private ViewManager viewManager = new ViewManager();
 
-    public void setAdherantLouant(Adherent adherantLouant) {
-        this.adherantLouant = adherantLouant;
+    
+    public ViewManager getViewManager() {
+        return this.viewManager;
+    }   
+    
+    public void setTransactionEnCours(Transaction transaction) {
+        this.transactionEnCours = transaction;
     }
 
-    public Adherent getAdherantLouant() {
-        return adherantLouant;
+    public Transaction getTransactionEnCours() {
+        return transactionEnCours;
     }
     
     // Instance unique de l'application (Videoclub)
@@ -79,7 +86,7 @@ public class Videoclub extends Application {
             //stage.setMinHeight(MINIMUM_WINDOW_HEIGHT);
             gotoLogin();
             primaryStage.show();
-            listeEmployes = DatabaseManager.getEmployees();
+            listeEmployes = DatabaseManager.chargerEmployes();
             if(listeEmployes.isEmpty())
                 throw new Exception("Liste d'employes vide");
         } catch (Exception ex) {
@@ -167,12 +174,13 @@ public class Videoclub extends Application {
 
     private void chargerDonnees() {
         // Charger liste employes
-        listeAdherents = DatabaseManager.getAdherents();
+        listeAdherents = DatabaseManager.chargerAdherents();
         
         // Charger articles dans onglet Inventaire
         
         // Charger catalogue
-        CatalogueProduits.getInstance().setListeProduits(DatabaseManager.getArticles());
+        CatalogueProduits.getInstance().setListeArticles(DatabaseManager.chargerArticles());
+        CatalogueProduits.getInstance().setListeFilms(DatabaseManager.chargerFilms());
     }
     
     public ObservableList<Adherent> getListeAdherents() {

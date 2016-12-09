@@ -55,14 +55,7 @@ public class OngletAccueilController implements Initializable {
     public void actionTransaction(ActionEvent event) {
         // Ouvrir l'interface de Nouvelle transaction
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("newTransaction.fxml"));
-            Parent root1 = (Parent) loader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Nouvelle transaction");
-            stage.setScene(new Scene(root1));  
-            stage.show();
+            application.getViewManager().openView("newTransaction.fxml", "Nouvelle transaction", StageStyle.UTILITY );
         }
         catch (Exception ex) {
             Logger.getLogger(OngletAccueilController.class.getName()).log(Level.SEVERE, null, ex);
