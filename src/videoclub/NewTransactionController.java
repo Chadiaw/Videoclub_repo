@@ -6,9 +6,12 @@
 package videoclub;
 
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,10 +20,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import videoclub.model.CatalogueProduits;
+import videoclub.model.LigneArticle;
+import videoclub.model.LigneLocation;
 import videoclub.model.Transaction;
 
 /**
@@ -29,7 +37,10 @@ import videoclub.model.Transaction;
  * @author cheik
  */
 public class NewTransactionController implements Initializable {
-
+    
+    /*
+        Éléments de l'interface
+    */
     @FXML
     private Button boutonPaiement;
     @FXML
@@ -50,11 +61,30 @@ public class NewTransactionController implements Initializable {
     private Label venteLabel;
     @FXML
     private Label adherentLabel;
-    @FXML
-    private TableView tableLocation;
-    @FXML
-    private TableView tableVente;
     
+    /*
+        Éléments de la table de location
+    */
+    @FXML
+    private TableView<TableLocationItem> tableLocation = new TableView<TableLocationItem>();
+    @FXML
+    private TableColumn filmCol;
+    @FXML
+    private TableColumn dateRetourCol;
+    private ObservableList<TableLocationItem> itemsTableLocation = FXCollections.observableArrayList();
+    
+    /*
+     Éléments de la table de vente
+    */
+    @FXML
+    private TableView<TableVenteItem> tableVente = new TableView<TableVenteItem>();
+    @FXML
+    private TableColumn articleCol;
+    @FXML
+    private TableColumn quantiteCol;
+    private ObservableList<TableVenteItem> itemsTableVente = FXCollections.observableArrayList();
+    
+    // Instance de l'application
     private Videoclub application;
     
     
@@ -63,43 +93,26 @@ public class NewTransactionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         this.application = Videoclub.getInstance();
-        if (application.getTransactionEnCours() == null) {
-            application.setTransactionEnCours(new Transaction());
-        }
-        sousTotalLocation.setText("Sous-total : 0.00 $");
-        sousTotalVente.setText("Sous-total: 0.00 $");
+
+        // Populate TableLocation
+        filmCol.setCellValueFactory(new PropertyValueFactory<TableLocationItem, String>("film"));
+        dateRetourCol.setCellValueFactory(new PropertyValueFactory<TableLocationItem, String>("dateRetour"));
+        tableLocation.setItems(itemsTableLocation);
         
-        if(application.getTransactionEnCours().getLocation() == null) {
-            boutonLocation.setVisible(true);
-            tableLocation.setVisible(false);
-        }
-        else {
-            boutonLocation.setVisible(false);
-            tableLocation.setVisible(true);
-        }
+        // Populate TableVente
+        articleCol.setCellValueFactory(new PropertyValueFactory<TableVenteItem,String>("article"));
+        quantiteCol.setCellValueFactory(new PropertyValueFactory<TableVenteItem, Integer>("quantite"));
+        tableVente.setItems(itemsTableVente);
         
-        if(application.getTransactionEnCours().getVente() == null) {
-            boutonVente.setVisible(true);
-            tableVente.setVisible(false);
-        }
-        else {
-            boutonVente.setVisible(false);
-            tableVente.setVisible(true);
-        }
-        
-        if(application.getTransactionEnCours().getAdherent() == null) {
-            adherentLabel.setText("");
-        }
-        else {
-            adherentLabel.setText("Adhérent : " + application.getTransactionEnCours().getAdherent().getNom());
-        }
-        
-        totalTransaction.setText("Total : 0.00$");
+        // MaJ les éléments de l'interface en fonction de l'état de l'application
+        updateAll();
         
     }    
     
+    /**
+     *  Ajout d'une location à la transaction. Ouverture de l'interface 'Identifier adhérent'.
+     */
     public void actionAjoutLocation(ActionEvent event) {
          // Ouvrir l'interface de Nouvelle location
         try {
@@ -108,7 +121,7 @@ public class NewTransactionController implements Initializable {
             stage.close();
             
             // Ouvrir vue 'Identifier adhérent'
-            application.getViewManager().openView("identifierAdherent.fxml", "Identifier adhérent", StageStyle.UNDECORATED );
+            application.getViewManager().openView("identifierAdherent.fxml", "Identifier adhérent", StageStyle.UTILITY );
          
         }
         catch (Exception ex) {
@@ -116,6 +129,9 @@ public class NewTransactionController implements Initializable {
         }   
     }
     
+    /**
+     *  Ajout d'une vente à la transaction. Ouvre l'interface 'Nouvelle vente'.
+     */
     public void actionAjoutVente(ActionEvent event){
         //Ouvrir l'interface Nouvelle vente
         try{
@@ -132,6 +148,9 @@ public class NewTransactionController implements Initializable {
         }
     }
     
+    /**
+     *  Annuler transaction. La transaction en cours est réinitialisée (null).
+     */
     public void actionAnnulerTransaction(ActionEvent event) {
         
         application.setTransactionEnCours(null);
@@ -141,6 +160,126 @@ public class NewTransactionController implements Initializable {
         stage.close();
         
         
+    }
+
+    /**
+     * Mise à jour des éléments de l'interface selon l'état de l'application
+     */
+    private void updateAll() {
+       if (application.getTransactionEnCours() == null) {
+           // S'il n'y a pas de transaction en cours, en créer une lorsque cette interface est ouverte.
+            application.setTransactionEnCours(new Transaction());
+        }
+               
+        if(application.getTransactionEnCours().getLocation() == null) {
+            // Cacher table et afficher bouton 'Ajout location'
+            boutonLocation.setVisible(true);
+            tableLocation.setVisible(false);
+            sousTotalLocation.setText("Sous-total : 0.00 $");
+        }
+        else {
+            // Cacher bouton et afficher table (location déjà définie)
+            boutonLocation.setVisible(false);
+            tableLocation.setVisible(true);
+            String locationTotal = application.getTransactionEnCours().getLocation().getTotalFormatted();                    
+            sousTotalLocation.setText(String.format("Sous-total: %s $", locationTotal));
+            
+            // Remplir les éléments de la table à partir de la location définie.
+            itemsTableLocation.clear();
+            for (LigneLocation ligneLocation : application.getTransactionEnCours().getLocation().getLignesLocation()) {
+                itemsTableLocation.add(new TableLocationItem((ligneLocation)));
+            }
+            
+        }
+        
+        if(application.getTransactionEnCours().getVente() == null) {
+            // Cacher table et afficher bouton 'Ajouter vente'
+            boutonVente.setVisible(true);
+            tableVente.setVisible(false);
+            sousTotalVente.setText("Sous-total: 0.00 $");
+        }
+        else {
+            // Afficher table et cacher bouton (vente déjà définie)
+            boutonVente.setVisible(false);
+            tableVente.setVisible(true);
+            String venteTotal = application.getTransactionEnCours().getVente().getTotalFormatted();
+            sousTotalVente.setText(String.format("Sous-total : %s $", venteTotal));
+            
+            // Remplir les éléments de la table à partir de la vente définie.
+            itemsTableVente.clear();
+            for (LigneArticle ligneArticle: application.getTransactionEnCours().getVente().getLignesArticles()) {
+                itemsTableVente.add(new TableVenteItem(ligneArticle));
+            }
+        }
+        
+        // MaJ du champ adhéremt.
+        if(application.getTransactionEnCours().getAdherent() == null) {
+            adherentLabel.setText("");
+        }
+        else {
+            adherentLabel.setText("Adhérent : " + application.getTransactionEnCours().getAdherent().getNom());
+        }
+        
+        // MaJ champ 'Total' de la transaction
+        totalTransaction.setText(String.format("Total : %s $" , application.getTransactionEnCours().getTotalFormatted()));
+    }
+
+    /**
+     * Objet définissant le contenu de la TableVente. 
+     */
+    protected class TableVenteItem {
+
+        private String article;
+        private int quantite;
+        
+        public String getArticle() {
+            return this.article;
+        }
+        
+        public int getQuantite() {
+            return this.quantite;
+        }
+        
+        public TableVenteItem(LigneArticle ligneArticle) {
+            String codeArticle = ligneArticle.getCodeArticle();
+            String descriptif = CatalogueProduits.getInstance().getArticle(codeArticle).getDescriptif();
+            
+            // La première colonne contient le code article ainsi que le descriptif de l'article.
+            this.article = String.format("#%1$s : %2$s ", codeArticle, descriptif);
+            
+            // Deuxième colonne : quantité vendue pour l'article en question 
+            this.quantite = ligneArticle.getQuantite();
+            
+        }
+    }
+
+    /**
+     * Objet définissant le contenu de la TableLocations
+     */
+    protected class TableLocationItem {
+        
+        private String film;
+        private String dateRetour;
+
+        public String getFilm() {
+            return film;
+        }
+
+        public String getDateRetour() {
+            return dateRetour;
+        }
+        
+        public TableLocationItem(LigneLocation ligneLocation) {
+            String codeFilm = ligneLocation.getCodeArticle();
+            String titreFilm = CatalogueProduits.getInstance().getFilm(codeFilm).getTitre();
+            int exemplaire = ligneLocation.getNumeroExemplaire();
+            
+            // 1ere colonne : " CodeFilm#Exemplaire : TireFilm"
+            this.film = String.format("%1$s | %3$s #%2$d", codeFilm, exemplaire, titreFilm);
+            
+            // 2e colonne : Date de retour sous le format yy/MM/dd (plus facile à trier)
+            this.dateRetour = ligneLocation.getDateRetour().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        }
     }
 
     

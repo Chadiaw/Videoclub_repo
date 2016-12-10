@@ -5,6 +5,7 @@
  */
 package videoclub;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -100,7 +101,11 @@ public class OngletAdherentsController implements Initializable {
     }    
     
     public void ajouterAdherent(ActionEvent event) {
-        application.goToNewAdherent();
+        try {
+            application.getViewManager().openView("nouvelAdherent.fxml", "Ajouter adhérent", StageStyle.UTILITY);
+        } catch (IOException ex) {
+            Logger.getLogger(OngletAdherentsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

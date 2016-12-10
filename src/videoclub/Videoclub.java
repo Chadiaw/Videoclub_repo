@@ -186,26 +186,5 @@ public class Videoclub extends Application {
     public ObservableList<Adherent> getListeAdherents() {
         return listeAdherents;
     }
-
-    public void goToNewAdherent() {
-        // Ouvrir l'interface de Nouvel adhérent
-        try {
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("nouvelAdherent.fxml"));
-            Parent root1 = (Parent) loader.load();
-            Stage popUpStage = new Stage();
-            popUpStage.initModality(Modality.APPLICATION_MODAL);
-            popUpStage.initStyle(StageStyle.UTILITY);
-            popUpStage.setTitle("Ajouter adhérent");
-            popUpStage.setScene(new Scene(root1));  
-            popUpStage.show();
-        }
-        catch (Exception ex) {
-            Logger.getLogger(Videoclub.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-    }
-    
-    void ajouterAdherent(Adherent nouveau) {
-        listeAdherents.add(nouveau);
-    }
+   
 }

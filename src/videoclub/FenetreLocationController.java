@@ -156,6 +156,33 @@ public class FenetreLocationController implements Initializable {
             Logger.getLogger(FenetreVenteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @FXML
+    private void actionConfirmer(ActionEvent event) {
+        // Mettre a jour la transaction courante
+        if(location.getLignesLocation().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("La location est vide !");
+            
+            alert.showAndWait();
+            return;
+            
+        }
+        application.getTransactionEnCours().setLocation(location);
+       
+        // Fermer fenetre
+        Stage stage = (Stage) boutonConfirmer.getScene().getWindow();
+        stage.close();
+        
+        try {
+            application.getViewManager().openView("newTransaction.fxml", "Nouvelle transaction", StageStyle.UTILITY);
+        }
+        catch (Exception ex) {
+            Logger.getLogger(FenetreLocationController.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+    }
 
     protected class TableLocationItem {
         

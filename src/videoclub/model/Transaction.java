@@ -5,6 +5,7 @@
  */
 package videoclub.model;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 /**
@@ -46,6 +47,11 @@ public class Transaction {
             retourner resultat
             */
         return total;
+    }
+    
+    public String getTotalFormatted() {
+        DecimalFormat df = new DecimalFormat("0.00");
+        return df.format(this.total);
     }
     
     public Adherent getAdherent() {

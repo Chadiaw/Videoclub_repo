@@ -73,7 +73,7 @@ public class NouvelAdherentController implements Initializable {
         }
         Adherent nouveau = new Adherent(nomAdherent.getText(), telephoneAdherent.getText(), 
                 adresseAdherent.getText(), 0, codeSaisi);
-        application.ajouterAdherent(nouveau);
+        application.getListeAdherents().add(nouveau);
         Stage stage = (Stage) boutonEnregistrer.getScene().getWindow();
         stage.close();
     }

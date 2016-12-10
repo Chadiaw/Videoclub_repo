@@ -47,5 +47,11 @@ public class Location {
         DecimalFormat df = new DecimalFormat("0.00");
         return df.format(totalLocation);
     }
+
+    public ObservableList<LigneLocation> getLignesLocation() {
+        return lignesLocation;
+    }
+    
+    
     
 }
