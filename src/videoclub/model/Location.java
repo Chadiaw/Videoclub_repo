@@ -37,15 +37,15 @@ public class Location {
     
     public double getTotalLocation(){
         double total = 0;
-        for(int i = 0; i< lignesLocation.size()-1; i++){
-            total = total + lignesLocation.get(i).getSousTotal();
+        for (LigneLocation ligne : lignesLocation){
+            total += ligne.getSousTotal();
         }
         return total;
     }
 
     public String getTotalFormatted() {
         DecimalFormat df = new DecimalFormat("0.00");
-        return df.format(totalLocation);
+        return df.format(getTotalLocation());
     }
 
     public ObservableList<LigneLocation> getLignesLocation() {

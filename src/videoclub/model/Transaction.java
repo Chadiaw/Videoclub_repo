@@ -46,10 +46,10 @@ public class Transaction {
     public double getTotal() {
         double sousTotal = 0;
         if(this.vente != null){
-            sousTotal = this.vente.getTotalVente();
+            sousTotal += this.vente.getTotalVente();
         }
         if(this.location != null){
-            sousTotal = this.location.getTotalLocation();
+            sousTotal += this.location.getTotalLocation();
         }
         
         this.TPS = calculerTPS(sousTotal);
@@ -63,7 +63,7 @@ public class Transaction {
     
     public String getTotalFormatted() {
         DecimalFormat df = new DecimalFormat("0.00");
-        return df.format(this.total);
+        return df.format(getTotal());
     }
     
     public Adherent getAdherent() {
