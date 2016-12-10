@@ -19,8 +19,11 @@ public class Transaction {
     private LocalDateTime date;
     private Vente vente;
     private Location location;
+    private Paiement paiement;
     private Adherent adherent;
     private double total;
+    private double TPS;
+    private double TVQ;
    
     public Transaction(){
         this.numeroTransaction = HistoriqueTransactions.getTransactionsCount();
@@ -41,13 +44,22 @@ public class Transaction {
     }
     
     public double getTotal() {
-            /*
-            additionner sousTotal Vente et Location
-            multiplier par taxes
-            retourner resultat
-            */
-        return total;
+        double sousTotal = 0;
+        if(this.vente != null){
+            sousTotal = this.vente.getTotalVente();
+        }
+        if(this.location != null){
+            sousTotal = this.location.getTotalLocation();
+        }
+        
+        this.TPS = calculerTPS(sousTotal);
+        this.TVQ = calculerTVQ(sousTotal);
+        
+        this.total = sousTotal + this.TPS + this.TVQ;
+        return this.total;
     }
+
+
     
     public String getTotalFormatted() {
         DecimalFormat df = new DecimalFormat("0.00");
@@ -70,6 +82,14 @@ public class Transaction {
         this.vente = vente;
     }
     
+    public void setPaiement(Paiement paiement){
+        this.paiement = paiement;
+    }
+    
+    public Paiement getPaiement(){
+        return this.paiement;
+    }
+    
     public Location getLocation() {
         return this.location;
     }
@@ -88,35 +108,22 @@ public class Transaction {
         }
         return totalSansTax;
     }
-    
-    public double calculerTPS(){
-        return (double)Math.round(this.totalSansTax * 0.05 * 0.998*100)/100 ;
+    */
+    public double calculerTPS(double sousTotal){
+        return (double)Math.round(sousTotal * 0.05 * 0.998*100)/100 ;
     }
     
-    public double calculerTVQ(){
-        return (double)Math.round(this.totalSansTax * 0.998*100)/100 ;
+    public double calculerTVQ(double sousTotal){
+        return (double)Math.round(sousTotal * 0.998*100)/100 ;
     }
     
-    public double calculerTotal() {
+  /*  public double calculerTotal() {
         return calculerSousTotal() + calculerTPS() + calculerTVQ();
-    }
-    
-      public void creerVente(){
-        this.vente = new Vente();
-    }
+    }*/
     
     
-    public void creerLocation(){
-        this.location = new Location(); 
-    }
-    
-    
-    public void creerPaiement(){
+   /* public void enregistrerTransaction(){
         
-    }
-    
-    public void enregistrerTransaction(){
-        
-    }
-*/
+    }*/
+
 }

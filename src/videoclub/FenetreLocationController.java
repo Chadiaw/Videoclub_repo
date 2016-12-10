@@ -111,6 +111,10 @@ public class FenetreLocationController implements Initializable {
             messageErreur.setText("Aucun film correspondant au code saisi.");
             return;
         }
+        if(CatalogueProduits.getInstance().getFilm(codeSaisi).isAchetable()){
+            messageErreur.setText("Ce film n'est pas disponible pour la location.");
+            return;
+        }
         String dureeSaisie = dureeLocationField.getText();
         int duree = 0;
         try {

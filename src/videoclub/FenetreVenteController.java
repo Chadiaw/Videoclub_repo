@@ -103,6 +103,13 @@ public class FenetreVenteController implements Initializable {
             alert.showAndWait();
             return;
         }
+        if(!CatalogueProduits.getInstance().getArticle(codeSaisi).isAchetable()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("L'article est disponible en location seulement");
+            alert.showAndWait();
+            return;
+        }
         String quantiteSaisie = quantite.getText();
         int quantiteEntree = 0;
         try {

@@ -113,6 +113,7 @@ public class NewTransactionController implements Initializable {
     /**
      *  Ajout d'une location à la transaction. Ouverture de l'interface 'Identifier adhérent'.
      */
+    @FXML
     public void actionAjoutLocation(ActionEvent event) {
          // Ouvrir l'interface de Nouvelle location
         try {
@@ -132,6 +133,7 @@ public class NewTransactionController implements Initializable {
     /**
      *  Ajout d'une vente à la transaction. Ouvre l'interface 'Nouvelle vente'.
      */
+    @FXML
     public void actionAjoutVente(ActionEvent event){
         //Ouvrir l'interface Nouvelle vente
         try{
@@ -151,6 +153,7 @@ public class NewTransactionController implements Initializable {
     /**
      *  Annuler transaction. La transaction en cours est réinitialisée (null).
      */
+    @FXML
     public void actionAnnulerTransaction(ActionEvent event) {
         
         application.setTransactionEnCours(null);
@@ -158,10 +161,25 @@ public class NewTransactionController implements Initializable {
         Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
         // Fermer fenêtre
         stage.close();
-        
-        
     }
-
+    
+    @FXML
+     public void actionPaiement(ActionEvent event) {
+        // Ouvrir l'interface de Paiement
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("fenetrePaiement.fxml"));
+            Parent root1 = (Parent) loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.setTitle("Paiement");
+            stage.setScene(new Scene(root1));  
+            stage.show();
+        }
+        catch (Exception ex) {
+            Logger.getLogger(OngletAccueilController.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
     /**
      * Mise à jour des éléments de l'interface selon l'état de l'application
      */
