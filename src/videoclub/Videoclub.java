@@ -18,10 +18,14 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import videoclub.model.Adherent;
+import videoclub.model.CatalogueProduits;
 import videoclub.model.DatabaseManager;
 import videoclub.model.Employe;
+import videoclub.model.Transaction;
 import videoclub.securite.LoginManager;
 
 /**
@@ -34,14 +38,20 @@ public class Videoclub extends Application {
     private Employe employeConnecte;
     private ArrayList<Employe> listeEmployes;
     private ObservableList<Adherent> listeAdherents = FXCollections.observableArrayList();
-    private Adherent adherantLouant;
+    private Transaction transactionEnCours = null;
+    private ViewManager viewManager = new ViewManager();
 
-    public void setAdherantLouant(Adherent adherantLouant) {
-        this.adherantLouant = adherantLouant;
+    
+    public ViewManager getViewManager() {
+        return this.viewManager;
+    }   
+    
+    public void setTransactionEnCours(Transaction transaction) {
+        this.transactionEnCours = transaction;
     }
 
-    public Adherent getAdherantLouant() {
-        return adherantLouant;
+    public Transaction getTransactionEnCours() {
+        return transactionEnCours;
     }
     
     // Instance unique de l'application (Videoclub)
@@ -76,7 +86,7 @@ public class Videoclub extends Application {
             //stage.setMinHeight(MINIMUM_WINDOW_HEIGHT);
             gotoLogin();
             primaryStage.show();
-            listeEmployes = DatabaseManager.getEmployees();
+            listeEmployes = DatabaseManager.chargerEmployes();
             if(listeEmployes.isEmpty())
                 throw new Exception("Liste d'employes vide");
         } catch (Exception ex) {
@@ -123,7 +133,6 @@ public class Videoclub extends Application {
     private void gotoLogin() {
         try {
             LoginController login = (LoginController) changerScene("Login.fxml");
-            login.setApp(instance);
         } catch (Exception ex) {
             Logger.getLogger(Videoclub.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -135,7 +144,6 @@ public class Videoclub extends Application {
     private void goToMainView() {
         try {
             MainViewController mainView = (MainViewController) changerScene("MainView.fxml");
-            mainView.setApp(instance);
         } catch (Exception ex) {
             Logger.getLogger(Videoclub.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -166,18 +174,17 @@ public class Videoclub extends Application {
 
     private void chargerDonnees() {
         // Charger liste employes
-        listeAdherents = DatabaseManager.getAdherents();
+        listeAdherents = DatabaseManager.chargerAdherents();
         
         // Charger articles dans onglet Inventaire
         
-        System.out.println("Adhérents chargés.");
+        // Charger catalogue
+        CatalogueProduits.getInstance().setListeArticles(DatabaseManager.chargerArticles());
+        CatalogueProduits.getInstance().setListeFilms(DatabaseManager.chargerFilms());
     }
     
     public ObservableList<Adherent> getListeAdherents() {
         return listeAdherents;
     }
-
-    void ajouterAdherent(Adherent nouveau) {
-        listeAdherents.add(nouveau);
-    }
+   
 }

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="187.0" prefWidth="394.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.IdentifierAdherentController">
+<AnchorPane id="AnchorPane" prefHeight="187.0" prefWidth="394.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.IdentifierAdherentController">
    <children>
       <VBox layoutY="-3.0" prefHeight="141.0" prefWidth="353.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -39,7 +40,7 @@
       </HBox>
       <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="151.0" AnchorPane.leftAnchor="20.0">
          <children>
-            <Label fx:id="messageErreur" layoutX="14.0" layoutY="151.0" text="Label" />
+            <Label fx:id="messageErreur" layoutX="14.0" layoutY="151.0" text="Label" textFill="RED" />
          </children>
       </HBox>
    </children>

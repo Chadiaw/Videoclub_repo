@@ -5,6 +5,7 @@
  */
 package videoclub;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,12 +19,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -39,6 +40,8 @@ public class OngletAdherentsController implements Initializable {
 
     @FXML
     private ListView<Adherent> listeAherents;
+    @FXML
+    private Label labelListeAdherent;
     @FXML
     private Button boutonAjouterAdherent;
     @FXML
@@ -98,22 +101,11 @@ public class OngletAdherentsController implements Initializable {
     }    
     
     public void ajouterAdherent(ActionEvent event) {
-        
-        // Ouvrir l'interface de Nouvel adhérent
         try {
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("nouvelAdherent.fxml"));
-            Parent root1 = (Parent) loader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("Ajouter adhérent");
-            stage.setScene(new Scene(root1));  
-            stage.show();
+            application.getViewManager().openView("nouvelAdherent.fxml", "Ajouter adhérent", StageStyle.UTILITY);
+        } catch (IOException ex) {
+            Logger.getLogger(OngletAdherentsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch (Exception ex) {
-            Logger.getLogger(OngletAccueilController.class.getName()).log(Level.SEVERE, null, ex);
-        }  
     }
     
 }

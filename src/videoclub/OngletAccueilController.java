@@ -5,6 +5,7 @@
  */
 package videoclub;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -44,29 +45,18 @@ public class OngletAccueilController implements Initializable {
     private Videoclub application;
     
     
-    public void setApp(Videoclub application){
-        this.application = application;
-    }
-    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        this.application = Videoclub.getInstance();
     }    
     
     public void actionTransaction(ActionEvent event) {
         // Ouvrir l'interface de Nouvelle transaction
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("newTransaction.fxml"));
-            Parent root1 = (Parent) loader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("Nouvelle transaction");
-            stage.setScene(new Scene(root1));  
-            stage.show();
+            application.getViewManager().openView("newTransaction.fxml", "Nouvelle transaction", StageStyle.UTILITY );
         }
         catch (Exception ex) {
             Logger.getLogger(OngletAccueilController.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,21 +64,11 @@ public class OngletAccueilController implements Initializable {
     }
     
     public void actionInscrireAdherent(ActionEvent event) {
-        // Ouvrir l'interface de Nouvel adhérent
         try {
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("nouvelAdherent.fxml"));
-            Parent root1 = (Parent) loader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("Ajouter adhérent");
-            stage.setScene(new Scene(root1));  
-            stage.show();
-        }
-        catch (Exception ex) {
+            application.getViewManager().openView("nouvelAdherent.fxml", "Ajouter adhérent", StageStyle.UTILITY);
+        } catch (IOException ex) {
             Logger.getLogger(OngletAccueilController.class.getName()).log(Level.SEVERE, null, ex);
-        }  
+        }
     }
     
     

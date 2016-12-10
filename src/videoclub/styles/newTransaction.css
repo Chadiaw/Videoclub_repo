@@ -1,0 +1,27 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 1-Dec-2016, 4:34:34 PM
+    Author     : cheikh
+*/
+
+.root {
+     -fx-background-image: url("../images/mainBackground.jpg");
+     -fx-background-repeat: no-repeat;
+}
+
+.split-pane {
+ -fx-background-image: url("../images/mainBackground.jpg");
+ }
+
+ #locationLabel, #venteLabel {
+     -fx-font-weight: bold;
+     -fx-font-size : 30px;
+ }
+ 
+ .label {
+     -fx-font-weight: bold;
+ }

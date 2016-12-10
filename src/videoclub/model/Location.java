@@ -5,10 +5,53 @@
  */
 package videoclub.model;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 /**
  *
- * @author cheik
+ * @author Melanie
  */
+
+
 public class Location {
+    
+    private double totalLocation;
+    private ObservableList<LigneLocation> lignesLocation;
+    
+    public Location(){
+        this.totalLocation = 0;
+        this.lignesLocation = FXCollections.observableArrayList();
+    }
+    
+    public void ajouterLigneLocation(LigneLocation ligne) {
+        lignesLocation.add(ligne);
+    }
+    
+    public void ajouterLigneLocation(String codeFilm, int numeroExemplaire, int duree){
+        LigneLocation ligne = new LigneLocation(codeFilm, numeroExemplaire, duree);
+        lignesLocation.add(ligne);
+    }
+    
+    public double getTotalLocation(){
+        double total = 0;
+        for(int i = 0; i< lignesLocation.size()-1; i++){
+            total = total + lignesLocation.get(i).getSousTotal();
+        }
+        return total;
+    }
+
+    public String getTotalFormatted() {
+        DecimalFormat df = new DecimalFormat("0.00");
+        return df.format(totalLocation);
+    }
+
+    public ObservableList<LigneLocation> getLignesLocation() {
+        return lignesLocation;
+    }
+    
+    
     
 }

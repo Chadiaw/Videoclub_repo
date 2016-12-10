@@ -5,6 +5,7 @@
  */
 package videoclub;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -59,6 +60,13 @@ public class IdentifierAdherentController implements Initializable {
         Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
         // Fermer fenêtre
         stage.close();
+        
+        try {
+            // Ouvrir vue 'Transaction
+            application.getViewManager().openView("newTransaction.fxml", "Nouvelle transaction", StageStyle.UTILITY);
+        } catch (IOException ex) {
+            Logger.getLogger(IdentifierAdherentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void actionIdentifier(ActionEvent event) {
@@ -80,7 +88,7 @@ public class IdentifierAdherentController implements Initializable {
                     || adherent.getNumeroTelephone().replaceAll("\\D", "").equals(numeroSaisi))
                     && adherent.getCodeSecret()==(codeSecretSaisi)) {
 
-                application.setAdherantLouant(adherent);
+                application.getTransactionEnCours().setAdherent(adherent);
                 estDansListe = true;
                 break;
             }
@@ -91,16 +99,11 @@ public class IdentifierAdherentController implements Initializable {
             try {
                     Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
                     stage.close();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("fenetreLocation.fxml"));
-                    Parent root1 = (Parent) loader.load();
-                    stage = new Stage();
-                    stage.initModality(Modality.APPLICATION_MODAL);
-                    stage.initStyle(StageStyle.UNDECORATED);
-                    stage.setTitle("Nouvelle location");
-                    stage.setScene(new Scene(root1));
-                    stage.show();
+                    
+                    // Ouvrir vue 'Location'
+                    application.getViewManager().openView("fenetreLocation.fxml", "Nouvelle location", StageStyle.UNDECORATED);
                 } catch (Exception ex) {
-                    Logger.getLogger(OngletAccueilController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(IdentifierAdherentController.class.getName()).log(Level.SEVERE, null, ex);
                 }
         }
         else {

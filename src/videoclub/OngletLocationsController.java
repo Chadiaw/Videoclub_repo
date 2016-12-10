@@ -6,6 +6,8 @@
 package videoclub;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,9 +36,6 @@ public class OngletLocationsController implements Initializable {
     private Videoclub application;
     
     
-    public void setApp(Videoclub application){
-        this.application = application;
-    }
     
     /**
      * Initializes the controller class.
@@ -44,9 +43,11 @@ public class OngletLocationsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        //String message = String.format("Bonjour, %s", 
-        //        application.getEmployeConnecte().getNom());
-        //messageBienvenue.setText(message);
+        this.application = Videoclub.getInstance();
+        
+        LocalDate today = LocalDate.now();
+        String dateFormatted = today.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        dateDuJour.setText(String.format("Date du jour : %s", dateFormatted));
     }    
     
 }

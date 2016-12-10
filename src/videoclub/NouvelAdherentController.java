@@ -46,7 +46,7 @@ public class NouvelAdherentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        application = Videoclub.getInstance();
+        this.application = Videoclub.getInstance();
     }    
     
     public void actionEnregistrer(ActionEvent event) {
@@ -59,9 +59,21 @@ public class NouvelAdherentController implements Initializable {
             alert.showAndWait();
             return;
         }
+        int codeSaisi = 0;
+        try {
+            codeSaisi = Integer.parseInt(codeSecretAdherent.getText());
+        }
+        catch(NumberFormatException ex) {
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Le format du code secret est invalide");
+            
+            alert.showAndWait();
+           return;
+        }
         Adherent nouveau = new Adherent(nomAdherent.getText(), telephoneAdherent.getText(), 
-                adresseAdherent.getText(), 0, Integer.parseInt(codeSecretAdherent.getText()));
-        application.ajouterAdherent(nouveau);
+                adresseAdherent.getText(), 0, codeSaisi);
+        application.getListeAdherents().add(nouveau);
         Stage stage = (Stage) boutonEnregistrer.getScene().getWindow();
         stage.close();
     }
