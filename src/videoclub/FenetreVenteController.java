@@ -106,7 +106,7 @@ public class FenetreVenteController implements Initializable {
         if(!CatalogueProduits.getInstance().getArticle(codeSaisi).isAchetable()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("L'article est disponible en location seulement");
+            alert.setContentText("L'article n'est pas disponible en vente.");
             alert.showAndWait();
             return;
         }

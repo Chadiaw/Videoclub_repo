@@ -2,19 +2,31 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="307.0" prefWidth="523.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.FenetrePaiementController">
+<AnchorPane id="AnchorPane" prefHeight="345.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.FenetrePaiementController">
    <children>
       <Label fx:id="Total" layoutX="49.0" layoutY="14.0" prefHeight="25.0" prefWidth="65.0" />
-      <Label fx:id="totalLabel" layoutX="68.0" layoutY="31.0" prefHeight="32.0" prefWidth="113.0" text="Total:" />
-      <Label fx:id="ArgentTenduLabel" layoutX="68.0" layoutY="87.0" prefHeight="32.0" prefWidth="113.0" text="Argent tendu:" />
-      <Button fx:id="boutonConfirmer" layoutX="367.0" layoutY="87.0" mnemonicParsing="false" onAction="#actionConfirmer" prefHeight="32.0" prefWidth="79.0" text="Confirmer" />
-      <TextField fx:id="ArgentTenduField" layoutX="181.0" layoutY="87.0" prefHeight="32.0" prefWidth="158.0" />
-      <Label fx:id="monnaieLabel" layoutX="68.0" layoutY="153.0" prefHeight="32.0" prefWidth="208.0" text="Monnaie :" />
+      <Label fx:id="totalLabel" layoutX="68.0" layoutY="143.0" prefHeight="32.0" prefWidth="158.0" text="Total:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label fx:id="ArgentTenduLabel" layoutX="68.0" layoutY="192.0" prefHeight="32.0" prefWidth="113.0" text="Argent tendu:" />
+      <Button fx:id="boutonConfirmer" layoutX="321.0" layoutY="192.0" mnemonicParsing="false" onAction="#actionConfirmer" prefHeight="32.0" prefWidth="79.0" text="Confirmer" />
+      <TextField fx:id="ArgentTenduField" layoutX="172.0" layoutY="192.0" prefHeight="32.0" prefWidth="121.0" />
+      <Label fx:id="monnaieLabel" layoutX="68.0" layoutY="244.0" prefHeight="32.0" prefWidth="208.0" text="Monnaie :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
       <Label layoutX="181.0" layoutY="153.0" prefHeight="32.0" prefWidth="91.0" />
-      <Button fx:id="boutonTerminer" layoutX="268.0" layoutY="222.0" mnemonicParsing="false" onAction="#actionTerminer" prefHeight="32.0" prefWidth="79.0" text="Terminer" />
-      <Button fx:id="boutonAnnuler" layoutX="380.0" layoutY="222.0" mnemonicParsing="false" onAction="#actionAnnulerPaiement" prefHeight="32.0" prefWidth="79.0" text="Annuler" />
+      <Button fx:id="boutonTerminer" layoutX="272.0" layoutY="299.0" mnemonicParsing="false" onAction="#actionTerminer" prefHeight="32.0" prefWidth="79.0" text="Terminer" />
+      <Button fx:id="boutonAnnuler" layoutX="388.0" layoutY="299.0" mnemonicParsing="false" onAction="#actionAnnulerPaiement" prefHeight="32.0" prefWidth="79.0" text="Annuler" />
+      <Label fx:id="TPSLabel" layoutX="68.0" layoutY="88.0" prefHeight="32.0" prefWidth="113.0" text="TPS:" />
+      <Label fx:id="TVQLabel" layoutX="68.0" layoutY="49.0" prefHeight="32.0" prefWidth="113.0" text="TVQ:" />
+      <Label fx:id="sousTotalLabel" layoutX="68.0" layoutY="11.0" prefHeight="32.0" prefWidth="113.0" text="Sous total: " />
+      <Separator layoutX="19.0" layoutY="124.0" prefHeight="15.0" prefWidth="489.0" />
    </children>
 </AnchorPane>

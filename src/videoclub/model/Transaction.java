@@ -22,12 +22,10 @@ public class Transaction {
     private Paiement paiement;
     private Adherent adherent;
     private double total;
-    private double TPS;
-    private double TVQ;
+
    
     public Transaction(){
         this.numeroTransaction = HistoriqueTransactions.getTransactionsCount();
-        this.total = 0;
         this.adherent = null;
         this.vente = null;
         this.location = null;
@@ -44,26 +42,19 @@ public class Transaction {
     }
     
     public double getTotal() {
-        double sousTotal = 0;
+        double total = 0;
         if(this.vente != null){
-            sousTotal = this.vente.getTotalVente();
+            total = total + this.vente.getTotalVente();
         }
         if(this.location != null){
-            sousTotal = this.location.getTotalLocation();
+            total = total + this.location.getTotalLocation();
         }
-        
-        this.TPS = calculerTPS(sousTotal);
-        this.TVQ = calculerTVQ(sousTotal);
-        
-        this.total = sousTotal + this.TPS + this.TVQ;
-        return this.total;
+        return total;
     }
 
-
-    
     public String getTotalFormatted() {
         DecimalFormat df = new DecimalFormat("0.00");
-        return df.format(this.total);
+        return df.format(getTotal());
     }
     
     public Adherent getAdherent() {
@@ -109,13 +100,7 @@ public class Transaction {
         return totalSansTax;
     }
     */
-    public double calculerTPS(double sousTotal){
-        return (double)Math.round(sousTotal * 0.05 * 0.998*100)/100 ;
-    }
     
-    public double calculerTVQ(double sousTotal){
-        return (double)Math.round(sousTotal * 0.998*100)/100 ;
-    }
     
   /*  public double calculerTotal() {
         return calculerSousTotal() + calculerTPS() + calculerTVQ();
