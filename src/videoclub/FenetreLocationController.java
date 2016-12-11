@@ -107,7 +107,7 @@ public class FenetreLocationController implements Initializable {
     private void actionAjouter(ActionEvent event){
         String codeSaisi = codeFilmField.getText();
         
-        if(CatalogueProduits.getInstance().getFilm(codeSaisi) == null ) {
+        if(CatalogueProduits.getInstance().getFilm(codeSaisi) == null) {
             messageErreur.setText("Aucun film correspondant au code saisi.");
             return;
         }
@@ -115,6 +115,7 @@ public class FenetreLocationController implements Initializable {
             messageErreur.setText("Ce film n'est pas disponible pour la location.");
             return;
         }
+        
         String dureeSaisie = dureeLocationField.getText();
         int duree = 0;
         try {
@@ -139,6 +140,11 @@ public class FenetreLocationController implements Initializable {
             
             messageErreur.setText("Numéro d'exemplaire invalide.");
            return;
+        }
+        if(CatalogueProduits.getInstance().getFilm(codeSaisi).findExemplaire(exemplaire) == null){
+            messageErreur.setText("L'exemplaire de ce film n'existe pas.");
+        }else if(CatalogueProduits.getInstance().getFilm(codeSaisi).findExemplaire(exemplaire).getEnLocation()){
+            messageErreur.setText("Ce film est déjà enregistré en location.");
         }
         
         LigneLocation newLigne = new LigneLocation(codeSaisi, exemplaire, duree);

@@ -44,13 +44,17 @@ public class Transaction {
     public double getTotal() {
         double total = 0;
         if(this.vente != null){
-            total = total + this.vente.getTotalVente();
+
+            total += this.vente.getTotalVente();
         }
         if(this.location != null){
-            total = total + this.location.getTotalLocation();
+            total += this.location.getTotalLocation();
         }
+        
         return total;
+
     }
+  
 
     public String getTotalFormatted() {
         DecimalFormat df = new DecimalFormat("0.00");
