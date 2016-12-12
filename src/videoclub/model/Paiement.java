@@ -42,17 +42,10 @@ public class Paiement {
     public double getTPS(){
         return TPS;
     }
-
     
-    /*public String getTotalFormatted() {
-        DecimalFormat df = new DecimalFormat("0.00");
-        return df.format(this.total);
+    public double getTotal(){
+        return this.total;
     }
-    
-    public String getMonnaieFormatted() {
-        DecimalFormat df = new DecimalFormat("0.00");
-        return df.format(this.monnaie);
-    }*/
     
     public String getMontantFormatted(double montant){
         DecimalFormat df = new DecimalFormat("0.00");

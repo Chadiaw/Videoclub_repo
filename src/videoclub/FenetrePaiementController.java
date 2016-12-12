@@ -66,7 +66,7 @@ public class FenetrePaiementController implements Initializable {
 
     @FXML
     private void actionConfirmer(ActionEvent event) {
-        if(Double.parseDouble(ArgentTenduField.getText())< paiement.getSousTotal()) {
+        if(Double.parseDouble(ArgentTenduField.getText())< paiement.getTotal()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);;
             alert.setHeaderText(null);
             alert.setContentText("Le montant tendu doit être égal ou supérieur au total.");
