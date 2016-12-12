@@ -33,7 +33,7 @@ public class HistoriqueSession {
     public void ajouterTransaction(Transaction transaction) {
         String details = "";
         if(transaction.getLocation() != null) {
-            details += String.format("Location '%1$s' (%2$s $); ", transaction.getAdherent().getNom(), transaction.getLocation().getTotalFormatted());
+            details += String.format("'%1$s': Location (%2$s $);", transaction.getAdherent().getNom(), transaction.getLocation().getTotalFormatted());
         }
         
         if (transaction.getVente() != null) {

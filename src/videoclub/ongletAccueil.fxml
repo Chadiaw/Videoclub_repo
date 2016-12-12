@@ -24,10 +24,10 @@
             </HBox>
                                     <TableView fx:id="tableHistorique" layoutX="14.0" layoutY="46.0" prefHeight="467.0" prefWidth="870.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
                                       <columns>
-                                        <TableColumn fx:id="idCol" prefWidth="49.0" text="Id" />
-                                        <TableColumn fx:id="typeCol" prefWidth="137.0" text="Type" />
-                                          <TableColumn fx:id="dateCol" prefWidth="214.0" text="Date" />
-                                          <TableColumn fx:id="detailsCol" prefWidth="449.0" text="Détails" />
+                                        <TableColumn fx:id="idCol" prefWidth="49.0" resizable="false" text="Id" />
+                                        <TableColumn fx:id="typeCol" prefWidth="110.0" resizable="false" text="Type" />
+                                          <TableColumn fx:id="dateCol" prefWidth="140.0" resizable="false" text="Date" />
+                                          <TableColumn fx:id="detailsCol" prefWidth="562.0" resizable="false" text="Détails" />
                                       </columns>
                                     </TableView>
                                     <VBox layoutX="14.0" layoutY="523.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
