@@ -45,6 +45,7 @@ public class Transaction {
         double total = 0;
         if(this.vente != null){
 
+            sousTotal = this.vente.getTotalVente();
             total += this.vente.getTotalVente();
         }
         if(this.location != null){

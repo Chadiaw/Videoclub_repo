@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="472.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.FenetreRetourController">
+   <children>
+      <Label fx:id="entreeManuelleLabel" layoutX="30.0" layoutY="7.0" prefHeight="27.0" prefWidth="155.0" text="Ajouter film manuellement:" />
+      <TextField fx:id="titreField" layoutX="36.0" layoutY="34.0" prefHeight="36.0" prefWidth="367.0" promptText="Titre du film" />
+      <TextField fx:id="codeArticleField" layoutX="36.0" layoutY="81.0" prefHeight="36.0" prefWidth="162.0" promptText="Code d'article" />
+      <Separator layoutX="449.0" layoutY="6.0" orientation="VERTICAL" prefHeight="126.0" prefWidth="17.0" />
+      <TextField fx:id="exemplaireField" layoutX="255.0" layoutY="81.0" prefHeight="36.0" prefWidth="148.0" promptText="Numéro d'exemplaire" />
+      <TableView layoutX="8.0" layoutY="183.0" prefHeight="215.0" prefWidth="585.0">
+        <columns>
+          <TableColumn prefWidth="177.66668701171875" text="Titre du film" />
+          <TableColumn prefWidth="69.33331298828125" text="Exemplaire" />
+            <TableColumn prefWidth="154.33331298828125" text="Client" />
+            <TableColumn prefWidth="94.66668701171875" text="Jours de retard" />
+            <TableColumn prefWidth="89.33331298828125" text="Amende" />
+        </columns>
+      </TableView>
+      <Button fx:id="boutonScan" layoutX="479.0" layoutY="20.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="98.0" text="Scan" />
+      <Button fx:id="boutonRetourner" layoutX="36.0" layoutY="129.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="81.0" text="Retourner" />
+      <Button fx:id="boutonTerminer" layoutX="471.0" layoutY="415.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="81.0" text="Terminer" />
+      <Label fx:id="messageErreur" layoutX="151.0" layoutY="132.0" prefHeight="27.0" prefWidth="255.0" text="message d'erreur" textFill="#eb0a0a" />
+   </children>
+</AnchorPane>
