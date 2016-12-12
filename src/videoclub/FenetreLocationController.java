@@ -89,9 +89,11 @@ public class FenetreLocationController implements Initializable {
         messageErreur.setText("");
         String labelMsg = String.format("Adhérent : %s", application.getTransactionEnCours().getAdherent().getNom());
         labelAdherent.setText(labelMsg);
-        totalLocation.setText("Total location : 0$");
         
         location = new Location(); 
+        location.setTotal(application.getTransactionEnCours().getAdherent().getSolde());
+        
+        totalLocation.setText(String.format("Total location : %s", location.getTotalFormatted()));
         
         codeCol.setCellValueFactory(new PropertyValueFactory<TableLocationItem,String>("code"));
         titreCol.setCellValueFactory(new PropertyValueFactory<TableLocationItem, String>("titre"));

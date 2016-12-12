@@ -28,19 +28,17 @@ public class Location {
     
     public void ajouterLigneLocation(LigneLocation ligne) {
         lignesLocation.add(ligne);
+        this.totalLocation += ligne.getSousTotal();
     }
     
     public void ajouterLigneLocation(String codeFilm, int duree){
         LigneLocation ligne = new LigneLocation(codeFilm, duree);
         lignesLocation.add(ligne);
+        this.totalLocation += ligne.getSousTotal();
     }
     
     public double getTotalLocation(){
-        double total = 0;
-        for (LigneLocation ligne : lignesLocation){
-            total += ligne.getSousTotal();
-        }
-        return total;
+        return this.totalLocation;
     }
 
     public String getTotalFormatted() {
@@ -48,6 +46,10 @@ public class Location {
         return df.format(getTotalLocation());
     }
 
+    public void setTotal(double total) {
+        this.totalLocation = total;
+    }
+    
     public ObservableList<LigneLocation> getLignesLocation() {
         return lignesLocation;
     }
