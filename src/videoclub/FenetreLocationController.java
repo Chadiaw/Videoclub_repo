@@ -25,6 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import videoclub.model.CatalogueProduits;
+import videoclub.model.Film;
 import videoclub.model.LigneLocation;
 import videoclub.model.Location;
 
@@ -41,8 +42,6 @@ public class FenetreLocationController implements Initializable {
     private TextField titreFilmField;
     @FXML
     private TextField codeFilmField;
-    @FXML
-    private TextField exemplaireField;
     @FXML
     private TextField dureeLocationField;
     @FXML
@@ -86,7 +85,6 @@ public class FenetreLocationController implements Initializable {
         application = Videoclub.getInstance();
         titreFilmField.setPromptText("Titre film...");
         codeFilmField.setPromptText("Code film...");
-        exemplaireField.setPromptText("Exemplaire..");
         dureeLocationField.setPromptText("jours");
         messageErreur.setText("");
         String labelMsg = String.format("Adhérent : %s", application.getTransactionEnCours().getAdherent().getNom());
@@ -105,13 +103,20 @@ public class FenetreLocationController implements Initializable {
     
     @FXML
     private void actionAjouter(ActionEvent event){
+        String titreSaisi = titreFilmField.getText();
         String codeSaisi = codeFilmField.getText();
         
-        if(CatalogueProduits.getInstance().getFilm(codeSaisi) == null) {
-            messageErreur.setText("Aucun film correspondant au code saisi.");
+        Film filmEntre = CatalogueProduits.getInstance().getFilmByTitre(titreSaisi);
+        
+        if (filmEntre == null) {
+            filmEntre = CatalogueProduits.getInstance().getFilmByCode(codeSaisi);
+        }
+        
+        if( filmEntre == null) {
+            messageErreur.setText("Aucun film correspondant.");
             return;
         }
-        if(CatalogueProduits.getInstance().getFilm(codeSaisi).isAchetable()){
+        if(filmEntre.isAchetable()){
             messageErreur.setText("Ce film n'est pas disponible pour la location.");
             return;
         }
@@ -129,21 +134,7 @@ public class FenetreLocationController implements Initializable {
            return;
         }
         
-        String exemplaireSaisi = exemplaireField.getText();
-        int exemplaire = 0;
-        try {
-            exemplaire = Integer.parseInt(exemplaireSaisi);
-            if (exemplaire <= 0)
-                throw new NumberFormatException();
-        }
-        catch (NumberFormatException ex) {
-            
-            messageErreur.setText("Numéro d'exemplaire invalide.");
-           return;
-        }
-        
-        
-        LigneLocation newLigne = new LigneLocation(codeSaisi, exemplaire, duree);
+        LigneLocation newLigne = new LigneLocation(filmEntre.getCodeArticle(), duree);
         location.ajouterLigneLocation(newLigne);
         totalLocation.setText("Total location : " + location.getTotalFormatted() + "$");
         
@@ -202,7 +193,7 @@ public class FenetreLocationController implements Initializable {
 
         public TableLocationItem(LigneLocation newLigne) {
            this.code = newLigne.getCodeArticle();
-           this.titre = CatalogueProduits.getInstance().getFilm(code).getTitre() + String.format(" #%s", newLigne.getNumeroExemplaire());
+           this.titre = CatalogueProduits.getInstance().getFilmByCode(code).getTitre();
            this.duree = newLigne.getDuree();
            this.cout = newLigne.getSousTotal();
         }

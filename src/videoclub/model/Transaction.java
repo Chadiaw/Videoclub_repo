@@ -24,11 +24,12 @@ public class Transaction {
     private double total;
 
    
-    public Transaction(){
-        this.numeroTransaction = HistoriqueTransactions.getTransactionsCount();
+    public Transaction(int numero){
+        this.numeroTransaction = numero;
         this.adherent = null;
         this.vente = null;
         this.location = null;
+        this.paiement = null;
         this.date = LocalDateTime.now(); 
         
     }
@@ -92,27 +93,5 @@ public class Transaction {
     public void setLocation(Location location) {
         this.location = location;
     }
-/*
-    public double calculerSousTotal(){
-        totalSansTax = 0;
-        if(this.vente != null){
-            totalSansTax = totalSansTax + this.vente.getTotalVente();
-        }
-        if(this.location != null){
-            totalSansTax = totalSansTax + this.location.getTotalLocation();
-        }
-        return totalSansTax;
-    }
-    */
-    
-    
-  /*  public double calculerTotal() {
-        return calculerSousTotal() + calculerTPS() + calculerTVQ();
-    }*/
-    
-    
-   /* public void enregistrerTransaction(){
-        
-    }*/
 
 }

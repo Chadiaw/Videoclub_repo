@@ -30,8 +30,8 @@ public class Location {
         lignesLocation.add(ligne);
     }
     
-    public void ajouterLigneLocation(String codeFilm, int numeroExemplaire, int duree){
-        LigneLocation ligne = new LigneLocation(codeFilm, numeroExemplaire, duree);
+    public void ajouterLigneLocation(String codeFilm, int duree){
+        LigneLocation ligne = new LigneLocation(codeFilm, duree);
         lignesLocation.add(ligne);
     }
     

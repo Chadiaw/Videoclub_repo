@@ -23,7 +23,8 @@ public class CatalogueProduits {
     private ObservableMap<String, Article> mapCodeArticles = FXCollections.observableHashMap();
     
     // Mappe les codes article à des objets Film
-    private ObservableMap<String, Film> mapCodeFilms = FXCollections.observableHashMap();
+    private ObservableMap<String, Film> mapCodesFilm = FXCollections.observableHashMap();
+    private ObservableMap<String, Film> mapTitresFilm = FXCollections.observableHashMap();
     
     private CatalogueProduits(){
         
@@ -43,7 +44,8 @@ public class CatalogueProduits {
     
     public void ajouterFilm(Film film) {
         listeFilms.add(film);
-        mapCodeFilms.put(film.getCodeArticle(), film);
+        mapCodesFilm.put(film.getCodeArticle(), film);
+        mapTitresFilm.put(film.getTitre(), film);
     }
     
     // Si on ne veut pas ajouter les articles un par un..
@@ -59,7 +61,8 @@ public class CatalogueProduits {
         this.listeFilms = listeFilms;
         for (Film film:listeFilms)
         {
-            mapCodeFilms.put(film.getCodeArticle(), film);
+            mapCodesFilm.put(film.getCodeArticle(), film);
+            mapTitresFilm.put(film.getTitre(), film);
         }
     }
     
@@ -67,8 +70,12 @@ public class CatalogueProduits {
         return mapCodeArticles.get(codeArticle);
     }
     
-    public Film getFilm(String codeFilm) {
-        return mapCodeFilms.get(codeFilm);
+    public Film getFilmByCode(String codeFilm) {
+        return mapCodesFilm.get(codeFilm);
+    }
+    
+    public Film getFilmByTitre(String titreFilm) {
+        return mapTitresFilm.get(titreFilm);
     }
     
 }

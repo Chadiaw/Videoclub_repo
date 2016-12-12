@@ -18,10 +18,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import videoclub.HistoriqueSession.EntreeHistoriqueSession;
 
 /**
  * FXML Controller class
@@ -33,7 +36,15 @@ public class OngletAccueilController implements Initializable {
     @FXML
     private Label historiqueLabel;
     @FXML
-    private TableView tableHistorique;
+    private TableView<EntreeHistoriqueSession> tableHistorique = new TableView<EntreeHistoriqueSession>();
+    @FXML
+    private TableColumn idCol;
+    @FXML
+    private TableColumn typeCol;
+    @FXML
+    private TableColumn dateCol;
+    @FXML
+    private TableColumn detailsCol;
     @FXML
     private Button boutonTransaction;
     @FXML
@@ -51,6 +62,13 @@ public class OngletAccueilController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.application = Videoclub.getInstance();
+        
+        idCol.setCellValueFactory(new PropertyValueFactory<EntreeHistoriqueSession, Integer>("id"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<EntreeHistoriqueSession, String>("type"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<EntreeHistoriqueSession, String>("date"));
+        detailsCol.setCellValueFactory(new PropertyValueFactory<EntreeHistoriqueSession, String>("details"));
+        tableHistorique.setItems(application.getHistoriqueSession().getListeEntrees());
+        
     }    
     
     public void actionTransaction(ActionEvent event) {

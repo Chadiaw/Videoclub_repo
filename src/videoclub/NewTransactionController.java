@@ -27,6 +27,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import videoclub.model.CatalogueProduits;
+import videoclub.model.HistoriqueTransactions;
 import videoclub.model.LigneArticle;
 import videoclub.model.LigneLocation;
 import videoclub.model.Transaction;
@@ -167,17 +168,13 @@ public class NewTransactionController implements Initializable {
      public void actionPaiement(ActionEvent event) {
         // Ouvrir l'interface de Paiement
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("fenetrePaiement.fxml"));
-            Parent root1 = (Parent) loader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Paiement");
-            stage.setScene(new Scene(root1));  
-            stage.show();
+            Stage stage = (Stage) boutonPaiement.getScene().getWindow();
+            stage.close();
+            
+            application.getViewManager().openView("fenetrePaiement.fxml", "Paiement", StageStyle.UTILITY);        
         }
         catch (Exception ex) {
-            Logger.getLogger(OngletAccueilController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewTransactionController.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
     /**
@@ -186,7 +183,7 @@ public class NewTransactionController implements Initializable {
     private void updateAll() {
        if (application.getTransactionEnCours() == null) {
            // S'il n'y a pas de transaction en cours, en créer une lorsque cette interface est ouverte.
-            application.setTransactionEnCours(new Transaction());
+            application.setTransactionEnCours(new Transaction(HistoriqueTransactions.getInstance().getTransactionsIndex()));
         }
                
         if(application.getTransactionEnCours().getLocation() == null) {
@@ -289,11 +286,11 @@ public class NewTransactionController implements Initializable {
         
         public TableLocationItem(LigneLocation ligneLocation) {
             String codeFilm = ligneLocation.getCodeArticle();
-            String titreFilm = CatalogueProduits.getInstance().getFilm(codeFilm).getTitre();
-            int exemplaire = ligneLocation.getNumeroExemplaire();
+            String titreFilm = CatalogueProduits.getInstance().getFilmByCode(codeFilm).getTitre();
+            
             
             // 1ere colonne : " CodeFilm#Exemplaire : TireFilm"
-            this.film = String.format("%1$s | %3$s #%2$d", codeFilm, exemplaire, titreFilm);
+            this.film = String.format("%1$s | %2$s", codeFilm, titreFilm);
             
             // 2e colonne : Date de retour sous le format yy/MM/dd (plus facile à trier)
             this.dateRetour = ligneLocation.getDateRetour().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));

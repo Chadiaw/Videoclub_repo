@@ -19,22 +19,17 @@ import java.time.LocalDate;
 public class LigneLocation {
     
     private int duree; /*le nombre de jours de la location */
-    private int numeroExemplaire; /*le numero d'exemplaire de l'article */
     private String codeFilm;
     private LocalDate dateRetour;
     
-    public LigneLocation(String codeFilm, int numeroExemplaire, int duree){
+    public LigneLocation(String codeFilm, int duree){
         this.duree = duree;
-        this.numeroExemplaire = numeroExemplaire;
         this.codeFilm = codeFilm;
         
         LocalDate today = LocalDate.now();
         this.dateRetour = today.plusDays(duree);
     }
     
-    public int getNumeroExemplaire() {
-        return this.numeroExemplaire;
-    }
     
     public String getCodeArticle() {
         return this.codeFilm;

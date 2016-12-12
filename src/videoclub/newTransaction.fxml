@@ -40,14 +40,14 @@
                               </HBox>
                               <TableView fx:id="tableLocation" layoutX="36.0" layoutY="65.0">
                                 <columns>
-                                  <TableColumn fx:id="filmCol" prefWidth="227.0" resizable="false" text="Film" />
-                                  <TableColumn fx:id="dateRetourCol" prefWidth="124.0" resizable="false" text="Date de retour" />
+                                  <TableColumn fx:id="filmCol" prefWidth="216.0" resizable="false" text="Film" />
+                                  <TableColumn fx:id="dateRetourCol" maxWidth="115.0" prefWidth="115.0" resizable="false" text="Retour" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets bottom="5.0" right="5.0" />
                                  </VBox.margin>
                               </TableView>
                            </children>
@@ -69,7 +69,7 @@
                               </HBox>
                               <TableView fx:id="tableVente" layoutX="36.0" layoutY="65.0" prefHeight="417.0" prefWidth="364.0">
                                  <columns>
-                                    <TableColumn fx:id="articleCol" prefWidth="256.0" text="Article" />
+                                    <TableColumn fx:id="articleCol" prefWidth="256.0" resizable="false" text="Article" />
                                     <TableColumn fx:id="quantiteCol" prefWidth="96.0" resizable="false" text="Quantité" />
                                  </columns>
                                  <columnResizePolicy>

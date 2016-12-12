@@ -25,6 +25,7 @@ import videoclub.model.Adherent;
 import videoclub.model.CatalogueProduits;
 import videoclub.model.DatabaseManager;
 import videoclub.model.Employe;
+import videoclub.model.HistoriqueTransactions;
 import videoclub.model.Transaction;
 import videoclub.securite.LoginManager;
 
@@ -39,8 +40,13 @@ public class Videoclub extends Application {
     private ArrayList<Employe> listeEmployes;
     private ObservableList<Adherent> listeAdherents = FXCollections.observableArrayList();
     private Transaction transactionEnCours = null;
-    private ViewManager viewManager = new ViewManager();
+    private HistoriqueSession historiqueSession = new HistoriqueSession();
+    private ViewManager viewManager = new ViewManager(); 
 
+    
+    public HistoriqueSession getHistoriqueSession() {
+        return historiqueSession;
+    }
     
     public ViewManager getViewManager() {
         return this.viewManager;
@@ -181,6 +187,10 @@ public class Videoclub extends Application {
         // Charger catalogue
         CatalogueProduits.getInstance().setListeArticles(DatabaseManager.chargerArticles());
         CatalogueProduits.getInstance().setListeFilms(DatabaseManager.chargerFilms());
+        
+        // Charger historique transactions
+        //HistoriqueTransactions.getInstance().setTransactions(listeTransactions);
+        // HistoriqueTransactions.getInstance().setTransactionsCount(nombreTransactions - 1);
     }
     
     public ObservableList<Adherent> getListeAdherents() {
