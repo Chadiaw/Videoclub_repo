@@ -141,11 +141,7 @@ public class FenetreLocationController implements Initializable {
             messageErreur.setText("Numéro d'exemplaire invalide.");
            return;
         }
-        if(CatalogueProduits.getInstance().getFilm(codeSaisi).findExemplaire(exemplaire) == null){
-            messageErreur.setText("L'exemplaire de ce film n'existe pas.");
-        }else if(CatalogueProduits.getInstance().getFilm(codeSaisi).findExemplaire(exemplaire).getEnLocation()){
-            messageErreur.setText("Ce film est déjà enregistré en location.");
-        }
+        
         
         LigneLocation newLigne = new LigneLocation(codeSaisi, exemplaire, duree);
         location.ajouterLigneLocation(newLigne);

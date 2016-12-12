@@ -8,6 +8,7 @@ package videoclub;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -82,15 +83,10 @@ public class FenetreRetourController implements Initializable {
            return;
         }
         
-        //Vérifier que l'exemplaire en question est loué
-        if(!CatalogueProduits.getInstance().getFilm(codeSaisi).findExemplaire(numeroExemplaire).getEnLocation()){
-            this.messageErreur.setText("Ce film n'est pas en location actuellement.");
-        }else{
         
-            //aller chercher le locataire en question - ajouter l'info de 
            
             
-        }
+        
     }
     
     
