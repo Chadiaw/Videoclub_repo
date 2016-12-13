@@ -28,26 +28,28 @@ public class Location {
     
     public void ajouterLigneLocation(LigneLocation ligne) {
         lignesLocation.add(ligne);
+        this.totalLocation += ligne.getSousTotal();
     }
     
-    public void ajouterLigneLocation(String codeFilm, int numeroExemplaire, int duree){
-        LigneLocation ligne = new LigneLocation(codeFilm, numeroExemplaire, duree);
+    public void ajouterLigneLocation(String codeFilm, int duree){
+        LigneLocation ligne = new LigneLocation(codeFilm, duree);
         lignesLocation.add(ligne);
+        this.totalLocation += ligne.getSousTotal();
     }
     
     public double getTotalLocation(){
-        double total = 0;
-        for(int i = 0; i< lignesLocation.size()-1; i++){
-            total = total + lignesLocation.get(i).getSousTotal();
-        }
-        return total;
+        return this.totalLocation;
     }
 
     public String getTotalFormatted() {
         DecimalFormat df = new DecimalFormat("0.00");
-        return df.format(totalLocation);
+        return df.format(getTotalLocation());
     }
 
+    public void setTotal(double total) {
+        this.totalLocation = total;
+    }
+    
     public ObservableList<LigneLocation> getLignesLocation() {
         return lignesLocation;
     }

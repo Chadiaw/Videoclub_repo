@@ -27,6 +27,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import videoclub.model.CatalogueProduits;
+import videoclub.model.HistoriqueTransactions;
 import videoclub.model.LigneArticle;
 import videoclub.model.LigneLocation;
 import videoclub.model.Transaction;
@@ -113,6 +114,7 @@ public class NewTransactionController implements Initializable {
     /**
      *  Ajout d'une location à la transaction. Ouverture de l'interface 'Identifier adhérent'.
      */
+    @FXML
     public void actionAjoutLocation(ActionEvent event) {
          // Ouvrir l'interface de Nouvelle location
         try {
@@ -132,6 +134,7 @@ public class NewTransactionController implements Initializable {
     /**
      *  Ajout d'une vente à la transaction. Ouvre l'interface 'Nouvelle vente'.
      */
+    @FXML
     public void actionAjoutVente(ActionEvent event){
         //Ouvrir l'interface Nouvelle vente
         try{
@@ -151,6 +154,7 @@ public class NewTransactionController implements Initializable {
     /**
      *  Annuler transaction. La transaction en cours est réinitialisée (null).
      */
+    @FXML
     public void actionAnnulerTransaction(ActionEvent event) {
         
         application.setTransactionEnCours(null);
@@ -158,17 +162,28 @@ public class NewTransactionController implements Initializable {
         Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
         // Fermer fenêtre
         stage.close();
-        
-        
     }
-
+    
+    @FXML
+     public void actionPaiement(ActionEvent event) {
+        // Ouvrir l'interface de Paiement
+        try {
+            Stage stage = (Stage) boutonPaiement.getScene().getWindow();
+            stage.close();
+            
+            application.getViewManager().openView("fenetrePaiement.fxml", "Paiement", StageStyle.UTILITY);        
+        }
+        catch (Exception ex) {
+            Logger.getLogger(NewTransactionController.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
     /**
      * Mise à jour des éléments de l'interface selon l'état de l'application
      */
     private void updateAll() {
        if (application.getTransactionEnCours() == null) {
            // S'il n'y a pas de transaction en cours, en créer une lorsque cette interface est ouverte.
-            application.setTransactionEnCours(new Transaction());
+            application.setTransactionEnCours(new Transaction(HistoriqueTransactions.getInstance().getTransactionsIndex()));
         }
                
         if(application.getTransactionEnCours().getLocation() == null) {
@@ -271,11 +286,11 @@ public class NewTransactionController implements Initializable {
         
         public TableLocationItem(LigneLocation ligneLocation) {
             String codeFilm = ligneLocation.getCodeArticle();
-            String titreFilm = CatalogueProduits.getInstance().getFilm(codeFilm).getTitre();
-            int exemplaire = ligneLocation.getNumeroExemplaire();
+            String titreFilm = CatalogueProduits.getInstance().getFilmByCode(codeFilm).getTitre();
+            
             
             // 1ere colonne : " CodeFilm#Exemplaire : TireFilm"
-            this.film = String.format("%1$s | %3$s #%2$d", codeFilm, exemplaire, titreFilm);
+            this.film = String.format("%1$s | %2$s", codeFilm, titreFilm);
             
             // 2e colonne : Date de retour sous le format yy/MM/dd (plus facile à trier)
             this.dateRetour = ligneLocation.getDateRetour().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));

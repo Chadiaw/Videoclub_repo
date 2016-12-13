@@ -85,7 +85,28 @@ and open the template in the editor.
 }
 
 /* ============================================
-    Éléments onglet locations 
+    Éléments onglet accueil 
+   ============================================
+*/
+
+.table-view .table-cell {
+    -fx-font-weight: bold;
+    -fx-text-fill: #191970;
+    -fx-alignment: center;
+}
+.table-view:selected {
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+#detailsCol {
+    -fx-font-weight: bold;
+    -fx-alignment: center-left;
+}
+
+
+/* ============================================
+    Éléments onglet adhérents 
    ============================================
 */
 

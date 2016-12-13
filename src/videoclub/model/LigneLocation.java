@@ -19,29 +19,28 @@ import java.time.LocalDate;
 public class LigneLocation {
     
     private int duree; /*le nombre de jours de la location */
-    private int numeroExemplaire; /*le numero d'exemplaire de l'article */
-    private String codeArticle;
+    private String codeFilm;
     private LocalDate dateRetour;
     
-    public LigneLocation(String codeArticle, int numeroExemplaire, int duree){
+    public LigneLocation(String codeFilm, int duree){
         this.duree = duree;
-        this.numeroExemplaire = numeroExemplaire;
-        this.codeArticle = codeArticle;
+        this.codeFilm = codeFilm;
         
         LocalDate today = LocalDate.now();
         this.dateRetour = today.plusDays(duree);
     }
     
-    public int getNumeroExemplaire() {
-        return this.numeroExemplaire;
-    }
     
     public String getCodeArticle() {
-        return this.codeArticle;
+        return this.codeFilm;
     }
     
     public LocalDate getDateRetour() {
         return this.dateRetour;
+    }
+    
+    public void setDuree(int duree){
+        this.duree = duree;
     }
     
     public int getDuree() {
@@ -49,30 +48,25 @@ public class LigneLocation {
     }
     
     public double getSousTotal(){
-        // dummy
+      /*  double total;*/
         return 6.99;
-                
-        /*
-        String numeroArticle = this.codeArticle;
-        int duree = this.duree;
-        */
-        //double total =0 ; /*a changer le 0 une fois le reste decommente */
-       /* boolean nouveaute = catalogue.getItem(numeroArticle).getDescription().getNouveaute();*/
-      /*  if(nouveaute){
-            total = 6 * duree;
+     /*   if(CatalogueProduits.getInstance().getFilm(codeFilm).isNouveaute()){
+            total = 6.0 * duree;
         }else{
             int nbSemaines = (int)duree/7;
             int nbJours = duree%7;
-            
+      */      
             /*Si le client a pris le film pour un nombre de semaines + 5 jours*/
             /*on lui accorde la semaine complete comme c'est le meme prix*/
-      /*      if(nbJours >= 5){
-                this.duree = duree + (7-nbJours);
+       /*     if(nbJours >= 5){
+                setDuree(this.duree + (7-nbJours));
                 nbSemaines ++;
                 nbJours = 0;
             }
-            total = 5*nbSemaines + nbJours;
-        }*/
-        //return total;
+            total = 5 *nbSemaines + nbJours;
+            
+        }
+*/
+        /*return total;*/
     }
 }

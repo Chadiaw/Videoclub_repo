@@ -39,22 +39,14 @@
                   <Insets left="25.0" top="5.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="31.0" spacing="20.0">
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="31.0" spacing="67.0">
                <children>
                   <TextField fx:id="codeFilmField" prefHeight="31.0" prefWidth="239.0">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </TextField>
-                  <HBox spacing="10.0">
-                     <children>
-                        <TextField fx:id="exemplaireField" prefHeight="31.0" prefWidth="101.0">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </TextField>
-                     </children>
-                  </HBox>
+                  <HBox spacing="10.0" />
                   <HBox layoutX="409.0" layoutY="20.0" spacing="10.0">
                      <children>
                         <Label text="Durée">
@@ -71,7 +63,7 @@
                   </HBox>
                </children>
                <padding>
-                  <Insets left="25.0" right="35.0" top="10.0" />
+                  <Insets left="25.0" top="10.0" />
                </padding>
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="72.0" spacing="25.0">

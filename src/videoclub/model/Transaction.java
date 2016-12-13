@@ -19,15 +19,17 @@ public class Transaction {
     private LocalDateTime date;
     private Vente vente;
     private Location location;
+    private Paiement paiement;
     private Adherent adherent;
     private double total;
+
    
-    public Transaction(){
-        this.numeroTransaction = HistoriqueTransactions.getTransactionsCount();
-        this.total = 0;
+    public Transaction(int numero){
+        this.numeroTransaction = numero;
         this.adherent = null;
         this.vente = null;
         this.location = null;
+        this.paiement = null;
         this.date = LocalDateTime.now(); 
         
     }
@@ -41,17 +43,23 @@ public class Transaction {
     }
     
     public double getTotal() {
-            /*
-            additionner sousTotal Vente et Location
-            multiplier par taxes
-            retourner resultat
-            */
+        double total = 0;
+        
+        if(this.vente != null){
+            total += this.vente.getTotalVente();
+        }
+        if(this.location != null){
+            total += this.location.getTotalLocation();
+        }
+        
         return total;
+
     }
-    
+  
+
     public String getTotalFormatted() {
         DecimalFormat df = new DecimalFormat("0.00");
-        return df.format(this.total);
+        return df.format(getTotal());
     }
     
     public Adherent getAdherent() {
@@ -70,6 +78,14 @@ public class Transaction {
         this.vente = vente;
     }
     
+    public void setPaiement(Paiement paiement){
+        this.paiement = paiement;
+    }
+    
+    public Paiement getPaiement(){
+        return this.paiement;
+    }
+    
     public Location getLocation() {
         return this.location;
     }
@@ -77,46 +93,5 @@ public class Transaction {
     public void setLocation(Location location) {
         this.location = location;
     }
-/*
-    public double calculerSousTotal(){
-        totalSansTax = 0;
-        if(this.vente != null){
-            totalSansTax = totalSansTax + this.vente.getTotalVente();
-        }
-        if(this.location != null){
-            totalSansTax = totalSansTax + this.location.getTotalLocation();
-        }
-        return totalSansTax;
-    }
-    
-    public double calculerTPS(){
-        return (double)Math.round(this.totalSansTax * 0.05 * 0.998*100)/100 ;
-    }
-    
-    public double calculerTVQ(){
-        return (double)Math.round(this.totalSansTax * 0.998*100)/100 ;
-    }
-    
-    public double calculerTotal() {
-        return calculerSousTotal() + calculerTPS() + calculerTVQ();
-    }
-    
-      public void creerVente(){
-        this.vente = new Vente();
-    }
-    
-    
-    public void creerLocation(){
-        this.location = new Location(); 
-    }
-    
-    
-    public void creerPaiement(){
-        
-    }
-    
-    public void enregistrerTransaction(){
-        
-    }
-*/
+
 }

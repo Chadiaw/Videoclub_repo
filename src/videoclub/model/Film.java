@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package videoclub.model;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author Melanie
@@ -43,6 +46,7 @@ public class Film extends Article{
     public String getType(){
         return this.type;
     }
+    
     
 }
     

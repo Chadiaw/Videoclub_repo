@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
  */
 public class HistoriqueTransactions {
     
-    private static int transactionsCount = 0;
+    private int transactionIndex = 1;
     
     private ObservableList<Transaction> transactions = FXCollections.observableArrayList();
     
@@ -28,8 +28,12 @@ public class HistoriqueTransactions {
         return INSTANCE;
     }
 
-    public static int getTransactionsCount() {
-        return transactionsCount;
+    public int getTransactionsIndex() {
+        return this.transactionIndex;
+    }
+    
+    public void setTransactionsIndex(int nombreTransactions) {
+        this.transactionIndex = nombreTransactions;
     }
 
     public ObservableList<Transaction> getTransactions() {
@@ -38,8 +42,11 @@ public class HistoriqueTransactions {
     
     public void enregistrer(Transaction transaction) {
         this.transactions.add(transaction);
-        transactionsCount++;
+        transactionIndex++;
     }
     
+    public void setTransactions(ObservableList<Transaction> listeTransactions) {
+        this.transactions = listeTransactions;
+    }
     
 }
