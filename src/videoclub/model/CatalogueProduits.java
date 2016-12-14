@@ -16,6 +16,10 @@ import javafx.collections.ObservableMap;
  */
 public class CatalogueProduits {
     
+    public final double CoutQuotidienNouveaute = 6.99;//Le cout pour la location quotidienne d'une nouveaute
+    public final double CoutQuotidienRegulier = 2.00;
+    public final double CoutHebdoRegulier = 5.99;
+    
     private ObservableList<Article> listeArticles;
     private ObservableList<Film> listeFilms;
     

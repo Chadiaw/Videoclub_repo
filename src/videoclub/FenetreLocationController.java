@@ -105,6 +105,7 @@ public class FenetreLocationController implements Initializable {
     
     @FXML
     private void actionAjouter(ActionEvent event){
+        messageErreur.setText("");
         String titreSaisi = titreFilmField.getText();
         String codeSaisi = codeFilmField.getText();
         
@@ -134,6 +135,19 @@ public class FenetreLocationController implements Initializable {
             
             messageErreur.setText("Durée invalide.");
            return;
+        }
+        
+        if(filmEntre.isNouveaute()){
+            if(duree !=1){
+                messageErreur.setText("Ce film est une nouveauté et peut être loué seulement une journée.");
+                return;
+            }
+            
+        }else{
+            if(duree > 7){
+                messageErreur.setText("Veuillez choisir une durée de 1 à 7 jours.");
+                return;
+            }
         }
         
         LigneLocation newLigne = new LigneLocation(filmEntre.getCodeArticle(), duree);

@@ -22,12 +22,16 @@ public class LigneLocation {
     private String codeFilm;
     private LocalDate dateRetour;
     
+    
+
+    
     public LigneLocation(String codeFilm, int duree){
         this.duree = duree;
         this.codeFilm = codeFilm;
         
         LocalDate today = LocalDate.now();
         this.dateRetour = today.plusDays(duree);
+
     }
     
     
@@ -47,9 +51,28 @@ public class LigneLocation {
         return this.duree;
     }
     
+    
     public double getSousTotal(){
+        if(CatalogueProduits.getInstance().getFilmByCode(codeFilm).isNouveaute()){
+            return CatalogueProduits.getInstance().CoutQuotidienNouveaute;   
+        }
+        
+        else{
+            double coutHebdo = CatalogueProduits.getInstance().CoutHebdoRegulier;
+            if(this.duree < 7){
+                double sousTotal = CatalogueProduits.getInstance().CoutQuotidienRegulier * this.duree;
+                if(sousTotal > coutHebdo){
+                    return coutHebdo;
+                }else{
+                    return sousTotal;
+                }
+            }else{
+                return coutHebdo;
+            }
+        }
+    }
       /*  double total;*/
-        return 6.99;
+       /* return 6.99;
      /*   if(CatalogueProduits.getInstance().getFilm(codeFilm).isNouveaute()){
             total = 6.0 * duree;
         }else{
@@ -68,6 +91,5 @@ public class LigneLocation {
         }
 */
         /*return total;*/
-    }
     
 }
