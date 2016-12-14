@@ -14,7 +14,6 @@
       <TextField fx:id="titreField" layoutX="36.0" layoutY="34.0" prefHeight="36.0" prefWidth="367.0" promptText="Titre du film" />
       <TextField fx:id="codeArticleField" layoutX="36.0" layoutY="81.0" prefHeight="36.0" prefWidth="162.0" promptText="Code d'article" />
       <Separator layoutX="449.0" layoutY="6.0" orientation="VERTICAL" prefHeight="126.0" prefWidth="17.0" />
-      <TextField fx:id="exemplaireField" layoutX="255.0" layoutY="81.0" prefHeight="36.0" prefWidth="148.0" promptText="Numéro d'exemplaire" />
       <TableView layoutX="8.0" layoutY="183.0" prefHeight="215.0" prefWidth="585.0">
         <columns>
           <TableColumn prefWidth="177.66668701171875" text="Titre du film" />

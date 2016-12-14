@@ -49,4 +49,13 @@ public class HistoriqueTransactions {
         this.transactions = listeTransactions;
     }
     
+    public Transaction findTransaction(String codeArticle){
+        for(Transaction trans : transactions){
+            if(trans.getLigneLocation(codeArticle) != null){
+                return trans;
+            }
+        }
+        return null;
+    }
+    
 }

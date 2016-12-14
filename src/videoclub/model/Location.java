@@ -54,6 +54,15 @@ public class Location {
         return lignesLocation;
     }
     
+    public LigneLocation findLigneLocation(String codeArticle){
+        for(LigneLocation ligneLoc: lignesLocation){
+            if(ligneLoc.getCodeArticle().equals(codeArticle)){
+                return ligneLoc;
+            }
+        }
+        return null;
+    }
+    
     
     
 }

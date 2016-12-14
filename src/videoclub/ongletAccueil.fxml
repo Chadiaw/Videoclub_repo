@@ -35,7 +35,7 @@
                                           <HBox alignment="CENTER" layoutX="14.0" layoutY="523.0" spacing="60.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
                                              <children>
                                                 <Button fx:id="boutonTransaction" mnemonicParsing="false" onAction="#actionTransaction" prefHeight="40.0" prefWidth="200.0" text="Nouvelle transaction" />
-                                                <Button fx:id="boutonRetournerFilm" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="Retourner film" />
+                                                <Button fx:id="boutonRetournerFilm" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#actionRetournerFilm" prefHeight="40.0" prefWidth="200.0" text="Retourner film" />
                                                 <Button fx:id="boutonInscrireAdherent" layoutX="285.0" layoutY="10.0" mnemonicParsing="false" onAction="#actionInscrireAdherent" prefHeight="40.0" prefWidth="200.0" text="Inscrire adhérent" />
                                              </children>
                                              <VBox.margin>

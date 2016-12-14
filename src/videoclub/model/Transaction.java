@@ -93,5 +93,9 @@ public class Transaction {
     public void setLocation(Location location) {
         this.location = location;
     }
+    
+    public LigneLocation getLigneLocation(String codeArticle){
+        return this.getLocation().findLigneLocation(codeArticle);
+    }
 
 }

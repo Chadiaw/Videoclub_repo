@@ -6,6 +6,7 @@
 package videoclub;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +16,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import videoclub.model.Adherent;
 import videoclub.model.CatalogueProduits;
+import videoclub.model.HistoriqueTransactions;
+import videoclub.model.LigneLocation;
+import videoclub.model.Transaction;
 
 /**
  * FXML Controller class
@@ -30,8 +35,6 @@ public class FenetreRetourController implements Initializable {
     private TextField titreField;
     @FXML
     private TextField codeArticleField;
-    @FXML
-    private TextField exemplaireField;
     @FXML
     private Button boutonScan;
     @FXML
@@ -51,41 +54,37 @@ public class FenetreRetourController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         application = Videoclub.getInstance();
+        messageErreur.setText("");
         // TODO
     }  
     
     private void actionRetourner(ActionEvent event){
         String codeSaisi = codeArticleField.getText();
+        Transaction transaction = HistoriqueTransactions.getInstance().findTransaction(codeSaisi);
         
-        if(CatalogueProduits.getInstance().getArticle(codeSaisi) == null ) {
+        if(transaction == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);;
             alert.setHeaderText(null);
-            alert.setContentText("Le code saisi ne correspond à aucun article");
+            alert.setContentText("Le code saisi ne correspond à aucun article en location");
             alert.showAndWait();
             return;
-        }
-        
-
-        
-        //vérifier si l'exemplaire en question existe
-        String exemplaireSaisi = exemplaireField.getText();
-        int numeroExemplaire = 0;
-        try {
-            numeroExemplaire = Integer.parseInt(exemplaireSaisi);
-        }
-        catch (NumberFormatException ex) {
+        }else{
+            Adherent adherent = transaction.getAdherent();
+            LocalDate dateRetour = transaction.getLigneLocation(codeSaisi).getDateRetour();
+            boolean nouveaute = CatalogueProduits.getInstance().getFilmByCode(codeSaisi).isNouveaute();
             
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("L'exemplaire saisi est invalide");
-            
-            alert.showAndWait();
-           return;
+            int retard = dateRetour.compareTo(LocalDate.now());
+            if(retard > 0){
+                //solde = calculer selon la formule choisie
+                //adherent.setSolde(adherent.getSolde() + solde);
+            }else{
+                //adherent.setSolde(solde);
+                //enlever la location;
+                //inscrire la date de retour (dans l'historique? dans ligneLocation?
+            }
         }
-        
-        
-           
-            
+     
+       
         
     }
     

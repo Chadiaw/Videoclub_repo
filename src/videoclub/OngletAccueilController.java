@@ -89,5 +89,13 @@ public class OngletAccueilController implements Initializable {
         }
     }
     
+    public void actionRetournerFilm(ActionEvent event) {
+        try {
+            application.getViewManager().openView("fenetreRetour.fxml", "Retourner film", StageStyle.UTILITY);
+        } catch (IOException ex) {
+            Logger.getLogger(OngletAccueilController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     
 }
