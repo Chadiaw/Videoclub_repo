@@ -6,6 +6,9 @@
 package videoclub.model;
 
 import java.text.DecimalFormat;
+import java.util.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -17,6 +20,8 @@ public class Adherent {
     private String numeroTelephone;
     private String adresse;
     private int codeSecret;
+    private ObservableList<LigneLocation> locationsCourantes = FXCollections.observableArrayList();
+    
 
     public int getCodeSecret() {
         return codeSecret;
@@ -25,8 +30,6 @@ public class Adherent {
     public void setCodeSecret(int codeSecret) {
         this.codeSecret = codeSecret;
     }
-    
-    private Location[] historiqueLocations; // ou locations courantes.
     
     private double solde; 
 
@@ -73,6 +76,14 @@ public class Adherent {
     
     public double getSolde() {
         return solde;
+    }
+
+    public ObservableList<LigneLocation> getLocationsCourantes() {
+        return locationsCourantes;
+    }
+
+    public void setLocationsCourantes(ObservableList<LigneLocation> locationsCourantes) {
+        this.locationsCourantes = locationsCourantes;
     }
     
     
