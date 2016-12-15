@@ -150,7 +150,7 @@ public class FenetreLocationController implements Initializable {
             }
         }
         
-        LigneLocation newLigne = new LigneLocation(filmEntre.getCodeArticle(), duree);
+        LigneLocation newLigne = new LigneLocation(application.getTransactionEnCours().getAdherent().getNom(), filmEntre.getCodeArticle(), duree);
         location.ajouterLigneLocation(newLigne);
         totalLocation.setText("Total location : " + location.getTotalFormatted() + "$");
         

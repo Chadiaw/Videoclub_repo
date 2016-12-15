@@ -12,6 +12,7 @@ package videoclub.model;
 
 import static java.lang.Math.ceil;
 import java.time.LocalDate;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
  *
@@ -22,17 +23,41 @@ public class LigneLocation {
     private int duree; /*le nombre de jours de la location */
     private String codeFilm;
     private LocalDate dateRetour;
+    private String nomAdherent; 
+    private LocalDate dateLouee; 
+
+    public String getCodeFilm() {
+        return codeFilm;
+    }
+
+    public String getNomAdherent() {
+        return nomAdherent;
+    }
+
+    public LocalDate getDateLouee() {
+        return dateLouee;
+    }
     
     
 
     
-    public LigneLocation(String codeFilm, int duree){
+    public LigneLocation(String adherent, String codeFilm, int duree){
         this.duree = duree;
         this.codeFilm = codeFilm;
+        this.nomAdherent = adherent;
         
         LocalDate today = LocalDate.now();
+        this.dateLouee = today;
         this.dateRetour = today.plusDays(duree);
 
+    }
+    
+    public LigneLocation(String codeFilm, String adherent, String dateLouee, String dateRetour) {
+        this.codeFilm = codeFilm;
+        this.nomAdherent = adherent;
+        this.dateLouee = LocalDate.parse(dateLouee);
+        this.dateRetour = LocalDate.parse(dateRetour);
+        this.duree = (int) DAYS.between(this.dateLouee, this.dateRetour);
     }
     
     

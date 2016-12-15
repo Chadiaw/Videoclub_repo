@@ -6,6 +6,9 @@
 package videoclub;
 
 import java.io.InputStream;
+import static java.lang.Math.ceil;
+import java.time.LocalDate;
+import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +29,9 @@ import videoclub.model.CatalogueProduits;
 import videoclub.model.DatabaseManager;
 import videoclub.model.Employe;
 import videoclub.model.HistoriqueTransactions;
+import videoclub.model.LigneLocation;
+import videoclub.model.LogLocations;
+import videoclub.model.LogVideoclub;
 import videoclub.model.Transaction;
 import videoclub.securite.LoginManager;
 
@@ -40,13 +46,25 @@ public class Videoclub extends Application {
     private ArrayList<Employe> listeEmployes;
     private ObservableList<Adherent> listeAdherents = FXCollections.observableArrayList();
     private Transaction transactionEnCours = null;
+    private ViewManager viewManager = new ViewManager();
+    
+    // Log
     private HistoriqueSession historiqueSession = new HistoriqueSession();
-    private ViewManager viewManager = new ViewManager(); 
-
+    private LogVideoclub logVideoclub = new LogVideoclub();
+    private LogLocations logLocations = new LogLocations();
     
     public HistoriqueSession getHistoriqueSession() {
         return historiqueSession;
     }
+
+    public LogVideoclub getLogVideoclub() {
+        return logVideoclub;
+    }
+
+    public LogLocations getLogLocations() {
+        return logLocations;
+    }
+    
     
     public ViewManager getViewManager() {
         return this.viewManager;
@@ -182,13 +200,34 @@ public class Videoclub extends Application {
         // Charger liste employes
         listeAdherents = DatabaseManager.chargerAdherents();
         
-        // Charger articles dans onglet Inventaire
-        
         // Charger catalogue
         CatalogueProduits.getInstance().setListeArticles(DatabaseManager.chargerArticles());
         CatalogueProduits.getInstance().setListeFilms(DatabaseManager.chargerFilms());
         
-        // Charger historique transactions
+        // Charger historique locations
+        logLocations.setLocationsEnCours(DatabaseManager.chargerLocations());
+        
+        // MaJ solde adhérents et locations courantes pour chaque adhérent
+        for (LigneLocation ligne : logLocations.getLocationsEnCours()) {
+            for (Adherent adherent : listeAdherents) {
+                if (adherent.getNom().equals(ligne.getNomAdherent())) {
+                    adherent.getLocationsCourantes().add(ligne);
+                    
+                    int joursRetard = (int) DAYS.between(ligne.getDateRetour(), LocalDate.now());
+                    if (CatalogueProduits.getInstance().getFilmByCode(ligne.getCodeFilm()).isNouveaute()) {
+                        // Si nouveauté, retard calculé à la journée
+                        double amende = joursRetard * CatalogueProduits.getInstance().CoutJourDeRetard;
+                        adherent.setSolde(adherent.getSolde() + amende);
+                    }
+                    else {
+                        // Sinon, retard calculé à la semaine
+                        int nombreSemaines = (int) ceil(joursRetard / 7);
+                        double amende = nombreSemaines * CatalogueProduits.getInstance().CoutSemaineDeRetard;
+                        adherent.setSolde(adherent.getSolde() + amende);
+                    }
+                }
+            }
+        }
         //HistoriqueTransactions.getInstance().setTransactions(listeTransactions);
         // HistoriqueTransactions.getInstance().setTransactionsCount(nombreTransactions - 1);
     }

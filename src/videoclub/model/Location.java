@@ -31,8 +31,8 @@ public class Location {
         this.totalLocation += ligne.getSousTotal();
     }
     
-    public void ajouterLigneLocation(String codeFilm, int duree){
-        LigneLocation ligne = new LigneLocation(codeFilm, duree);
+    public void ajouterLigneLocation(Adherent adherent, String codeFilm, int duree){
+        LigneLocation ligne = new LigneLocation(adherent.getNom(), codeFilm, duree);
         lignesLocation.add(ligne);
         this.totalLocation += ligne.getSousTotal();
     }

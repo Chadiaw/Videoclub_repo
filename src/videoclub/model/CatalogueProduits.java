@@ -20,6 +20,9 @@ public class CatalogueProduits {
     public final double CoutQuotidienRegulier = 2.00;
     public final double CoutHebdoRegulier = 5.99;
     
+    public final double CoutJourDeRetard = 5.00;
+    public final double CoutSemaineDeRetard = 10.00;
+    
     private ObservableList<Article> listeArticles;
     private ObservableList<Film> listeFilms;
     

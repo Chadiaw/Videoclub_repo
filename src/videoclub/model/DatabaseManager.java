@@ -11,6 +11,7 @@ package videoclub.model;
  */
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -143,6 +144,36 @@ public class DatabaseManager {
           System.exit(0);
         }
         return listeFilms;
+    }
+
+    public static ObservableList<LigneLocation> chargerLocations() {
+         ObservableList<LigneLocation> listeLocations = FXCollections.observableArrayList();
+        
+        Connection c = null;
+        Statement stmt = null;
+        try {
+          Class.forName("org.sqlite.JDBC");
+          String url = String.format("jdbc:sqlite:%s", DATABASE_PATH);
+          c = DriverManager.getConnection(url);
+          c.setAutoCommit(false);
+          
+          stmt = c.createStatement();
+          ResultSet rs = stmt.executeQuery( "SELECT * FROM LOCATIONS;" );
+          while ( rs.next() ) {
+             
+             LigneLocation ligne = new LigneLocation(rs.getString("code"), rs.getString("adherent"), 
+                     rs.getString("dateLouee"), rs.getString("dateRetour"));
+             
+             listeLocations.add(ligne);
+          }
+          rs.close();
+          stmt.close();
+          c.close();
+        } catch ( Exception e ) {
+          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+          System.exit(0);
+        }
+        return listeLocations;
     }
     
     
