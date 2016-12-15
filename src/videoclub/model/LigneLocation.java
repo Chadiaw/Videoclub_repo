@@ -10,6 +10,7 @@
 */
 package videoclub.model;
 
+import static java.lang.Math.ceil;
 import java.time.LocalDate;
 
 /**
@@ -53,12 +54,20 @@ public class LigneLocation {
     
     
     public double getSousTotal(){
+        // Si nouveauté, facturation quotidienne
         if(CatalogueProduits.getInstance().getFilmByCode(codeFilm).isNouveaute()){
-            return CatalogueProduits.getInstance().CoutQuotidienNouveaute;   
+            return CatalogueProduits.getInstance().CoutQuotidienNouveaute * this.getDuree();   
         }
         
         else{
+            // Sinon, facturation hebdomadaire
             double coutHebdo = CatalogueProduits.getInstance().CoutHebdoRegulier;
+            
+            // On trouve le nombre de semaines (arrondi supérieur) correspodant à duree, car facturation hebdomadaire
+            int nombreSemaines = (int) ceil(this.duree / 7);
+            
+            return coutHebdo * nombreSemaines; 
+            /*
             if(this.duree < 7){
                 double sousTotal = CatalogueProduits.getInstance().CoutQuotidienRegulier * this.duree;
                 if(sousTotal > coutHebdo){
@@ -69,27 +78,7 @@ public class LigneLocation {
             }else{
                 return coutHebdo;
             }
+            */
         }
     }
-      /*  double total;*/
-       /* return 6.99;
-     /*   if(CatalogueProduits.getInstance().getFilm(codeFilm).isNouveaute()){
-            total = 6.0 * duree;
-        }else{
-            int nbSemaines = (int)duree/7;
-            int nbJours = duree%7;
-      */      
-            /*Si le client a pris le film pour un nombre de semaines + 5 jours*/
-            /*on lui accorde la semaine complete comme c'est le meme prix*/
-       /*     if(nbJours >= 5){
-                setDuree(this.duree + (7-nbJours));
-                nbSemaines ++;
-                nbJours = 0;
-            }
-            total = 5 *nbSemaines + nbJours;
-            
-        }
-*/
-        /*return total;*/
-    
 }
