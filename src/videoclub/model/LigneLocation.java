@@ -69,6 +69,10 @@ public class LigneLocation {
         return this.dateRetour;
     }
     
+    public void setDateRetour(LocalDate date){
+        this.dateRetour = date;
+    }
+    
     public void setDuree(int duree){
         this.duree = duree;
     }

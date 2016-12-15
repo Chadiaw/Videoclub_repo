@@ -7,19 +7,26 @@ package videoclub;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import videoclub.model.Adherent;
 import videoclub.model.CatalogueProduits;
 import videoclub.model.HistoriqueTransactions;
 import videoclub.model.LigneLocation;
+import videoclub.model.Location;
 import videoclub.model.Transaction;
 
 /**
@@ -41,11 +48,17 @@ public class FenetreRetourController implements Initializable {
     private Button boutonRetourner;
     @FXML
     private Label messageErreur;
+    @FXML 
+    private TableColumn titreCol;
+    @FXML 
+    private TableColumn adherentCol;
     
-    //private TableView<TableRetourItem> tableRetour = new TableView<TableRetourItem>();
+    @FXML
+    private TableView<TableRetourItem> tableRetour = new TableView<TableRetourItem>();
     @FXML
     private Button boutonTerminer;
     private Videoclub application;
+    private ObservableList<FenetreRetourController.TableRetourItem> items = FXCollections.observableArrayList();
     
 
     /**
@@ -56,35 +69,67 @@ public class FenetreRetourController implements Initializable {
         application = Videoclub.getInstance();
         messageErreur.setText("");
         // TODO
+        titreCol.setCellValueFactory(new PropertyValueFactory<FenetreRetourController.TableRetourItem,String>("titre"));
+        adherentCol.setCellValueFactory(new PropertyValueFactory<FenetreRetourController.TableRetourItem, String>("adherent"));
+        
+        tableRetour.setItems(items);
     }  
     
+    @FXML
     private void actionRetourner(ActionEvent event){
         String codeSaisi = codeArticleField.getText();
-        Transaction transaction = HistoriqueTransactions.getInstance().findTransaction(codeSaisi);
         
-        if(transaction == null){
+        LigneLocation location = application.getLogLocations().findLocation(codeSaisi);
+        
+        if(location == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);;
             alert.setHeaderText(null);
             alert.setContentText("Le code saisi ne correspond à aucun article en location");
             alert.showAndWait();
             return;
         }else{
-            Adherent adherent = transaction.getAdherent();
-            LocalDate dateRetour = transaction.getLigneLocation(codeSaisi).getDateRetour();
-            boolean nouveaute = CatalogueProduits.getInstance().getFilmByCode(codeSaisi).isNouveaute();
-            
-            int retard = dateRetour.compareTo(LocalDate.now());
-            if(retard > 0){
-                //solde = calculer selon la formule choisie
-                //adherent.setSolde(adherent.getSolde() + solde);
-            }else{
-                //adherent.setSolde(solde);
-                //enlever la location;
-                //inscrire la date de retour (dans l'historique? dans ligneLocation?
+            //Enlever la location de la liste des locations courantes de l'adherent 
+            for(Adherent adherent: application.getListeAdherents()){
+                if(adherent.getNom().equals(location.getNomAdherent())){
+                    adherent.enleverLocation(location);
+                }
             }
+            //mettre à jour la date de retour de la location
+            location.setDateRetour(LocalDate.now());
+            
+            //Enlever la location du Log des locations courantes
+            application.getLogLocations().enleverLocation(location);
+            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Retour confirmé!");
+            alert.showAndWait();
+            
+            items.add(new TableRetourItem(location));
         }
-     
-       
+ 
+    }
+    
+    protected class TableRetourItem {
+        
+        /*
+         Définit le format d'une ligne de la table location
+        */
+        //private String code;
+        private String titre;
+        private String adherent;
+
+        public TableRetourItem(LigneLocation ligneRetour) {
+            this.titre = CatalogueProduits.getInstance().getFilmByCode(ligneRetour.getCodeFilm()).getTitre();
+            this.adherent = ligneRetour.getNomAdherent();       
+        }
+        
+        public String getTitre() {
+            return titre;
+        }
+
+        public String getAdherent() {
+            return adherent;
+        }
         
     }
     
