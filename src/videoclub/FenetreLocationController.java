@@ -137,19 +137,6 @@ public class FenetreLocationController implements Initializable {
            return;
         }
         
-        if(filmEntre.isNouveaute()){
-            if(duree !=1){
-                messageErreur.setText("Ce film est une nouveauté et peut être loué seulement une journée.");
-                return;
-            }
-            
-        }else{
-            if(duree > 7){
-                messageErreur.setText("Veuillez choisir une durée de 1 à 7 jours.");
-                return;
-            }
-        }
-        
         LigneLocation newLigne = new LigneLocation(application.getTransactionEnCours().getAdherent().getNom(), filmEntre.getCodeArticle(), duree);
         location.ajouterLigneLocation(newLigne);
         totalLocation.setText("Total location : " + location.getTotalFormatted() + "$");

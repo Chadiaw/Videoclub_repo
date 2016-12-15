@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import videoclub.model.CatalogueProduits;
 import videoclub.model.HistoriqueTransactions;
+import videoclub.model.LigneLocation;
 import videoclub.model.Paiement;
 
 /**
@@ -111,7 +112,15 @@ public class FenetrePaiementController implements Initializable {
             //enregistrer paiement
             application.getTransactionEnCours().setPaiement(paiement);
 
+            // MaJ historique session, logVideoclub, logLocations, adherent.locationsEnCours
             application.getHistoriqueSession().ajouterTransaction(application.getTransactionEnCours());
+            application.getLogVideoclub().enregistrerTransaction(application.getTransactionEnCours(), application.getEmployeConnecte().getUsername());
+            for (LigneLocation ligne : application.getTransactionEnCours().getLocation().getLignesLocation()) {
+                // Ajouter chaque ligne au logLocations, ainsi qu'aux locations en cours de l'adhérent. 
+                application.getLogLocations().ajouterLocation(ligne);
+                application.getTransactionEnCours().getAdherent().getLocationsCourantes().add(ligne);                
+            }
+            
             
             HistoriqueTransactions.getInstance().enregistrer(application.getTransactionEnCours());
             
@@ -120,6 +129,13 @@ public class FenetrePaiementController implements Initializable {
             //fermer fenetre Paiement
             Stage stage = (Stage) boutonTerminer.getScene().getWindow();
             stage.close();
+            
+            try {
+                // Ouvrir fenetre principale
+                application.getViewManager().openView("MainView.fxml", "Vidéoclub", StageStyle.DECORATED);
+            } catch (IOException ex) {
+                Logger.getLogger(FenetrePaiementController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             ;
         }
@@ -136,7 +152,7 @@ public class FenetrePaiementController implements Initializable {
         stage.close();
 
         try {
-            application.getViewManager().openView("newTransaction.fxml", "Nouvelle transaction", StageStyle.UTILITY);
+            application.getViewManager().openView("newTransaction.fxml", "Nouvelle transaction", StageStyle.DECORATED);
         } catch (IOException ex) {
             Logger.getLogger(FenetrePaiementController.class.getName()).log(Level.SEVERE, null, ex);
         }

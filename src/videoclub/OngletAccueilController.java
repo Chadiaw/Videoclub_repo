@@ -72,6 +72,10 @@ public class OngletAccueilController implements Initializable {
     }    
     
     public void actionTransaction(ActionEvent event) {
+        
+        Stage stage = (Stage) boutonTransaction.getScene().getWindow();
+        stage.close();
+        
         // Ouvrir l'interface de Nouvelle transaction
         try {
             application.getViewManager().openView("newTransaction.fxml", "Nouvelle transaction", StageStyle.UTILITY );

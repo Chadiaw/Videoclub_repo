@@ -5,6 +5,7 @@
  */
 package videoclub;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -162,6 +163,12 @@ public class NewTransactionController implements Initializable {
         Stage stage = (Stage) boutonAnnuler.getScene().getWindow();
         // Fermer fenêtre
         stage.close();
+        
+        try {
+            application.getViewManager().openView("MainView.fxml", "Vidéoclub", StageStyle.DECORATED);
+        } catch (IOException ex) {
+            Logger.getLogger(NewTransactionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @FXML

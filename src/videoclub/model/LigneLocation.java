@@ -89,7 +89,7 @@ public class LigneLocation {
             double coutHebdo = CatalogueProduits.getInstance().CoutHebdoRegulier;
             
             // On trouve le nombre de semaines (arrondi supérieur) correspodant à duree, car facturation hebdomadaire
-            int nombreSemaines = (int) ceil(this.duree / 7);
+            int nombreSemaines = (int) ceil(this.duree / 7.0);
             
             return coutHebdo * nombreSemaines; 
             /*

@@ -24,6 +24,9 @@ public class LogLocations {
         this.locationsEnCours = locationsEnCours;
     }
     
+    public void ajouterLocation(LigneLocation ligne) {
+        locationsEnCours.add(ligne);
+    }
     
     
 }

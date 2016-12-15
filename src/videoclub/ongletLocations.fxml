@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="543.0" prefWidth="859.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.OngletLocationsController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="543.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.OngletLocationsController">
                            <children>
                               <VBox layoutX="182.0" layoutY="123.0" prefHeight="200.0" prefWidth="100.0" spacing="30.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
                                  <children>
@@ -33,11 +33,11 @@
                                     </GridPane>
                                     <TableView fx:id="listeLocations" prefHeight="537.0" prefWidth="880.0">
                                       <columns>
-                                        <TableColumn prefWidth="55.0" text="Id" />
-                                        <TableColumn prefWidth="134.0" text="Code article" />
-                                          <TableColumn prefWidth="138.0" text="Adhérent" />
-                                          <TableColumn prefWidth="168.0" text="Date de retour" />
-                                          <TableColumn prefWidth="384.0" text="Description" />
+                                        <TableColumn fx:id="codeCol" prefWidth="94.0" resizable="false" text="Code film" />
+                                          <TableColumn fx:id="titreCol" prefWidth="320.0" resizable="false" text="Titre" />
+                                          <TableColumn fx:id="adherentCol" prefWidth="180.0" resizable="false" text="Adhérent" />
+                                          <TableColumn fx:id="dateLocCol" prefWidth="140.0" resizable="false" text="Date de location" />
+                  <TableColumn fx:id="dateRetCol" prefWidth="140.0" resizable="false" text="Date de retour" />
                                       </columns>
                                     </TableView>
                                  </children>
