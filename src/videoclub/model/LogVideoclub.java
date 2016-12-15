@@ -61,10 +61,18 @@ public class LogVideoclub {
         this.entreesLog.add(entry);
     }
     
-    public void enregistrerRetour(String nomEmploye, String nomAdhrent, Film film) {
-        String details = String.format("%1$s, %2$s (%3$s)", nomAdhrent, film.getCodeArticle(), film.getTitre());
+    public void enregistrerRetour(String nomEmploye, String nomAdherent, Film film) {
+        String details = String.format("%1$s, %2$s (%3$s)", nomAdherent, film.getCodeArticle(), film.getTitre());
         
         LogEntry entry = new LogEntry("Retour", nomEmploye, details);
+        
+        this.entreesLog.add(entry);
+    }
+
+    public void enregistrerNouvelAdherent(String nomEmploye,Adherent nouveau) {
+        String details = nouveau.getNom();
+        
+        LogEntry entry = new LogEntry("Nouvel adhérent", nomEmploye, details);
         
         this.entreesLog.add(entry);
     }

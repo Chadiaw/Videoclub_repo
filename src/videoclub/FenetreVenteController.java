@@ -129,7 +129,6 @@ public class FenetreVenteController implements Initializable {
                         iterLignesAffichees.remove();
                     }
                 }
-                
             }
         }
         

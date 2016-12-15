@@ -11,6 +11,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import videoclub.model.Adherent;
 import videoclub.model.Transaction;
 
 /**
@@ -44,6 +45,19 @@ public class HistoriqueSession {
         
         this.listeEntrees.add(entree);
         
+        idCourant++;
+    }
+
+    void ajouterAdherent(Adherent nouveau) {
+        String details = String.format("%1$s | Telephone: %2$s", nouveau.getNom(), nouveau.getNumeroTelephone());
+        
+        if (!"".equals(nouveau.getAdresse())) {
+            details += ", Adresse: " + nouveau.getAdresse();
+        }
+        
+        EntreeHistoriqueSession entree = new EntreeHistoriqueSession(idCourant, "Inscription", details);
+        
+        this.listeEntrees.add(entree);
         idCourant++;
     }
     
