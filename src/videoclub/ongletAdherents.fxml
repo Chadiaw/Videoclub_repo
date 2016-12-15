@@ -138,12 +138,12 @@
                                                 <content>
                                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                          <children>
-                                                            <TableView fx:id="historiqueAdherent" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <TableView fx:id="locationsCourantesAdherent" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                               <columns>
-                                                                <TableColumn prefWidth="92.0" text="Statut" />
-                                                                <TableColumn prefWidth="132.0" text="Code article" />
-                                                                  <TableColumn prefWidth="146.0" text="Date de retour" />
-                                                                  <TableColumn prefWidth="254.0" text="Titre" />
+                                                                <TableColumn fx:id="statutCol" text="Statut" />
+                                                                <TableColumn fx:id="titreCol" prefWidth="261.0" text="Titre" />
+                                                                  <TableColumn fx:id="dateLocCol" prefWidth="133.0" text="Date de location" />
+                                          <TableColumn fx:id="dateRetCol" prefWidth="121.0" text="Date de retour" />
                                                               </columns>
                                                             </TableView>
                                                          </children>

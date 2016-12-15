@@ -7,29 +7,33 @@ package videoclub;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import videoclub.model.Adherent;
+import videoclub.model.CatalogueProduits;
+import videoclub.model.LigneLocation;
 
 /**
  * FXML Controller class
@@ -53,7 +57,18 @@ public class OngletAdherentsController implements Initializable {
     @FXML
     private Text  soldeAdherent;
     @FXML 
-    private TableView historiqueAdherent;
+    private TableView<TablePretsItem> locationsCourantesAdherent = new TableView<TablePretsItem>();
+    @FXML
+    private TableColumn statutCol;
+    @FXML
+    private TableColumn titreCol;
+    @FXML
+    private TableColumn dateLocCol;
+    @FXML
+    private TableColumn dateRetCol;
+    private ObservableList<TablePretsItem> tablePretsItems = FXCollections.observableArrayList();
+    
+    
     
     
     private Videoclub application;
@@ -92,12 +107,25 @@ public class OngletAdherentsController implements Initializable {
                     telephoneAdherent.setText(newValue.getNumeroTelephone());
                     adresseAdherent.setText(newValue.getAdresse());
                     soldeAdherent.setText(newValue.getSoldeFormatted());
+                    
                     // MaJ historique ici
-                    // TODO
+                    tablePretsItems.clear();
+                    for (LigneLocation ligne : newValue.getLocationsCourantes()) {
+                        tablePretsItems.add(new TablePretsItem((ligne)));
+                    }
                     
                 }
             }
         );
+        
+        // Initialisation table des locations courantes
+        statutCol.setCellValueFactory(new PropertyValueFactory<TablePretsItem,String>("statut"));
+        titreCol.setCellValueFactory(new PropertyValueFactory<TablePretsItem, String>("titre"));
+        dateLocCol.setCellValueFactory(new PropertyValueFactory<TablePretsItem, String>("dateLoc"));
+        dateRetCol.setCellValueFactory(new PropertyValueFactory<TablePretsItem, String>("dateRet"));
+        
+        locationsCourantesAdherent.setItems(tablePretsItems);
+        
     }    
     
     public void ajouterAdherent(ActionEvent event) {
@@ -105,6 +133,46 @@ public class OngletAdherentsController implements Initializable {
             application.getViewManager().openView("nouvelAdherent.fxml", "Ajouter adhérent", StageStyle.UTILITY);
         } catch (IOException ex) {
             Logger.getLogger(OngletAdherentsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    protected class TablePretsItem {
+        
+        private SimpleStringProperty statut;
+        private SimpleStringProperty titre;
+        private SimpleStringProperty dateLoc;
+        private SimpleStringProperty dateRet; 
+
+        public String getStatut() {
+            return statut.get();
+        }
+
+        public String getTitre() {
+            return titre.get();
+        }
+
+        public String getDateLoc() {
+            return dateLoc.get();
+        }
+
+        public String getDateRet() {
+            return dateRet.get();
+        }
+        
+        public TablePretsItem(LigneLocation ligne) {
+            String titreFilm = CatalogueProduits.getInstance().getFilmByCode(ligne.getCodeFilm()).getTitre();
+            this.titre = new SimpleStringProperty(titreFilm);
+            
+            this.dateLoc = new SimpleStringProperty(ligne.getDateLouee().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            this.dateRet = new SimpleStringProperty(ligne.getDateRetour().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            
+            if (ligne.getDateRetour().isBefore(LocalDate.now())) {
+                this.statut = new SimpleStringProperty("Retard");
+            }
+            else {
+                this.statut = new SimpleStringProperty("A jour");
+            }
+            
         }
     }
     
