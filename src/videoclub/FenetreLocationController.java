@@ -7,6 +7,7 @@ package videoclub;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -131,10 +132,28 @@ public class FenetreLocationController implements Initializable {
             if (duree <= 0)
                 throw new NumberFormatException();
         }
-        catch (NumberFormatException ex) {
-            
+        catch (NumberFormatException ex) { 
             messageErreur.setText("Durée invalide.");
            return;
+        }
+        
+        // Vérifier si le film n'est pas déja inclus dans la location      
+        Iterator<LigneLocation> iterLocations = location.getLignesLocation().iterator();
+        while (iterLocations.hasNext()) {
+            LigneLocation ligne = iterLocations.next();
+            if (ligne.getCodeFilm() == filmEntre.getCodeArticle()) {
+                location.setTotal(location.getTotalLocation() - ligne.getSousTotal());
+                iterLocations.remove();
+                // Trouver la ligne dans l'affichage
+                Iterator<TableLocationItem> iterLignesAffichees = items.iterator();
+                while (iterLignesAffichees.hasNext()) {
+                    TableLocationItem item = iterLignesAffichees.next();
+                    if(item.getCode().equals(ligne.getCodeFilm())) {
+                        iterLignesAffichees.remove();
+                    }
+                }
+                
+            }
         }
         
         LigneLocation newLigne = new LigneLocation(application.getTransactionEnCours().getAdherent().getNom(), filmEntre.getCodeArticle(), duree);

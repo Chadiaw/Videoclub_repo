@@ -29,7 +29,12 @@ public class Vente {
         lignesArticle.add(ligne);
         totalVente += ligne.getSousTotal();
     }
+
+    public void setTotalVente(double totalVente) {
+        this.totalVente = totalVente;
+    }
    
+    
     public double getTotalVente(){
         return totalVente;
     }

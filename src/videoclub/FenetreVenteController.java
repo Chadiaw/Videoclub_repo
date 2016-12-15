@@ -7,6 +7,7 @@ package videoclub;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -96,20 +97,43 @@ public class FenetreVenteController implements Initializable {
     private void actionAjouter(ActionEvent event){
         String codeSaisi = codeArticle.getText();
         
-        if(CatalogueProduits.getInstance().getArticle(codeSaisi) == null ) {
+        Article articleEntre = CatalogueProduits.getInstance().getArticle(codeSaisi);
+        
+        if(articleEntre == null ) {
             Alert alert = new Alert(Alert.AlertType.ERROR);;
             alert.setHeaderText(null);
             alert.setContentText("Le code saisi ne correspond à aucun article");
             alert.showAndWait();
             return;
         }
-        if(!CatalogueProduits.getInstance().getArticle(codeSaisi).isAchetable()){
+        if(!articleEntre.isAchetable()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("L'article n'est pas disponible en vente.");
             alert.showAndWait();
             return;
         }
+        
+        // Vérifier si l'article n'est pas déja inclus dans la vente      
+        Iterator<LigneArticle> iterVente = vente.getLignesArticles().iterator();
+        while (iterVente.hasNext()) {
+            LigneArticle ligne = iterVente.next();
+            if (ligne.getCodeArticle().equals(articleEntre.getCodeArticle())) {
+                vente.setTotalVente(vente.getTotalVente()- ligne.getSousTotal());
+                iterVente.remove();
+                // Trouver la ligne dans l'affichage
+                Iterator<TableVenteItem> iterLignesAffichees = items.iterator();
+                while (iterLignesAffichees.hasNext()) {
+                    TableVenteItem item = iterLignesAffichees.next();
+                    if(item.getCode().equals(ligne.getCodeArticle())) {
+                        iterLignesAffichees.remove();
+                    }
+                }
+                
+            }
+        }
+        
+        
         String quantiteSaisie = quantite.getText();
         int quantiteEntree = 0;
         try {
