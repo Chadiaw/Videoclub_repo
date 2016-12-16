@@ -24,7 +24,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import videoclub.model.Adherent;
 import videoclub.model.CatalogueProduits;
-import videoclub.model.HistoriqueTransactions;
 import videoclub.model.LigneLocation;
 import videoclub.model.Location;
 import videoclub.model.Transaction;
