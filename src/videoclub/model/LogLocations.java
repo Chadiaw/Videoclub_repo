@@ -28,5 +28,18 @@ public class LogLocations {
         locationsEnCours.add(ligne);
     }
     
+    public LigneLocation findLocation(String codeFilm){
+        for(LigneLocation loc: locationsEnCours){
+            if(loc.getCodeFilm().equals(codeFilm)){
+                return loc;
+            }
+        }
+        return null;
+    }
+    
+    public void enleverLocation(LigneLocation location){
+        locationsEnCours.remove(location);
+    }
+    
     
 }

@@ -86,6 +86,14 @@ public class Adherent {
         this.locationsCourantes = locationsCourantes;
     }
     
+    public void enleverLocation(LigneLocation location){
+        //for(LigneLocation ligneLoc: locationsCourantes){
+        //    if(ligneLoc.equals(location)){      
+        //    }
+        locationsCourantes.remove(location);
+    }
+    
+    
     
     
 }

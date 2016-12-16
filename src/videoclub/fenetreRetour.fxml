@@ -14,18 +14,15 @@
       <TextField fx:id="titreField" layoutX="36.0" layoutY="34.0" prefHeight="36.0" prefWidth="367.0" promptText="Titre du film" />
       <TextField fx:id="codeArticleField" layoutX="36.0" layoutY="81.0" prefHeight="36.0" prefWidth="162.0" promptText="Code d'article" />
       <Separator layoutX="449.0" layoutY="6.0" orientation="VERTICAL" prefHeight="126.0" prefWidth="17.0" />
-      <TableView layoutX="8.0" layoutY="183.0" prefHeight="215.0" prefWidth="585.0">
+      <TableView fx:id="tableRetour" layoutX="8.0" layoutY="183.0" prefHeight="215.0" prefWidth="585.0">
         <columns>
-          <TableColumn prefWidth="177.66668701171875" text="Titre du film" />
-          <TableColumn prefWidth="69.33331298828125" text="Exemplaire" />
-            <TableColumn prefWidth="154.33331298828125" text="Client" />
-            <TableColumn prefWidth="94.66668701171875" text="Jours de retard" />
-            <TableColumn prefWidth="89.33331298828125" text="Amende" />
+          <TableColumn fx:id="titreCol" prefWidth="294.0" text="Titre du film" />
+            <TableColumn fx:id="adherentCol" prefWidth="290.0" text="Client" />
         </columns>
       </TableView>
       <Button fx:id="boutonScan" layoutX="479.0" layoutY="20.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="98.0" text="Scan" />
-      <Button fx:id="boutonRetourner" layoutX="36.0" layoutY="129.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="81.0" text="Retourner" />
-      <Button fx:id="boutonTerminer" layoutX="471.0" layoutY="415.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="81.0" text="Terminer" />
+      <Button fx:id="boutonRetourner" layoutX="36.0" layoutY="129.0" mnemonicParsing="false" onAction="#actionRetourner" prefHeight="36.0" prefWidth="81.0" text="Retourner" />
+      <Button fx:id="boutonTerminer" cancelButton="true" layoutX="471.0" layoutY="415.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="81.0" text="Terminer" />
       <Label fx:id="messageErreur" layoutX="151.0" layoutY="132.0" prefHeight="27.0" prefWidth="255.0" text="message d'erreur" textFill="#eb0a0a" />
    </children>
 </AnchorPane>
