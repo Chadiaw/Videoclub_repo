@@ -1,15 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.OngletInventaireController" />
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="580.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.OngletInventaireController">
+   <children>
+      <VBox prefHeight="580.0" prefWidth="900.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox spacing="10.0">
+               <children>
+                  <HBox layoutX="14.0" layoutY="14.0" spacing="500.0">
+                     <children>
+                        <AnchorPane prefWidth="921.0">
+                           <children>
+                              <Label fx:id="venteLabel" text="Articles disponibles à la vente" AnchorPane.leftAnchor="5.0" />
+                              <HBox layoutX="777.0" spacing="15.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Button fx:id="boutonArticle" mnemonicParsing="false" onAction="#actionNouvelArticle" text="Ajouter article" />
+                                    <Button fx:id="boutonConfirmerArticle" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#actionConfirmerArticle" text="Confirmer changements" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tableAchetables" editable="true" layoutX="14.0" layoutY="46.0" prefHeight="230.0" prefWidth="870.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                     <columns>
+                        <TableColumn fx:id="codeArticleCol" editable="false" prefWidth="123.0" resizable="false" text="Code" />
+                        <TableColumn fx:id="descriptifCol" prefWidth="474.0" resizable="false" text="Descriptif" />
+                        <TableColumn fx:id="prixCol" prefWidth="145.0" resizable="false" text="Prix" />
+                        <TableColumn fx:id="quantiteCol" prefWidth="138.0" resizable="false" text="Quantité en stock" />
+                     </columns>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </VBox.margin>
+                  </TableView>
+               </children>
+            </VBox>
+            <Separator prefWidth="200.0" />
+            <VBox spacing="10.0">
+               <children>
+                  <HBox layoutX="14.0" layoutY="14.0">
+                     <children>
+                        <AnchorPane prefHeight="31.0" prefWidth="900.0">
+                           <children>
+                              <Label fx:id="locationLabel" text="Articles disponibles en location" AnchorPane.leftAnchor="5.0" />
+                              <HBox layoutX="646.0" spacing="15.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Button fx:id="boutonAjouterFilm" disable="true" mnemonicParsing="false" text="Ajouter film" />
+                                    <Button fx:id="boutonConfirmerFilm" mnemonicParsing="false" onAction="#actionConfirmerFilm" text="Confirmer changements" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tableLouables" editable="true" layoutX="14.0" layoutY="46.0" prefHeight="230.0" prefWidth="870.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                     <columns>
+                        <TableColumn fx:id="codeFilmCol" prefWidth="85.0" resizable="false" text="Code" />
+                        <TableColumn fx:id="titreCol" prefWidth="417.0" resizable="false" text="Titre" />
+                        <TableColumn fx:id="typeCol" prefWidth="98.0" resizable="false" text="Type" />
+                        <TableColumn fx:id="genreCol" prefWidth="111.0" resizable="false" text="Genre" />
+                        <TableColumn fx:id="anneeCol" prefWidth="65.0" resizable="false" text="Année" />
+                        <TableColumn fx:id="nouveauteCol" prefWidth="105.0" resizable="false" text="Nouveauté" />
+                     </columns>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </VBox.margin>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets top="5.0" />
+   </padding>
+</AnchorPane>

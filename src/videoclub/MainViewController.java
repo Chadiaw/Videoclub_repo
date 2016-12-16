@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 
 
 /**
@@ -25,6 +26,8 @@ public class MainViewController implements Initializable {
     private Label messageBienvenue;
     @FXML 
     private Button boutonDeconnexion;
+    @FXML
+    private Tab tabInventaire;
 
     
     private Videoclub application;
@@ -34,6 +37,13 @@ public class MainViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.application = Videoclub.getInstance();
         messageBienvenue.setText(application.getEmployeConnecte().getNom());
+        
+        if (application.getEmployeConnecte().getUsername().equals("admin")) {
+            tabInventaire.setDisable(false);
+        }
+        else {
+            tabInventaire.setDisable(true);
+        }
     }
     
     public void actionDeconnexion(ActionEvent event) {

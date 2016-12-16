@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="900.0" stylesheets="@styles/MainView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.MainViewController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="900.0" stylesheets="@styles/MainView.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.MainViewController">
    <children>
       <GridPane prefHeight="700.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -56,15 +57,15 @@
                 </Tab>
                 <Tab text="Locations">
                     <content>
-					  <fx:include fx:id="ongletLocations" source="ongletLocations.fxml" />
+                        <fx:include fx:id="ongletLocations" source="ongletLocations.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Log">
                     <content>
-					  <fx:include fx:id="ongletLog" source="ongletLog.fxml" />
+			<fx:include fx:id="ongletLog" source="ongletLog.fxml" />
                     </content>
                 </Tab>
-                <Tab disable="true" text="Inventaire">
+                <Tab disable="true" fx:id="tabInventaire" text="Inventaire">
                     <content>
                       <fx:include fx:id="ongletInventaire" source="ongletInventaire.fxml" />
                     </content>

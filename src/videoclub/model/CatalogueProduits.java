@@ -23,7 +23,8 @@ public class CatalogueProduits {
     public final double CoutJourDeRetard = 5.00;
     public final double CoutSemaineDeRetard = 10.00;
     
-    private boolean dirty = false; // Indique si un article/film a été modifié.
+    private boolean articleDirty = false; // Indique si un élément de liste articles a été modifié.
+    private boolean filmDirty = false;  // Indique si un élément de liste films a été modifié.
     
     private ObservableList<Article> listeArticles;
     private ObservableList<Film> listeFilms;
@@ -36,7 +37,8 @@ public class CatalogueProduits {
     private ObservableMap<String, Film> mapTitresFilm = FXCollections.observableHashMap();
     
     private CatalogueProduits(){
-        this.dirty = false;
+        this.articleDirty = false;
+        this.filmDirty = false;
     }
     
     private static CatalogueProduits INSTANCE = new CatalogueProduits();
@@ -91,14 +93,22 @@ public class CatalogueProduits {
      * Indique si un article ou film a été modifié depuis l'initialisation.
      * @return 
      */
-    public boolean isDirty() {
-        return dirty;
-    }
-    
-    public void setDirty(boolean dirty) {
-        this.dirty = dirty;
+    public boolean isArticleDirty() {
+        return articleDirty;
     }
 
+    public boolean isFilmDirty() {
+        return filmDirty;
+    }
+    
+    public void setArticleDirty(boolean dirty) {
+        this.articleDirty = dirty;
+    }
+    
+    public void setFilmDirty(boolean dirty) {
+        this.filmDirty = dirty;
+    }
+    
     public ObservableList<Article> getListeArticles() {
         return listeArticles;
     }
@@ -106,6 +116,7 @@ public class CatalogueProduits {
     public ObservableList<Film> getListeFilms() {
         return listeFilms;
     }
+
     
     
     

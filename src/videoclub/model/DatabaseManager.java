@@ -10,7 +10,9 @@ package videoclub.model;
  * @author cheik
  */
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -177,9 +179,9 @@ public class DatabaseManager {
         }
         return listeLocations;
     }
-    
-     public static LogVideoclub chargerLog() {
-         LogVideoclub logVideoclub = new LogVideoclub();
+
+    public static LogVideoclub chargerLog() {
+        LogVideoclub logVideoclub = new LogVideoclub();
 
         Connection c = null;
         Statement stmt = null;
@@ -192,6 +194,14 @@ public class DatabaseManager {
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM LOG;");
             while (rs.next()) {
+                if (rs.getString("employe").equals("System")) {
+                    LocalDateTime lastUpdate = LocalDateTime.parse(rs.getString("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm"));
+                    LocalDateTime today = LocalDateTime.now();
+                    if(DAYS.between(lastUpdate, today) == 0) {
+                        // Les soldes ont été mis à jour aujourd'hui
+                        logVideoclub.setSoldeUpdated(true);
+                    }
+                }
                 logVideoclub.ajouterEntree(rs.getString("type"), rs.getString("employe"), rs.getString("date"), rs.getString("details"));
             }
             rs.close();
@@ -202,7 +212,7 @@ public class DatabaseManager {
             System.exit(0);
         }
         return logVideoclub;
-     }
+    }
 
     public static void sauvegarderAdherents(ObservableList<Adherent> listeAdherents) {
         Connection c = null;
@@ -223,7 +233,7 @@ public class DatabaseManager {
             for (Adherent adherent : listeAdherents) {
                 stmt = c.createStatement();
                 sql = String.format("INSERT INTO ADHERENT (NAME,TELEPHONE,ADDRESS,SOLDE,CODE) "
-                        + "VALUES ('%1$s', '%2$s', '%3$s', %4$.2f, %5$d);", 
+                        + "VALUES ('%1$s', '%2$s', '%3$s', %4$.2f, %5$d);",
                         adherent.getNom(), adherent.getNumeroTelephone(), adherent.getAdresse(), adherent.getSolde(), adherent.getCodeSecret());
                 stmt.executeUpdate(sql);
                 c.commit();
@@ -257,8 +267,8 @@ public class DatabaseManager {
             for (LigneLocation ligne : locationsEnCours) {
                 stmt = c.createStatement();
                 sql = String.format("INSERT INTO LOCATIONS (CODE,ADHERENT,DATELOUEE,DATERETOUR) "
-                        + "VALUES ('%1$s', '%2$s', '%3$s', '%4$s');", 
-                        ligne.getCodeFilm(), ligne.getNomAdherent(), 
+                        + "VALUES ('%1$s', '%2$s', '%3$s', '%4$s');",
+                        ligne.getCodeFilm(), ligne.getNomAdherent(),
                         ligne.getDateLouee().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                         ligne.getDateRetour().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                 stmt.executeUpdate(sql);
@@ -274,10 +284,9 @@ public class DatabaseManager {
         }
     }
 
-    public static void sauvegarderCatalogue(CatalogueProduits catalogue) {
+    public static void sauvegarderArticles(CatalogueProduits catalogue) {
         ObservableList<Article> listeArticles = catalogue.getListeArticles();
-        ObservableList<Film> listeFilms = catalogue.getListeFilms();
-        
+
         Connection c = null;
         Statement stmt = null;
         try {
@@ -296,39 +305,12 @@ public class DatabaseManager {
             for (Article article : listeArticles) {
                 stmt = c.createStatement();
                 sql = String.format("INSERT INTO ARTICLE (CODE,DESCRIPTIF,PRIX,ACHETABLE) "
-                        + "VALUES (%1$d, '%2$s', %3$.2f, %4$d);", 
+                        + "VALUES (%1$d, '%2$s', %3$.2f, %4$d);",
                         Integer.parseInt(article.getCodeArticle()),
-                        article.getDescriptif(), 
+                        article.getDescriptif(),
                         article.getPrix(),
                         article.isAchetable() ? 1 : 0
-                        );
-                stmt.executeUpdate(sql);
-                c.commit();
-
-            }
-            
-            // Supprimer entrées de la table film
-            stmt = c.createStatement();
-            sql = "DELETE from FILM;";
-            stmt.executeUpdate(sql);
-            c.commit();
-
-            // Ajouter les films mis à jour
-            for (Film film : listeFilms) {
-                stmt = c.createStatement();
-                sql = String.format("INSERT INTO FILM (CODE,DESCRIPTIF,PRIX,ACHETABLE,TITRE,GENRE,NOUVEAUTE,SYNOPSIS,TYPE,ANNEE) "
-                        + "VALUES (%1$d, '%2$s', %3$.2f, %4$d, '%5$s', '%6$s', %7$d, '%8$s', '%9$s', %10$d);", 
-                        Integer.parseInt(film.getCodeArticle()),
-                        film.getDescriptif(), 
-                        film.getPrix(),
-                        film.isAchetable() ? 1 : 0,
-                        film.getTitre(),
-                        film.getGenre(),
-                        film.isNouveaute() ? 1 : 0,
-                        film.getSynopsis(),
-                        film.getType(),
-                        film.getAnnee()
-                        );
+                );
                 stmt.executeUpdate(sql);
                 c.commit();
 
@@ -340,12 +322,55 @@ public class DatabaseManager {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        
+    }
+
+    public static void sauvegarderFilms(CatalogueProduits catalogue) {
+        ObservableList<Film> listeFilms = catalogue.getListeFilms();
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            String url = String.format("jdbc:sqlite:%s", DATABASE_PATH);
+            c = DriverManager.getConnection(url);
+            c.setAutoCommit(false);
+
+            // Supprimer entrées de la table film
+            stmt = c.createStatement();
+            String sql = "DELETE from FILM;";
+            stmt.executeUpdate(sql);
+            c.commit();
+
+            // Ajouter les films mis à jour
+            for (Film film : listeFilms) {
+                stmt = c.createStatement();
+                sql = String.format("INSERT INTO FILM (CODE,DESCRIPTIF,PRIX,ACHETABLE,TITRE,GENRE,NOUVEAUTE,SYNOPSIS,TYPE,ANNEE) "
+                        + "VALUES (%1$d, '%2$s', %3$.2f, %4$d, '%5$s', '%6$s', %7$d, '%8$s', '%9$s', %10$d);",
+                        Integer.parseInt(film.getCodeArticle()),
+                        film.getDescriptif(),
+                        film.getPrix(),
+                        film.isAchetable() ? 1 : 0,
+                        film.getTitre(),
+                        film.getGenre(),
+                        film.isNouveaute() ? 1 : 0,
+                        film.getSynopsis(),
+                        film.getType(),
+                        film.getAnnee()
+                );
+                stmt.executeUpdate(sql);
+                c.commit();
+
+            }
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
     }
 
     public static void sauvegarderLogVideoclub(LogVideoclub logVideoclub) {
         ObservableList<LogEntry> entreesLog = logVideoclub.getEntreesLog();
-        
+
         Connection c = null;
         Statement stmt = null;
         try {
@@ -364,12 +389,12 @@ public class DatabaseManager {
             for (LogEntry entry : entreesLog) {
                 stmt = c.createStatement();
                 sql = String.format("INSERT INTO LOG (Date,Type,Employe,Details) "
-                        + "VALUES ('%1$s', '%2$s', '%3$s', '%4$s');", 
+                        + "VALUES ('%1$s', '%2$s', '%3$s', '%4$s');",
                         entry.getDateFormatted(),
                         entry.getType(),
                         entry.getNomEmploye(),
                         entry.getDetails()
-                        );
+                );
                 stmt.executeUpdate(sql);
                 c.commit();
 

@@ -5,6 +5,7 @@
  */
 package videoclub.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javafx.collections.FXCollections;
@@ -18,6 +19,8 @@ public class LogVideoclub {
     
     private ObservableList<LogEntry> entreesLog = FXCollections.observableArrayList();
     
+    private boolean soldeUpdated = false;
+    
     public ObservableList<LogEntry> getEntreesLog() {
         return entreesLog;
     }
@@ -27,9 +30,12 @@ public class LogVideoclub {
     }
     
     public LogVideoclub(){
-        
+        this.soldeUpdated = false;
     }
     
+    public void updateRetards(String dateString) {
+        ajouterEntree("Update", "System", dateString, "Mise à jour des soldes.");
+    } 
     
     public void enregistrerTransaction(Transaction transaction, String nomEmploye ) {
         String details = "";
@@ -74,6 +80,14 @@ public class LogVideoclub {
         LogEntry entry = new LogEntry(type, nomEmploye, date, details);
         
         this.entreesLog.add(entry);
+    }
+
+    public boolean getSoldeUpdated() {
+        return this.soldeUpdated;
+    }
+    
+    public void setSoldeUpdated(boolean value) {
+        this.soldeUpdated = value;
     }
      
 }

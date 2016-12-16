@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="472.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.FenetreRetourController">
    <children>
-      <Label fx:id="entreeManuelleLabel" layoutX="30.0" layoutY="7.0" prefHeight="27.0" prefWidth="155.0" text="Ajouter film manuellement:" />
+      <Label fx:id="entreeManuelleLabel" layoutX="30.0" layoutY="7.0" prefHeight="27.0" prefWidth="226.0" text="Ajouter film manuellement:" />
       <TextField fx:id="titreField" layoutX="36.0" layoutY="34.0" prefHeight="36.0" prefWidth="367.0" promptText="Titre du film" />
       <TextField fx:id="codeArticleField" layoutX="36.0" layoutY="81.0" prefHeight="36.0" prefWidth="162.0" promptText="Code d'article" />
       <Separator layoutX="449.0" layoutY="6.0" orientation="VERTICAL" prefHeight="126.0" prefWidth="17.0" />

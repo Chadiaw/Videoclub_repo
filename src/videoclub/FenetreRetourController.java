@@ -61,6 +61,7 @@ public class FenetreRetourController implements Initializable {
     private TableView<TableRetourItem> tableRetour = new TableView<TableRetourItem>();
     @FXML
     private Button boutonTerminer;
+    
     private Videoclub application;
     private ObservableList<FenetreRetourController.TableRetourItem> items = FXCollections.observableArrayList();
     
@@ -98,8 +99,12 @@ public class FenetreRetourController implements Initializable {
                     adherent.enleverLocation(location);
                 }
             }
-            //mettre à jour la date de retour de la location
-            location.setDateRetour(LocalDate.now());
+            // Enregistrer retour dans le log du vidéoclub
+            application.getLogVideoclub().enregistrerRetour(application.getEmployeConnecte().getNom(), 
+                    location.getNomAdherent(), 
+                    CatalogueProduits.getInstance().getFilmByCode(location.getCodeFilm()));
+            
+            application.getHistoriqueSession().ajouterRetour(location);
             
             //Enlever la location du Log des locations courantes
             application.getLogLocations().enleverLocation(location);

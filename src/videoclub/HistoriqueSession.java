@@ -12,6 +12,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import videoclub.model.Adherent;
+import videoclub.model.CatalogueProduits;
+import videoclub.model.LigneLocation;
 import videoclub.model.Transaction;
 
 /**
@@ -57,6 +59,15 @@ public class HistoriqueSession {
         
         EntreeHistoriqueSession entree = new EntreeHistoriqueSession(idCourant, "Inscription", details);
         
+        this.listeEntrees.add(entree);
+        idCourant++;
+    }
+
+    void ajouterRetour(LigneLocation location) {
+        String details = String.format("%1$s | [%2$s]: %3$s", location.getNomAdherent(), location.getCodeFilm(), 
+                CatalogueProduits.getInstance().getFilmByCode(location.getCodeFilm()).getTitre());
+        
+        EntreeHistoriqueSession entree = new  EntreeHistoriqueSession(idCourant, "Retour", details);
         this.listeEntrees.add(entree);
         idCourant++;
     }
