@@ -76,7 +76,6 @@ public class HistoriqueSession {
         String dateEntree = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MMM yy, HH:mm"));
         this.date = new SimpleStringProperty(dateEntree);
     }
-
         public int getId() {
             return id.get();
         }

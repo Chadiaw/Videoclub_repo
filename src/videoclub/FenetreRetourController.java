@@ -18,7 +18,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import videoclub.model.Adherent;
 import videoclub.model.CatalogueProduits;
-import videoclub.model.HistoriqueTransactions;
 import videoclub.model.LigneLocation;
 import videoclub.model.Transaction;
 
@@ -60,7 +59,7 @@ public class FenetreRetourController implements Initializable {
     
     private void actionRetourner(ActionEvent event){
         String codeSaisi = codeArticleField.getText();
-        Transaction transaction = HistoriqueTransactions.getInstance().findTransaction(codeSaisi);
+        Transaction transaction = new Transaction();
         
         if(transaction == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);;

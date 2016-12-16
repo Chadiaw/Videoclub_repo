@@ -46,6 +46,16 @@ public class Film extends Article{
     public String getType(){
         return this.type;
     }
+
+    public String getSynopsis() {
+        return synopsis;
+    }
+
+    public int getAnnee() {
+        return annee;
+    }
+    
+    
     
     
 }

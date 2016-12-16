@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="580.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="videoclub.OngletLogController">
+                           <children>
+      <VBox layoutX="14.0" layoutY="14.0" spacing="5.0">
+         <children>
+            <HBox layoutX="14.0" layoutY="14.0">
+               <children>
+                  <Label fx:id="logLabel" layoutX="14.0" layoutY="14.0" text="Journal">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+                                    <TableView fx:id="tableLog" layoutX="14.0" layoutY="46.0" prefHeight="526.0" prefWidth="870.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                                      <columns>
+                                        <TableColumn fx:id="dateCol" prefWidth="158.0" resizable="false" text="Date" />
+                                        <TableColumn fx:id="typeCol" prefWidth="116.0" resizable="false" text="Type" />
+                                          <TableColumn fx:id="employeCol" prefWidth="125.0" resizable="false" text="Employe" />
+                                          <TableColumn fx:id="detailsCol" prefWidth="462.0" resizable="false" text="Détails" />
+                                      </columns>
+                                    </TableView>
+         </children>
+      </VBox>
+                           </children>
+                        </AnchorPane>

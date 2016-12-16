@@ -47,13 +47,12 @@ public class OngletAccueilController implements Initializable {
     private TableColumn detailsCol;
     @FXML
     private Button boutonTransaction;
-    @FXML
-    private Button boutonRetournerFilm;
-    @FXML 
-    private Button boutonInscrireAdherent;
-    
     
     private Videoclub application;
+    @FXML
+    private Button boutonRetournerFilm;
+    @FXML
+    private Button boutonInscrireAdherent;
     
     
     /**
@@ -71,6 +70,7 @@ public class OngletAccueilController implements Initializable {
         
     }    
     
+    @FXML
     public void actionTransaction(ActionEvent event) {
         
         Stage stage = (Stage) boutonTransaction.getScene().getWindow();
@@ -85,6 +85,7 @@ public class OngletAccueilController implements Initializable {
         }    
     }
     
+    @FXML
     public void actionInscrireAdherent(ActionEvent event) {
         try {
             application.getViewManager().openView("nouvelAdherent.fxml", "Ajouter adhérent", StageStyle.UTILITY);
@@ -93,6 +94,7 @@ public class OngletAccueilController implements Initializable {
         }
     }
     
+    @FXML
     public void actionRetournerFilm(ActionEvent event) {
         try {
             application.getViewManager().openView("fenetreRetour.fxml", "Retourner film", StageStyle.UTILITY);

@@ -19,7 +19,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import videoclub.model.HistoriqueTransactions;
 import videoclub.model.LigneLocation;
 import videoclub.model.Paiement;
 
@@ -113,16 +112,13 @@ public class FenetrePaiementController implements Initializable {
 
             // MaJ historique session, logVideoclub, logLocations, adherent.locationsEnCours
             application.getHistoriqueSession().ajouterTransaction(application.getTransactionEnCours());
-            application.getLogVideoclub().enregistrerTransaction(application.getTransactionEnCours(), application.getEmployeConnecte().getUsername());
+            application.getLogVideoclub().enregistrerTransaction(application.getTransactionEnCours(), application.getEmployeConnecte().getNom());
             for (LigneLocation ligne : application.getTransactionEnCours().getLocation().getLignesLocation()) {
                 // Ajouter chaque ligne au logLocations, ainsi qu'aux locations en cours de l'adhérent. 
                 application.getLogLocations().ajouterLocation(ligne);
                 application.getTransactionEnCours().getAdherent().getLocationsCourantes().add(ligne);                
             }
-            
-            
-            HistoriqueTransactions.getInstance().enregistrer(application.getTransactionEnCours());
-            
+          
             application.setTransactionEnCours(null);
             
             //fermer fenetre Paiement
@@ -134,9 +130,7 @@ public class FenetrePaiementController implements Initializable {
                 application.getViewManager().openView("MainView.fxml", "Vidéoclub", StageStyle.DECORATED);
             } catch (IOException ex) {
                 Logger.getLogger(FenetrePaiementController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            ;
+            }  
         }
     }
 

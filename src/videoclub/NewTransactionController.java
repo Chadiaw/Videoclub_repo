@@ -28,7 +28,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import videoclub.model.CatalogueProduits;
-import videoclub.model.HistoriqueTransactions;
 import videoclub.model.LigneArticle;
 import videoclub.model.LigneLocation;
 import videoclub.model.Transaction;
@@ -190,7 +189,7 @@ public class NewTransactionController implements Initializable {
     private void updateAll() {
        if (application.getTransactionEnCours() == null) {
            // S'il n'y a pas de transaction en cours, en créer une lorsque cette interface est ouverte.
-            application.setTransactionEnCours(new Transaction(HistoriqueTransactions.getInstance().getTransactionsIndex()));
+            application.setTransactionEnCours(new Transaction());
         }
                
         if(application.getTransactionEnCours().getLocation() == null) {

@@ -6,6 +6,7 @@
 package videoclub.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -14,17 +15,6 @@ import javafx.collections.ObservableList;
  * @author cheikh
  */
 public class LogVideoclub {
- 
-    private int transactionsIndex;
-
-    public int getTransactionsIndex() {
-        return transactionsIndex;
-    }
-
-    public void setTransactionsIndex(int transactionsIndex) {
-        this.transactionsIndex = transactionsIndex;
-    }
-
     
     private ObservableList<LogEntry> entreesLog = FXCollections.observableArrayList();
     
@@ -72,23 +62,18 @@ public class LogVideoclub {
     public void enregistrerNouvelAdherent(String nomEmploye,Adherent nouveau) {
         String details = nouveau.getNom();
         
-        LogEntry entry = new LogEntry("Nouvel adhérent", nomEmploye, details);
+        LogEntry entry = new LogEntry("Inscription", nomEmploye, details);
         
         this.entreesLog.add(entry);
     }
-            
-    class LogEntry {
-        private String type; 
-        private String nomEmploye;
-        private LocalDateTime date;
-        private String details;
+    
+    public void ajouterEntree(String type, String nomEmploye, String dateString, String details) {
         
-        public LogEntry(String type, String employe, String details) {
-            this.type = type;
-            this.nomEmploye = employe;
-            this.details = details;
-            this.date = LocalDateTime.now();
-        }
+        LocalDateTime date = LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm"));
         
+        LogEntry entry = new LogEntry(type, nomEmploye, date, details);
+        
+        this.entreesLog.add(entry);
     }
+     
 }

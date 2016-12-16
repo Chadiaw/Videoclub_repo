@@ -54,16 +54,22 @@
                     <fx:include fx:id="ongletAdherents" source="ongletAdherents.fxml" />
                   </content>
                 </Tab>
-                  <Tab text="Locations">
+                <Tab text="Locations">
                     <content>
 					  <fx:include fx:id="ongletLocations" source="ongletLocations.fxml" />
                     </content>
-                  </Tab>
-                  <Tab disable="true" text="Inventaire">
+                </Tab>
+                <Tab text="Log">
+                    <content>
+					  <fx:include fx:id="ongletLog" source="ongletLog.fxml" />
+                    </content>
+                </Tab>
+                <Tab disable="true" text="Inventaire">
                     <content>
                       <fx:include fx:id="ongletInventaire" source="ongletInventaire.fxml" />
                     </content>
-                  </Tab>
+                </Tab>
+                
               </tabs>
             </TabPane>
          </children>

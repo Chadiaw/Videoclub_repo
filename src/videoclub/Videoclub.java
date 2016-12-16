@@ -28,7 +28,6 @@ import videoclub.model.Adherent;
 import videoclub.model.CatalogueProduits;
 import videoclub.model.DatabaseManager;
 import videoclub.model.Employe;
-import videoclub.model.HistoriqueTransactions;
 import videoclub.model.LigneLocation;
 import videoclub.model.LogLocations;
 import videoclub.model.LogVideoclub;
@@ -106,10 +105,10 @@ public class Videoclub extends Application {
         try {
             stage = primaryStage;
             stage.setTitle("Vidéoclub");
-            //stage.setMinWidth(MINIMUM_WINDOW_WIDTH);
-            //stage.setMinHeight(MINIMUM_WINDOW_HEIGHT);
             gotoLogin();
             primaryStage.show();
+            
+            // Liste des employes chargée séparément car nécessaire pour la connexion
             listeEmployes = DatabaseManager.chargerEmployes();
             if(listeEmployes.isEmpty())
                 throw new Exception("Liste d'employes vide");
@@ -117,6 +116,13 @@ public class Videoclub extends Application {
             Logger.getLogger(Videoclub.class.getName()).log(Level.SEVERE, null, ex);
         }
       
+    }
+    
+    @Override
+    public void stop() throws Exception{
+        // Méthode appelée à la fermeture de l'application, il faut sauvegarder toutes données
+        sauvegarderDonnees();
+        
     }
     
     public Employe getEmployeConnecte() {
@@ -131,6 +137,8 @@ public class Videoclub extends Application {
                     employeConnecte = e;
             }
             chargerDonnees();
+            transactionEnCours = null;
+            
             goToMainView();
             return true;
         } else {
@@ -140,14 +148,7 @@ public class Videoclub extends Application {
     
     void deconnexion(){
         employeConnecte = null;
-        
-        // Sauvegarder tous les objets dans base de donnees
-        //DatabaseManager.saveAll();
-        
-        // Désallouer mémoire si nécessaire ici
-        
-        
-        
+        sauvegarderDonnees();
         gotoLogin();
     }
     
@@ -204,6 +205,9 @@ public class Videoclub extends Application {
         CatalogueProduits.getInstance().setListeArticles(DatabaseManager.chargerArticles());
         CatalogueProduits.getInstance().setListeFilms(DatabaseManager.chargerFilms());
         
+        // Charger log videoclub
+        logVideoclub = DatabaseManager.chargerLog();
+        
         // Charger historique locations
         logLocations.setLocationsEnCours(DatabaseManager.chargerLocations());
         
@@ -228,8 +232,23 @@ public class Videoclub extends Application {
                 }
             }
         }
-        //HistoriqueTransactions.getInstance().setTransactions(listeTransactions);
-        // HistoriqueTransactions.getInstance().setTransactionsCount(nombreTransactions - 1);
+    }
+    
+    private void sauvegarderDonnees() {
+        // Sauvegarde adhérents dans table ADHERENTS
+        DatabaseManager.sauvegarderAdherents(listeAdherents);
+        
+        // Sauvegarde logLocations dans LOCATIONS
+        DatabaseManager.sauvegarderLocations(logLocations.getLocationsEnCours());
+        
+        // Sauvegarde table FILM et ARTICLE
+        if(CatalogueProduits.getInstance().isDirty()) {
+            // Sauvegarder tables
+            DatabaseManager.sauvegarderCatalogue(CatalogueProduits.getInstance());
+        }
+        
+        // Sauvegarde du log videoclub
+        DatabaseManager.sauvegarderLogVideoclub(logVideoclub);
     }
     
     public ObservableList<Adherent> getListeAdherents() {

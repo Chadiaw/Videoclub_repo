@@ -6,7 +6,6 @@
 package videoclub.model;
 
 import java.text.DecimalFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 /**
  *
@@ -14,8 +13,6 @@ import java.time.LocalDateTime;
  */
 public class Transaction {
     
-    
-    private int numeroTransaction;
     private LocalDateTime date;
     private Vente vente;
     private Location location;
@@ -23,19 +20,14 @@ public class Transaction {
     private Adherent adherent;
     private double total;
 
-   
-    public Transaction(int numero){
-        this.numeroTransaction = numero;
+    public Transaction(){
         this.adherent = null;
         this.vente = null;
         this.location = null;
         this.paiement = null;
         this.date = LocalDateTime.now(); 
+        this.total = 0;
         
-    }
-    
-    public int getNumeroTransaction(){
-        return numeroTransaction;
     }
     
     public LocalDateTime getDate(){
@@ -43,7 +35,7 @@ public class Transaction {
     }
     
     public double getTotal() {
-        double total = 0;
+        this.total = 0;
         
         if(this.vente != null){
             total += this.vente.getTotalVente();
@@ -51,7 +43,6 @@ public class Transaction {
         if(this.location != null){
             total += this.location.getTotalLocation();
         }
-        
         return total;
 
     }
