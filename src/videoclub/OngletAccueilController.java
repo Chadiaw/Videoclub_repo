@@ -96,6 +96,8 @@ public class OngletAccueilController implements Initializable {
     
     @FXML
     public void actionRetournerFilm(ActionEvent event) {
+        Stage stage = (Stage) boutonRetournerFilm.getScene().getWindow();
+        stage.close();
         try {
             application.getViewManager().openView("fenetreRetour.fxml", "Retourner film", StageStyle.UTILITY);
         } catch (IOException ex) {

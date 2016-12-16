@@ -5,11 +5,14 @@
  */
 package videoclub;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +25,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import videoclub.model.Adherent;
 import videoclub.model.CatalogueProduits;
 import videoclub.model.LigneLocation;
@@ -106,6 +111,21 @@ public class FenetreRetourController implements Initializable {
             items.add(new TableRetourItem(location));
         }
  
+    }
+    
+    @FXML
+    public void terminerRetours(ActionEvent event) {
+        
+        // Recuperer la fenêtre (stage) parente
+        Stage stage = (Stage) boutonTerminer.getScene().getWindow();
+        // Fermer fenêtre
+        stage.close();
+        
+       try {
+            application.getViewManager().openView("MainView.fxml", "Vidéoclub", StageStyle.DECORATED);
+        } catch (IOException ex) {
+            Logger.getLogger(NewTransactionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     protected class TableRetourItem {

@@ -22,7 +22,7 @@
       </TableView>
       <Button fx:id="boutonScan" layoutX="479.0" layoutY="20.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="98.0" text="Scan" />
       <Button fx:id="boutonRetourner" layoutX="36.0" layoutY="129.0" mnemonicParsing="false" onAction="#actionRetourner" prefHeight="36.0" prefWidth="81.0" text="Retourner" />
-      <Button fx:id="boutonTerminer" cancelButton="true" layoutX="471.0" layoutY="415.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="81.0" text="Terminer" />
+      <Button fx:id="boutonTerminer" cancelButton="true" layoutX="471.0" layoutY="415.0" mnemonicParsing="false" onAction="#terminerRetours" prefHeight="36.0" prefWidth="81.0" text="Terminer" />
       <Label fx:id="messageErreur" layoutX="151.0" layoutY="132.0" prefHeight="27.0" prefWidth="255.0" text="message d'erreur" textFill="#eb0a0a" />
    </children>
 </AnchorPane>
