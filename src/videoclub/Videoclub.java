@@ -54,14 +54,13 @@ public class Videoclub extends Application {
     private HistoriqueSession historiqueSession = new HistoriqueSession();
     private LogVideoclub logVideoclub = new LogVideoclub();
     private LogLocations logLocations = new LogLocations();
-    
+
     private ObservableList<LogEntry> articlesAjoutes = FXCollections.observableArrayList();
 
     public ObservableList<LogEntry> getArticlesAjoutes() {
         return articlesAjoutes;
     }
 
-    
     public HistoriqueSession getHistoriqueSession() {
         return historiqueSession;
     }
@@ -225,13 +224,13 @@ public class Videoclub extends Application {
         // Charger historique locations
         logLocations.setLocationsEnCours(DatabaseManager.chargerLocations());
 
-        if (!logVideoclub.getSoldeUpdated()) {
-            // MaJ solde adhérents et locations courantes pour chaque adhérent
-            for (LigneLocation ligne : logLocations.getLocationsEnCours()) {
-                for (Adherent adherent : listeAdherents) {
-                    if (adherent.getNom().equals(ligne.getNomAdherent())) {
-                        adherent.getLocationsCourantes().add(ligne);
+        // MaJ solde adhérents et locations courantes pour chaque adhérent
+        for (LigneLocation ligne : logLocations.getLocationsEnCours()) {
+            for (Adherent adherent : listeAdherents) {
+                if (adherent.getNom().equals(ligne.getNomAdherent())) {
+                    adherent.getLocationsCourantes().add(ligne);
 
+                    if (!logVideoclub.getSoldeUpdated()) {
                         int joursRetard = (int) DAYS.between(ligne.getDateRetour(), LocalDate.now());
                         if (CatalogueProduits.getInstance().getFilmByCode(ligne.getCodeFilm()).isNouveaute()) {
                             // Si nouveauté, retard calculé à la journée
@@ -246,6 +245,7 @@ public class Videoclub extends Application {
                     }
                 }
             }
+
             logVideoclub.updateRetards(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm")));
             logVideoclub.setSoldeUpdated(true);
         }
