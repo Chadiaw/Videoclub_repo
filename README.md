@@ -1,5 +1,3 @@
-# Videoclub_repo
-
 # Description
 
 Projet réalisé dans le cadre du cours de Modélisation et Conception Orienté Objet. 
