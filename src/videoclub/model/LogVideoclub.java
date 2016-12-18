@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
+/** 
  *
  * @author cheikh
  */
@@ -19,7 +19,7 @@ public class LogVideoclub {
     
     private ObservableList<LogEntry> entreesLog = FXCollections.observableArrayList();
     
-    private boolean soldeUpdated = false;
+    private LocalDate lastUpdate;
     
     public ObservableList<LogEntry> getEntreesLog() {
         return entreesLog;
@@ -30,11 +30,12 @@ public class LogVideoclub {
     }
     
     public LogVideoclub(){
-        this.soldeUpdated = false;
+        lastUpdate = null;
     }
     
     public void updateRetards(String dateString) {
         ajouterEntree("Update", "System", dateString, "Mise à jour des soldes.");
+        lastUpdate = LocalDate.now();
     } 
     
     public void enregistrerTransaction(Transaction transaction, String nomEmploye ) {
@@ -82,12 +83,12 @@ public class LogVideoclub {
         this.entreesLog.add(entry);
     }
 
-    public boolean getSoldeUpdated() {
-        return this.soldeUpdated;
+    public LocalDate getLastUpdate() {
+        return this.lastUpdate;
     }
     
-    public void setSoldeUpdated(boolean value) {
-        this.soldeUpdated = value;
+    public void setLastUpdate(LocalDate date) {
+        this.lastUpdate = date;
     }
      
 }

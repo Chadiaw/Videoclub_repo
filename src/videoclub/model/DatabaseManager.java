@@ -196,11 +196,8 @@ public class DatabaseManager {
             while (rs.next()) {
                 if (rs.getString("employe").equals("System")) {
                     LocalDateTime lastUpdate = LocalDateTime.parse(rs.getString("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm"));
-                    LocalDateTime today = LocalDateTime.now();
-                    if(DAYS.between(lastUpdate, today) == 0) {
-                        // Les soldes ont été mis à jour aujourd'hui
-                        logVideoclub.setSoldeUpdated(true);
-                    }
+                    
+                    logVideoclub.setLastUpdate(lastUpdate.toLocalDate());
                 }
                 logVideoclub.ajouterEntree(rs.getString("type"), rs.getString("employe"), rs.getString("date"), rs.getString("details"));
             }

@@ -146,6 +146,7 @@ public class Videoclub extends Application {
             for (Employe e : listeEmployes) {
                 if (e.getUsername().equals(username)) {
                     employeConnecte = e;
+                    break;
                 }
             }
             chargerDonnees();
@@ -230,8 +231,11 @@ public class Videoclub extends Application {
                 if (adherent.getNom().equals(ligne.getNomAdherent())) {
                     adherent.getLocationsCourantes().add(ligne);
 
-                    if (!logVideoclub.getSoldeUpdated()) {
-                        int joursRetard = (int) DAYS.between(ligne.getDateRetour(), LocalDate.now());
+                    int joursRetard = (int) DAYS.between(ligne.getDateRetour(), LocalDate.now());
+                    if (joursRetard > 0) {
+                        if(!(logVideoclub.getLastUpdate() == null)) {
+                            joursRetard = (int) DAYS.between(logVideoclub.getLastUpdate(), LocalDate.now());
+                        }
                         if (CatalogueProduits.getInstance().getFilmByCode(ligne.getCodeFilm()).isNouveaute()) {
                             // Si nouveauté, retard calculé à la journée
                             double amende = joursRetard * CatalogueProduits.getInstance().CoutJourDeRetard;
@@ -243,11 +247,11 @@ public class Videoclub extends Application {
                             adherent.setSolde(adherent.getSolde() + amende);
                         }
                     }
+
                 }
             }
 
             logVideoclub.updateRetards(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm")));
-            logVideoclub.setSoldeUpdated(true);
         }
 
     }
